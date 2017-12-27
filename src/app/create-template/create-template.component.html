@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Create preset</h3>
+    </div>
+
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="presetName">Preset name</label>
+          <input type="text" id="presetName" class="form-control" placeholder="Insert a name for the preset">
+        </div>
+
+        <div class="form-group">
+          <label for="originFolder">Template origin folder</label>
+          <div class="input-group">
+            <input type="text" id="originFolder" class="form-control" placeholder="Select the template origin folder">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button">Browse</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fileExtensions">File types extensions</label>
+          <input type="text" id="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement">
+        </div>
+
+        <div class="form-group">
+          <label for="keywords">Replacement keywords</label>
+          <textarea id="keywords" class="form-control" placeholder="Insert the keywords to replace the template placeholders" rows="3"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Entities</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Presenters</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update WinForms</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update WpfForms</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Core.Base</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Core.Messages</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Action.Manager</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Forms Customization</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Objects Customization</span>
+              </label>
+
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Update Workflows Customization</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Is Crm project</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-footer text-muted">
+      <button type="button" class="btn btn-success">Save</button>
+      <button type="button" class="btn btn-secondary" routerLink="">Cancel</button>
+    </div>
+
+  </div>
+</div>

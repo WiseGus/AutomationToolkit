@@ -1,0 +1,10 @@
+D:\WebProjects\Electron01\api\Api\Api\bin\Any CPU\Release\netcoreapp2.0\Api.deps.json
+D:\WebProjects\Electron01\api\Api\Api\bin\Any CPU\Release\netcoreapp2.0\Api.runtimeconfig.json
+D:\WebProjects\Electron01\api\Api\Api\bin\Any CPU\Release\netcoreapp2.0\Api.runtimeconfig.dev.json
+D:\WebProjects\Electron01\api\Api\Api\bin\Any CPU\Release\netcoreapp2.0\Api.dll
+D:\WebProjects\Electron01\api\Api\Api\bin\Any CPU\Release\netcoreapp2.0\Api.pdb
+D:\WebProjects\Electron01\api\Api\Api\obj\Any CPU\Release\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
+D:\WebProjects\Electron01\api\Api\Api\obj\Any CPU\Release\netcoreapp2.0\Api.AssemblyInfoInputs.cache
+D:\WebProjects\Electron01\api\Api\Api\obj\Any CPU\Release\netcoreapp2.0\Api.AssemblyInfo.cs
+D:\WebProjects\Electron01\api\Api\Api\obj\Any CPU\Release\netcoreapp2.0\Api.dll
+D:\WebProjects\Electron01\api\Api\Api\obj\Any CPU\Release\netcoreapp2.0\Api.pdb
