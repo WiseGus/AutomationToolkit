@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
-import { HttpClient } from '@angular/common/http';
 import { DataService } from './svc/data.service';
 
 @Component({
@@ -10,12 +9,14 @@ import { DataService } from './svc/data.service';
 })
 export class AppComponent implements OnInit {
 
+  serverRunning = false;
+
   constructor(private _electron: ElectronService, private _dataSvc: DataService) {
   }
 
-  ngOnInit(): void {
-    // this._dataSvc.getAll<any[]>()
-    //   .subscribe(p => this.values = p);
+  ngOnInit() {
+    this._dataSvc.getAll<any>('presets/ping')
+      .subscribe(p => this.serverRunning = true);
   }
 
 }

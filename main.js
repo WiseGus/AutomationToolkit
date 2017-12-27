@@ -16,7 +16,7 @@ function createWindow() {
     height: 1000,
     title: "My first Electron app!",
     backgroundColor: '#ffffff',
-    icon: `file://${__dirname}/dist/assets/logo.png`,
+    icon: `${__dirname}/dist/assets/logo.png`,
     webPreferences: {
       webSecurity: false
     }

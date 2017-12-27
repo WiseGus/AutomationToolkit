@@ -10,30 +10,33 @@ export class DataService {
   private actionUrl: string;
 
   constructor(private http: HttpClient, private _configuration: Configuration) {
-    this.actionUrl = _configuration.ServerWithApiUrl + 'values/';
   }
 
-  public getAll<T>(): Observable<T> {
-    return this.http.get<T>(this.actionUrl);
+  public getAll<T>(controller: string): Observable<T> {
+    return this.http.get<T>(this.generateUrl(controller));
   }
 
-  public getSingle<T>(id: number): Observable<T> {
-    return this.http.get<T>(this.actionUrl + id);
+  public getSingle<T>(controller: string, id: number): Observable<T> {
+    return this.http.get<T>(this.generateUrl(controller) + id);
   }
 
-  public add<T>(itemName: string): Observable<T> {
+  public add<T>(controller: string, itemName: string): Observable<T> {
     const toAdd = JSON.stringify({ ItemName: itemName });
 
-    return this.http.post<T>(this.actionUrl, toAdd);
+    return this.http.post<T>(this.generateUrl(controller), toAdd);
   }
 
-  public update<T>(id: number, itemToUpdate: any): Observable<T> {
+  public update<T>(controller: string, id: number, itemToUpdate: any): Observable<T> {
     return this.http
-      .put<T>(this.actionUrl + id, JSON.stringify(itemToUpdate));
+      .put<T>(this.generateUrl(controller) + id, JSON.stringify(itemToUpdate));
   }
 
-  public delete<T>(id: number): Observable<T> {
-    return this.http.delete<T>(this.actionUrl + id);
+  public delete<T>(controller: string, id: number): Observable<T> {
+    return this.http.delete<T>(this.generateUrl(controller) + id);
+  }
+
+  private generateUrl(controller: string) {
+    return this._configuration.ServerWithApiUrl + controller + '/';
   }
 }
 

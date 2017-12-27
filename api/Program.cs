@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace Api
     {
         public static void Main(string[] args)
         {
+            //dotnet publish -r win-x64 --output bin/dist/win
             BuildWebHost(args).Run();
         }
 
