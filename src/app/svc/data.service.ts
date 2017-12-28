@@ -20,10 +20,9 @@ export class DataService {
     return this.http.get<T>(this.generateUrl(controller) + id);
   }
 
-  public add<T>(controller: string, itemName: string): Observable<T> {
-    const toAdd = JSON.stringify({ ItemName: itemName });
-
-    return this.http.post<T>(this.generateUrl(controller), toAdd);
+  public post<T>(controller: string, itemToUpdate: any): Observable<T> {
+    return this.http
+      .post(this.generateUrl(controller), itemToUpdate) as Observable<T>;
   }
 
   public update<T>(controller: string, id: number, itemToUpdate: any): Observable<T> {

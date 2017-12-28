@@ -1,28 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+  [Route("api/[controller]")]
     public class PresetsController : Controller
     {
-
-        [HttpGet("ping")]
-        public IActionResult Ping()
-        {
-          return new JsonResult("pong");
-        }
-
+    
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var templateDirsInfo = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates"));
+            var settsController = new SettingsController();
+            var appSettings = await settsController.GetAppSettings();
+
+            var templateDirsInfo = new DirectoryInfo(appSettings.TemplatesFolderPath);
             if (!templateDirsInfo.Exists) return new NotFoundResult();
 
             var templateDirs = templateDirsInfo.GetDirectories();
@@ -99,6 +95,6 @@ namespace Api.Controllers
                     DirectoryCopy(subdir.FullName, temppath, copySubDirs);
                 }
             }
+      }
     }
-  }
 }

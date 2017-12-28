@@ -9,11 +9,14 @@ import { Configuration } from './conf/configuration';
 import { CreateTemplateComponent } from './create-template/create-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'create-template', component: CreateTemplateComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', component: HomeComponent }
 ];
 
@@ -21,9 +24,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CreateTemplateComponent,
-    HomeComponent
+    HomeComponent,
+    SettingsComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     NgxElectronModule,

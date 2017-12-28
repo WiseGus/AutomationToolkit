@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataSvc.getAll<any>('presets/ping')
+    this._dataSvc.getAll<any>('settings/ping')
       .subscribe(p => this.serverRunning = true);
   }
 
