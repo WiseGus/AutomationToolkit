@@ -6,14 +6,13 @@ public class Preset
 {
     public string Name { get; set; }
     public string TemplateOrigin { get; set; }
-    public List<string> FileTypesExtensions { get; set; }
-    public Dictionary<string, string> Keywords { get; set; }
+    public string FileTypesExtensions { get; set; }
+    public List<Keyword> Keywords { get; set; }
     public AutoUpdates AutoUpdates { get; set; }
 
     public Preset()
     {
-        FileTypesExtensions = new List<string>();
-        Keywords = new Dictionary<string, string>();
+        Keywords = new List<Keyword>();
         AutoUpdates = new AutoUpdates();
     }
 }

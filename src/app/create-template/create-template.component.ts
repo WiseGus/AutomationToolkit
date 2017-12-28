@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Preset } from './preset';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Preset, Keyword } from './preset';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-create-template',
@@ -14,8 +15,8 @@ export class CreateTemplateComponent implements OnInit {
     this.preset = {
       name: '',
       templateOrigin: '',
-      fileTypesExtensions: [],
-      keywords: new Map<string, string>(),
+      fileTypesExtensions: '',
+      keywords: [{ keyword: '$EntityName$', replacement: 'Glx.ENT.IS', type: 'text' }],
       autoUpdates: {}
     };
   }
@@ -27,21 +28,29 @@ export class CreateTemplateComponent implements OnInit {
     console.log(this.preset);
   }
 
-  addFileTypeExtension(text: string) {
-    if (!text) {
+  addKeyword(keywordValue: HTMLInputElement, keywordReplace: HTMLInputElement, keywordType: HTMLInputElement) {
+    if (!keywordValue.value) {
       return;
     }
-    const idx = this.preset.fileTypesExtensions.indexOf(text);
-    if (idx > -1) {
+    const keyword = this.preset.keywords.find(p => p.keyword === keywordValue.value);
+    if (keyword) {
       return;
     }
 
-    this.preset.fileTypesExtensions.push(text);
+    this.preset.keywords.push({
+      keyword: keywordValue.value,
+      replacement: keywordReplace.value,
+      type: keywordType.value
+    });
+
+    keywordValue.value = '';
+    keywordReplace.value = '';
+    keywordType.value = '';
   }
 
-  removeFileTypeExtension(keyword: string) {
-    const idx = this.preset.fileTypesExtensions.indexOf(keyword);
-    this.preset.fileTypesExtensions.splice(idx, 1);
+  removeKeyword(keyword: string) {
+    const idx = this.preset.keywords.findIndex(p => p.keyword === keyword);
+    this.preset.keywords.splice(idx, 1);
   }
 
 }

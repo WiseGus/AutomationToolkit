@@ -22,32 +22,49 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-9">
-            <div class="form-group">
-              <label for="fileExtensions">File types extensions</label>
-              <div class="input-group">
-                <input #txtFileTypeExtensions type="text" id="fileExtensions" name="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" (click)="addFileTypeExtension(txtFileTypeExtensions.value)" type="button">Add</button>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <ul class="list-group">
-              <li class="list-group-item" *ngFor="let keyword of preset.fileTypesExtensions">
-                {{keyword}}
-                <button type="button" class="close" (click)="removeFileTypeExtension(keyword)" aria-hidden="true"> ×</button>
-              </li>
-            </ul>
+        <div class="form-group">
+          <label for="fileExtensions">File types extensions</label>
+          <div class="input-group">
+            <input type="text" id="fileExtensions" name="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement (comma separated)"
+              [(ngModel)]="preset.fileTypesExtensions">
           </div>
         </div>
 
         <div class="form-group">
           <label for="keywords">Replacement keywords</label>
-          <textarea id="keywords" class="form-control" name="keywords" placeholder="Insert the keywords to replace the template placeholders"
-            rows="3" [(ngModel)]="preset.keywords"></textarea>
+          <form class="form-inline">
+            <label class="sr-only" for="keywordValue">Keyword</label>
+            <input #keywordValue type="text" class="form-control mb-2 mr-sm-2" id="keywordValue" placeholder="Keyword">
+
+            <label class="sr-only" for="keywordReplacement">Replacement</label>
+            <input #keywordReplace type="text" class="form-control mb-2 mr-sm-2" id="keywordReplacement" placeholder="Replacement">
+
+            <label class="sr-only" for="keywordType">Type</label>
+            <input #keywordType type="text" class="form-control mb-2 mr-sm-2" id="keywordType" placeholder="Type">
+
+            <button type="submit" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType)">Add</button>
+          </form>
+
+          <table *ngIf="preset.keywords.length > 0" class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Keyword</th>
+                <th scope="col">Replacement</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let keyword of preset.keywords">
+                <td>{{keyword.keyword}}</td>
+                <td>{{keyword.replacement}}</td>
+                <td>{{keyword.type}}</td>
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="removeKeyword(keyword.keyword)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="row">

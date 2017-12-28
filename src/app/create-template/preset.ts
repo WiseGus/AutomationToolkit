@@ -1,8 +1,8 @@
 export interface Preset {
   name: string;
   templateOrigin: string;
-  fileTypesExtensions: string[];
-  keywords: Map<string, string>;
+  fileTypesExtensions: string;
+  keywords: Keyword[];
   autoUpdates: AutoUpdates;
 }
 
@@ -18,4 +18,10 @@ export interface AutoUpdates {
   updateObjectsCustomization?: boolean;
   updateWorkflowsCustomization?: boolean;
   isCrmProject?: boolean;
+}
+
+export interface Keyword {
+  keyword: string;
+  replacement?: string;
+  type: string;
 }
