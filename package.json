@@ -2,7 +2,6 @@
   "name": "automationtoolkit2",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,9 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build && electron .",
-    "electron-aot": "ng build --prod && electron .",
-    "electron-release": "electron-packager . --platform=win32"
+    "build-electron": "ng build --base-href ./ && copy src\\electron\\* dist && xcopy api\\bin\\dist\\win\\* dist\\api\\bin\\dist\\win\\",
+    "build-electron-aot": "ng build --prod --base-href ./ && copy src\\electron\\* dist && xcopy api\\bin\\dist\\win\\* dist\\api\\bin\\dist\\win\\",
+    "electron": "npm run build-electron && electron dist",
+    "electron-aot": "npm run build-electron-aot && electron dist",
+    "electron-release": "npm run build-electron-aot && electron-packager dist --platform=win32"
   },
   "private": true,
   "dependencies": {

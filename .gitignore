@@ -4,9 +4,13 @@
 /dist
 /tmp
 /out-tsc
+/automationToolkit2-win32-x64
 
 # dependencies
 /node_modules
+/api/bin/Release
+/api/bin/Debug
+/api/obj
 
 # IDEs and editors
 /.idea

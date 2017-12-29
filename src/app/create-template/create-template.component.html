@@ -17,7 +17,7 @@
             <input type="text" id="originFolder" name="originFolder" class="form-control" placeholder="Select the template origin folder"
               [(ngModel)]="preset.templateOrigin">
             <span class="input-group-btn">
-              <button class="btn btn-primary" type="button">Browse</button>
+              <button type="button" class="btn btn-primary" type="button">Browse</button>
             </span>
           </div>
         </div>
@@ -42,7 +42,7 @@
             <label class="sr-only" for="keywordType">Type</label>
             <input #keywordType type="text" class="form-control mb-2 mr-sm-2" id="keywordType" placeholder="Type">
 
-            <button type="submit" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType)">Add</button>
+            <button type="button" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType)">Add</button>
           </form>
 
           <table *ngIf="preset.keywords.length > 0" class="table table-sm table-bordered">
@@ -60,7 +60,7 @@
                 <td>{{keyword.replacement}}</td>
                 <td>{{keyword.type}}</td>
                 <td>
-                  <button class="btn btn-sm btn-danger" (click)="removeKeyword(keyword.keyword)">Delete</button>
+                  <button type="button" class="btn btn-sm btn-danger" (click)="removeKeyword(keyword.keyword)">Delete</button>
                 </td>
               </tr>
             </tbody>

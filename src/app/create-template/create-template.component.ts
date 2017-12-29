@@ -16,7 +16,7 @@ export class CreateTemplateComponent implements OnInit {
       name: '',
       templateOrigin: '',
       fileTypesExtensions: '',
-      keywords: [{ keyword: '$EntityName$', replacement: 'Glx.ENT.IS', type: 'text' }],
+      keywords: [],
       autoUpdates: {}
     };
   }
