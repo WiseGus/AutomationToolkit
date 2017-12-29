@@ -1,22 +1,23 @@
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Configuration } from '../conf/configuration';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { ElectronService } from 'ngx-electron';
 
 @Injectable()
 export class DataService {
 
   private actionUrl: string;
+  private _isElectronApp: boolean;
 
-  constructor(private http: HttpClient, private _configuration: Configuration) {
+  constructor(electron: ElectronService, private http: HttpClient) {
+    this._isElectronApp = electron.isElectronApp;
   }
 
   public getAll<T>(controller: string): Observable<T> {
     return this.http.get<T>(this.generateUrl(controller));
   }
 
-  public getSingle<T>(controller: string, id: number): Observable<T> {
+  public getSingle<T>(controller: string, id: string): Observable<T> {
     return this.http.get<T>(this.generateUrl(controller) + id);
   }
 
@@ -25,17 +26,21 @@ export class DataService {
       .post(this.generateUrl(controller), itemToUpdate) as Observable<T>;
   }
 
-  public update<T>(controller: string, id: number, itemToUpdate: any): Observable<T> {
+  public update<T>(controller: string, id: string, itemToUpdate: any): Observable<T> {
     return this.http
-      .put<T>(this.generateUrl(controller) + id, JSON.stringify(itemToUpdate));
+      .put<T>(this.generateUrl(controller) + id, itemToUpdate);
   }
 
-  public delete<T>(controller: string, id: number): Observable<T> {
+  public delete<T>(controller: string, id: string): Observable<T> {
     return this.http.delete<T>(this.generateUrl(controller) + id);
   }
 
   private generateUrl(controller: string) {
-    return this._configuration.ServerWithApiUrl + controller + '/';
+    let apiUrl = `api/${controller}/`;
+    if (this._isElectronApp) {
+      apiUrl = `http://localhost:5000/${apiUrl}`;
+    }
+    return apiUrl;
   }
 }
 

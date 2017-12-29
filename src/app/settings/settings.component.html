@@ -11,12 +11,6 @@
           <input type="text" id="tfsUrl" name="tfsUrl" class="form-control" placeholder="Insert the TFS url to be able to checkout files"
             [(ngModel)]="appSettings.tfsUrl">
         </div>
-
-        <div class="form-group">
-          <label for="templatesFolderPath">Templates folder path</label>
-          <input type="text" id="templatesFolderPath" name="templatesFolderPath" class="form-control" placeholder="Insert the Templates folder path"
-            [(ngModel)]="appSettings.templatesFolderPath">
-        </div>
       </form>
 
       <div class="alert alert-success alert-dismissible fade show" *ngIf="postOk">

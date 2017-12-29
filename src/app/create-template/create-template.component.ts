@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Preset, Keyword } from './preset';
 import { element } from 'protractor';
+import { DataService } from '../svc/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-template',
@@ -9,9 +11,11 @@ import { element } from 'protractor';
 })
 export class CreateTemplateComponent implements OnInit {
 
+  isNew = true;
   preset: Preset;
+  postOk: boolean;
 
-  constructor() {
+  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
     this.preset = {
       name: '',
       templateOrigin: '',
@@ -22,10 +26,30 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.params.subscribe(prms => {
+      const presetName = prms['name'];
+
+      if (presetName) {
+        this.isNew = false;
+        this._dataSvc.getSingle<Preset>('presets', presetName)
+          .subscribe(p => {
+            this.preset = p;
+          });
+      }
+    });
   }
 
   save() {
-    console.log(this.preset);
+    if (this.isNew) {
+      if (!this.preset.name) {
+        return;
+      }
+      this._dataSvc.post<Preset>('presets', this.preset)
+        .subscribe(p => this.postOk = true);
+    } else {
+      this._dataSvc.update<Preset>('presets', this.preset.name, this.preset)
+        .subscribe(p => this.postOk = true);
+    }
   }
 
   addKeyword(keywordValue: HTMLInputElement, keywordReplace: HTMLInputElement, keywordType: HTMLInputElement) {

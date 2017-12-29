@@ -5,17 +5,19 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './svc/data.service';
-import { Configuration } from './conf/configuration';
 import { CreateTemplateComponent } from './create-template/create-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GenerateProjectComponent } from './generate-project/generate-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'create-template', component: CreateTemplateComponent },
+  { path: 'generateproject', component: GenerateProjectComponent },
+  { path: 'createtemplate/:name', component: CreateTemplateComponent },
+  { path: 'createtemplate', component: CreateTemplateComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '**', component: HomeComponent }
 ];
@@ -25,7 +27,8 @@ const routes: Routes = [
     AppComponent,
     CreateTemplateComponent,
     HomeComponent,
-    SettingsComponent
+    SettingsComponent,
+    GenerateProjectComponent
   ],
   imports: [
     FormsModule,
@@ -37,8 +40,7 @@ const routes: Routes = [
     NgbModule.forRoot()
   ],
   providers: [
-    DataService,
-    Configuration
+    DataService
   ],
   bootstrap: [AppComponent]
 })

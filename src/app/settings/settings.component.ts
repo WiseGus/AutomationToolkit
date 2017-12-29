@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
     this._dataSvc.getAll<any>('settings')
       .subscribe(p => {
         this.appSettings.tfsUrl = p.tfsUrl;
-        this.appSettings.templatesFolderPath = p.templatesFolderPath;
       });
   }
 

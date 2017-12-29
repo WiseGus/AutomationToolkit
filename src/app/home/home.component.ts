@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
-    this._dataSvc.getAll<string[]>('presets')
+    this._dataSvc.getAll<any[]>('presets')
       .subscribe(p => this.templatesCount = p.length);
   }
 

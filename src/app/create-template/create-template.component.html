@@ -45,7 +45,7 @@
             <button type="button" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType)">Add</button>
           </form>
 
-          <table *ngIf="preset.keywords.length > 0" class="table table-sm table-bordered">
+          <table *ngIf="preset.keywords.length > 0" class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">Keyword</th>
@@ -113,7 +113,7 @@
               <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" name="updateActionManager" [(ngModel)]="preset.autoUpdates.updateActionManager">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Action.Manager</span>
+                <span class="custom-control-description">Update Core.Action.Manager</span>
               </label>
             </div>
           </div>
@@ -123,19 +123,19 @@
               <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" name="updateFormsCustomization" [(ngModel)]="preset.autoUpdates.updateFormsCustomization">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Forms Customization</span>
+                <span class="custom-control-description">Update Core.FormsCustomization</span>
               </label>
 
               <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" name="updateObjectsCustomization" [(ngModel)]="preset.autoUpdates.updateObjectsCustomization">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Objects Customization</span>
+                <span class="custom-control-description">Update Core.ObjectsCustomization</span>
               </label>
 
               <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" name="updateWorkflowsCustomization" [(ngModel)]="preset.autoUpdates.updateWorkflowsCustomization">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Workflows Customization</span>
+                <span class="custom-control-description">Update Core.WorkflowsCustomization</span>
               </label>
             </div>
           </div>
@@ -151,11 +151,16 @@
           </div>
         </div>
       </form>
+
+      <div class="alert alert-success alert-dismissible fade show" *ngIf="postOk">
+        <strong>Save success!</strong>
+      </div>
+
     </div>
 
     <div class="card-footer text-muted">
       <button type="button" class="btn btn-success" (click)="save()">Save</button>
-      <button type="button" class="btn btn-secondary" routerLink="">Cancel</button>
+      <button type="button" class="btn btn-secondary" routerLink="">{{postOk ? 'Back' : 'Cancel'}}</button>
     </div>
 
   </div>
