@@ -75,9 +75,9 @@ var apiProcess = null;
 function startApi() {
   var proc = require('child_process').spawn;
   //  run server
-  var apipath = path.join(__dirname, '\\api\\bin\\dist\\win\\Api.exe')
+  var apipath = path.join(__dirname, '\\api\\Api.exe')
   if (os.platform() === 'darwin') {
-    apipath = path.join(__dirname, '..//api//bin//dist//osx//Api')
+    apipath = path.join(__dirname, '..//api//osx//Api')
   }
   apiProcess = proc(apipath)
 

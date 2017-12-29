@@ -30,7 +30,7 @@ namespace Api.Controllers
         public async Task<IActionResult> Post([FromBody]AppSettings value)
         {
             var rootDirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-            var settingsFile = new FileInfo(rootDirInfo + "/" + "AppSettings.json");
+            var settingsFile = new FileInfo(rootDirInfo + "/" + "Api.Settings.json");
             using (var sr = new StreamWriter(settingsFile.FullName, false, Encoding.UTF8))
             {
                 var resString = JsonConvert.SerializeObject(value, Formatting.Indented);
@@ -44,7 +44,7 @@ namespace Api.Controllers
             var res = new AppSettings();
 
             var rootDirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-            var settingsFile = new FileInfo(rootDirInfo + "/" + "AppSettings.json");
+            var settingsFile = new FileInfo(rootDirInfo + "/" + "Api.Settings.json");
             if (settingsFile.Exists)
             {
                 using (var sr = new StreamReader(settingsFile.FullName, Encoding.UTF8))

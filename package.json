@@ -9,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-electron": "ng build --base-href ./ && copy src\\electron\\* dist && xcopy api\\bin\\dist\\win\\* dist\\api\\bin\\dist\\win\\",
-    "build-electron-aot": "ng build --prod --base-href ./ && copy src\\electron\\* dist && xcopy api\\bin\\dist\\win\\* dist\\api\\bin\\dist\\win\\",
+    "build-electron": "ng build --base-href ./ && copy src\\electron\\* dist && xcopy /e api\\bin\\dist\\win\\* dist\\api\\",
+    "build-electron-aot": "ng build --prod --base-href ./ && copy src\\electron\\* dist && xcopy /e api\\bin\\dist\\win\\* dist\\api\\",
     "electron": "npm run build-electron && electron dist",
     "electron-aot": "npm run build-electron-aot && electron dist",
     "electron-release": "npm run build-electron-aot && electron-packager dist --platform=win32"
