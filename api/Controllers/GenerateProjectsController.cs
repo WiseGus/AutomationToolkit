@@ -16,8 +16,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Preset value)
         {
-            var appSettings = await new SettingsController().GetAppSettings();
-
+            /* Copy Project structure from template */
             var templateOriginInfo = new DirectoryInfo(value.TemplateOrigin);
             if (!templateOriginInfo.Exists) throw new ArgumentException("Invalid template origin path");
 
@@ -25,6 +24,21 @@ namespace Api.Controllers
             outputFolderPathInfo.Create();
 
             DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true);
+
+            /* Replace keywords in files matching search pattern */
+            var searchPatterns = string.IsNullOrEmpty(value.FileTypesExtensions) ? new[] { "*.*" } : value.FileTypesExtensions.Split(',');
+            foreach (string searchPattern in searchPatterns)
+            {
+                foreach (var fileInfo in outputFolderPathInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
+                {
+                    var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName);
+                    ReplaceKeyword(fileText, value.Keywords);
+                    await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText);
+                }
+            }
+
+            /* Perform updates in main build solutions, core folders */
+            var appSettings = await new SettingsController().GetAppSettings();
 
             return new OkResult();
         }
