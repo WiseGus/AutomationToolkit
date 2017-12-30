@@ -10,12 +10,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GenerateProjectListComponent } from './generate-project-list/generate-project-list.component';
 import { GenerateProjectComponent } from './generate-project/generate-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'generateproject', component: GenerateProjectComponent },
+  { path: 'generateproject/:name', component: GenerateProjectComponent },
+  { path: 'generateprojectlist', component: GenerateProjectListComponent },
   { path: 'createtemplate/:name', component: CreateTemplateComponent },
   { path: 'createtemplate', component: CreateTemplateComponent },
   { path: 'settings', component: SettingsComponent },
@@ -28,6 +30,7 @@ const routes: Routes = [
     CreateTemplateComponent,
     HomeComponent,
     SettingsComponent,
+    GenerateProjectListComponent,
     GenerateProjectComponent
   ],
   imports: [

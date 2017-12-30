@@ -1,1 +1,27 @@
-﻿[]
+﻿[
+  {
+    "Name": "Test Glx Entity",
+    "TemplateOrigin": "D:\\darth\\Desktop\\Templates",
+    "FileTypesExtensions": "*.*",
+    "Keywords": [
+      {
+        "keyword": "$Entity$",
+        "replacement": "",
+        "type": "text"
+      }
+    ],
+    "AutoUpdates": {
+      "UpdateEntities": true,
+      "UpdatePresenters": false,
+      "UpdateWinforms": false,
+      "UpdateWpfforms": false,
+      "UpdateCoreBase": true,
+      "UpdateCoreMessages": true,
+      "UpdateActionManager": true,
+      "UpdateFormsCustomization": true,
+      "UpdateObjectsCustomization": true,
+      "UpdateWorkflowsCustomization": true,
+      "IsCrmProject": false
+    }
+  }
+]

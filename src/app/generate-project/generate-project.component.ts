@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../svc/data.service';
 import { Preset } from '../create-template/preset';
 
@@ -9,24 +10,18 @@ import { Preset } from '../create-template/preset';
 })
 export class GenerateProjectComponent implements OnInit {
 
-  presets: Preset[] = [];
+  preset: Preset;
 
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._dataSvc.getAll<Preset[]>('presets')
-      .subscribe(p => {
-        this.presets = p;
-      });
-  }
-
-  generate(preset: Preset) { }
-
-  delete(presetName: string) {
-    this._dataSvc.delete('presets', presetName)
-      .subscribe(p => {
-        this.ngOnInit();
-      });
+    this._route.params.subscribe(prms => {
+      const presetName = prms['name'];
+      this._dataSvc.getSingle<Preset>('presets', presetName)
+        .subscribe(p => {
+          this.preset = p;
+        });
+    });
   }
 
 }
