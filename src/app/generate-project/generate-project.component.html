@@ -10,26 +10,29 @@
       </h5>
       <br>
 
+      <div class="form-group">
+        <label for="projectName">Project name</label>
+        <input type="text" id="projectName" name="projectName" class="form-control" placeholder="Insert a name for the project" [(ngModel)]="preset.projectName">
+      </div>
+
       <div *ngIf="keywords && keywords.length > 0">
         <h5>Required Keywords:</h5>
         <form>
-          <div class="form-group row">
-            <ng-container *ngFor="let keyword of keywords">
-              <label class=" offset-3 col-sm-2 col-form-label">{{keyword.keyword}}</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" [name]="keyword.keyword" [(ngModel)]="keyword.replacement">
-              </div>
-            </ng-container>
+          <div class="form-group row" *ngFor="let keyword of keywords">
+            <label class="offset-2 col-lg-2 col-form-label">{{keyword.keyword}}</label>
+            <div class="col-lg-4">
+              <input type="text" class="form-control" [name]="keyword.keyword" [(ngModel)]="keyword.replacement">
+            </div>
           </div>
         </form>
       </div>
       <div *ngIf="showDetails">
-        {{preset | json}}
+        <pre>{{preset | json}}</pre>
       </div>
     </div>
 
     <div class="card-footer text-muted">
-      <button type="button" class="btn btn-success">Generate!</button>
+      <button type="button" class="btn btn-success" (click)="generateProject()">Generate!</button>
       <button type="button" class="btn btn-secondary" routerLink="/generateprojectlist">Back</button>
       <button type="button" class="btn btn-primary" (click)="toggleShowDetails()">Details</button>
     </div>

@@ -23,6 +23,17 @@
         </div>
 
         <div class="form-group">
+          <label for="outputFolderPath">Output folder path</label>
+          <div class="input-group">
+            <input type="text" id="outputFolderPath" name="outputFolderPath" class="form-control" placeholder="Select the generated output path"
+              [(ngModel)]="preset.outputFolderPath">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-primary" type="button">Browse</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label for="fileExtensions">File types extensions</label>
           <div class="input-group">
             <input type="text" id="fileExtensions" name="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement (comma separated)"

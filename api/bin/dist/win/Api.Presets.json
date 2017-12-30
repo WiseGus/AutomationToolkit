@@ -1,7 +1,8 @@
 ﻿[
   {
     "Name": "Test Glx Entity",
-    "TemplateOrigin": "D:\\darth\\Desktop\\Templates",
+    "TemplateOrigin": "D:\\darth\\Desktop\\Templates\\Glx.ENT.Master",
+    "OutputFolderPath": "C:\\Dev\\Glx\\Baseline\\Sources\\Entities\\IS",
     "FileTypesExtensions": "*.*",
     "Keywords": [
       {

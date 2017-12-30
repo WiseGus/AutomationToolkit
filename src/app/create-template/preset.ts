@@ -1,6 +1,8 @@
 export interface Preset {
   name: string;
+  projectName: string;
   templateOrigin: string;
+  outputFolderPath: string;
   fileTypesExtensions: string;
   keywords: Keyword[];
   autoUpdates: AutoUpdates;

@@ -31,4 +31,18 @@ export class GenerateProjectComponent implements OnInit {
     this.showDetails = !this.showDetails;
   }
 
+  generateProject() {
+    if (!this.preset.projectName || this.preset.keywords.filter(p => !p.replacement).length > 0) {
+      return;
+    }
+
+    console.log('Generating template: ', this.preset);
+    this._dataSvc.post('generateprojects', this.preset)
+      .subscribe(p => { });
+  }
+
+  updateProjectName(value: string) {
+    this.preset.name = value;
+  }
+
 }

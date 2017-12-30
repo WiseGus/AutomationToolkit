@@ -18,7 +18,9 @@ export class CreateTemplateComponent implements OnInit {
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
     this.preset = {
       name: '',
+      projectName: '',
       templateOrigin: '',
+      outputFolderPath: '',
       fileTypesExtensions: '',
       keywords: [],
       autoUpdates: {
