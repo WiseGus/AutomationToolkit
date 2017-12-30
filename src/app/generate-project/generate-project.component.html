@@ -4,12 +4,34 @@
       <h3>Generate project</h3>
     </div>
 
-    <div class="card-body">
-      {{preset | json}}
+    <div class="card-body" *ngIf="preset">
+      <h5 class="card-title">Preset:
+        <strong class="text-success">{{preset.name}}</strong>
+      </h5>
+      <br>
+
+      <div *ngIf="keywords && keywords.length > 0">
+        <h5>Required Keywords:</h5>
+        <form>
+          <div class="form-group row">
+            <ng-container *ngFor="let keyword of keywords">
+              <label class=" offset-3 col-sm-2 col-form-label">{{keyword.keyword}}</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" [name]="keyword.keyword" [(ngModel)]="keyword.replacement">
+              </div>
+            </ng-container>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="showDetails">
+        {{preset | json}}
+      </div>
     </div>
 
     <div class="card-footer text-muted">
-      <button type="button" class="btn btn-secondary" routerLink="">Back</button>
+      <button type="button" class="btn btn-success">Generate!</button>
+      <button type="button" class="btn btn-secondary" routerLink="/generateprojectlist">Back</button>
+      <button type="button" class="btn btn-primary" (click)="toggleShowDetails()">Details</button>
     </div>
 
   </div>

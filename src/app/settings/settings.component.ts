@@ -17,14 +17,13 @@ export class SettingsComponent implements OnInit {
     this._dataSvc.getAll<any>('settings')
       .subscribe(p => {
         this.appSettings.tfsUrl = p.tfsUrl;
+        this.appSettings.glxSourcesPath = p.glxSourcesPath;
       });
   }
 
   save() {
     this._dataSvc.post<any>('settings', this.appSettings)
-      .subscribe(p => {
-        this.postOk = true;
-      });
+      .subscribe(p => this.postOk = true);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../svc/data.service';
-import { Preset } from '../create-template/preset';
+import { Preset, Keyword } from '../create-template/preset';
 
 @Component({
   selector: 'app-generate-project',
@@ -11,6 +11,8 @@ import { Preset } from '../create-template/preset';
 export class GenerateProjectComponent implements OnInit {
 
   preset: Preset;
+  keywords: Keyword[];
+  showDetails = false;
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
@@ -20,8 +22,13 @@ export class GenerateProjectComponent implements OnInit {
       this._dataSvc.getSingle<Preset>('presets', presetName)
         .subscribe(p => {
           this.preset = p;
+          this.keywords = this.preset.keywords.filter(x => !x.replacement);
         });
     });
+  }
+
+  toggleShowDetails() {
+    this.showDetails = !this.showDetails;
   }
 
 }

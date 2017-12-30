@@ -5,9 +5,19 @@
     "FileTypesExtensions": "*.*",
     "Keywords": [
       {
-        "keyword": "$Entity$",
+        "keyword": "$Enetity$",
+        "replacement": "kkk",
+        "type": "xx"
+      },
+      {
+        "keyword": "aaaaaa",
         "replacement": "",
-        "type": "text"
+        "type": ""
+      },
+      {
+        "keyword": "bbbbb",
+        "replacement": "",
+        "type": ""
       }
     ],
     "AutoUpdates": {
