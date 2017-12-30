@@ -21,7 +21,19 @@ export class CreateTemplateComponent implements OnInit {
       templateOrigin: '',
       fileTypesExtensions: '',
       keywords: [],
-      autoUpdates: {}
+      autoUpdates: {
+        updateEntities: false,
+        updatePresenters: false,
+        updateWinforms: false,
+        updateWpfforms: false,
+        updateCoreBase: true,
+        updateCoreMessages: true,
+        updateActionManager: true,
+        updateFormsCustomization: true,
+        updateObjectsCustomization: true,
+        updateWorkflowsCustomization: true,
+        isCrmProject: false
+      }
     };
   }
 
@@ -44,9 +56,12 @@ export class CreateTemplateComponent implements OnInit {
       if (!this.preset.name) {
         return;
       }
+
+      console.log('Posting preset: ', this.preset);
       this._dataSvc.post<Preset>('presets', this.preset)
         .subscribe(p => this.postOk = true);
     } else {
+      console.log('Updating preset: ', this.preset);
       this._dataSvc.update<Preset>('presets', this.preset.name, this.preset)
         .subscribe(p => this.postOk = true);
     }

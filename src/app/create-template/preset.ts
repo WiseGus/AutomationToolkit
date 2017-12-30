@@ -7,21 +7,21 @@ export interface Preset {
 }
 
 export interface AutoUpdates {
-  updateEntities?: boolean;
-  updatePresenters?: boolean;
-  updateWinforms?: boolean;
-  updateWpfforms?: boolean;
-  updateCoreBase?: boolean;
-  updateCoreMessages?: boolean;
-  updateActionManager?: boolean;
-  updateFormsCustomization?: boolean;
-  updateObjectsCustomization?: boolean;
-  updateWorkflowsCustomization?: boolean;
-  isCrmProject?: boolean;
+  updateEntities: boolean;
+  updatePresenters: boolean;
+  updateWinforms: boolean;
+  updateWpfforms: boolean;
+  updateCoreBase: boolean;
+  updateCoreMessages: boolean;
+  updateActionManager: boolean;
+  updateFormsCustomization: boolean;
+  updateObjectsCustomization: boolean;
+  updateWorkflowsCustomization: boolean;
+  isCrmProject: boolean;
 }
 
 export interface Keyword {
   keyword: string;
-  replacement?: string;
+  replacement: string;
   type: string;
 }

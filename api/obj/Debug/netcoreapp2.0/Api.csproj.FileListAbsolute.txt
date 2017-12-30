@@ -9,3 +9,14 @@ D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoIn
 D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
 D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.dll
 D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.pdb
+D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.deps.json
+D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.json
+D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.dev.json
+D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.dll
+D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.pdb
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csprojResolveAssemblyReference.cache
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoInputs.cache
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.dll
+D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.pdb

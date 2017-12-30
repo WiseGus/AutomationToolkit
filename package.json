@@ -11,11 +11,13 @@
     "e2e": "ng e2e",
     "api-publish": "cd api && dotnet publish -c release -r win-x64 --output bin/dist/win && cd ..",
     "build-electron": "ng build --base-href ./ && copy src\\electron\\* dist && xcopy /e api\\bin\\dist\\win\\* dist\\api\\",
-    "build-electron-aot": "ng build --prod --base-href ./ && copy src\\electron\\* dist && xcopy /e api\\bin\\dist\\win\\* dist\\api\\",
     "electron": "npm run build-electron && electron dist",
+    "electron-release": "npm run build-electron && electron-packager dist --platform=win32 --arch=x64 --overwrite",
+    "full-publish": "npm run api-publish && npm run electron-release",
+    "build-electron-aot": "ng build --prod --base-href ./ && copy src\\electron\\* dist && xcopy /e api\\bin\\dist\\win\\* dist\\api\\",
     "electron-aot": "npm run build-electron-aot && electron dist",
-    "electron-release": "npm run build-electron-aot && electron-packager dist --platform=win32",
-    "full-publish": "npm run api-publish && npm run electron-release"
+    "electron-release-aot": "npm run build-electron-aot && electron-packager dist --platform=win32 --arch=x64 --overwrite",
+    "full-publish-aot": "npm run api-publish && npm run electron-release-aot"
   },
   "private": true,
   "dependencies": {

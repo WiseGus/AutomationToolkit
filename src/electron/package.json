@@ -1,5 +1,11 @@
 {
-  "name"    : "automationToolkit2",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "automation-toolkit-2",
+  "productName": "Automation Toolkit 2",
+  "version": "0.1.0",
+  "main": "main.js",
+  "author": {
+    "name": "Gus Wise",
+    "email": "wisegus@gmail.com"
+  },
+  "icon": "favicon.ico"
 }
