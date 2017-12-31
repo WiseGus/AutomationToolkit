@@ -1,6 +1,7 @@
 public class Keyword
 {
-    public string keyword { get; set; }
-    public string replacement { get; set; }
-    public string type { get; set; }
+    public string KeywordName { get; set; }
+    public string Replacement { get; set; }
+    public string KeywordType { get; set; }
+    public bool ShowInGenerate { get; set; }
 }

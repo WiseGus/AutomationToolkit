@@ -17,11 +17,11 @@ export class CreateTemplateComponent implements OnInit {
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
     this.preset = {
-      name: '',
+      alias: '',
       projectName: '',
       templateOrigin: '',
       outputFolderPath: '',
-      fileTypesExtensions: '',
+      fileKeywordTypesExtensions: '',
       keywords: [],
       autoUpdates: {
         updateEntities: false,
@@ -41,11 +41,11 @@ export class CreateTemplateComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.subscribe(prms => {
-      const presetName = prms['name'];
+      const presetAlias = prms['alias'];
 
-      if (presetName) {
+      if (presetAlias) {
         this.isNew = false;
-        this._dataSvc.getSingle<Preset>('presets', presetName)
+        this._dataSvc.getSingle<Preset>('presets', presetAlias)
           .subscribe(p => {
             this.preset = p;
           });
@@ -55,7 +55,7 @@ export class CreateTemplateComponent implements OnInit {
 
   save() {
     if (this.isNew) {
-      if (!this.preset.name) {
+      if (!this.preset.alias) {
         return;
       }
 
@@ -64,33 +64,35 @@ export class CreateTemplateComponent implements OnInit {
         .subscribe(p => this.postOk = true);
     } else {
       console.log('Updating preset: ', this.preset);
-      this._dataSvc.update<Preset>('presets', this.preset.name, this.preset)
+      this._dataSvc.update<Preset>('presets', this.preset.alias, this.preset)
         .subscribe(p => this.postOk = true);
     }
   }
 
-  addKeyword(keywordValue: HTMLInputElement, keywordReplace: HTMLInputElement, keywordType: HTMLInputElement) {
+  addKeyword(keywordValue: HTMLInputElement, keywordReplace: HTMLInputElement, keywordType: HTMLInputElement, keywordShowInGenerate: HTMLInputElement) {
     if (!keywordValue.value) {
       return;
     }
-    const keyword = this.preset.keywords.find(p => p.keyword === keywordValue.value);
+    const keyword = this.preset.keywords.find(p => p.keywordName === keywordValue.value);
     if (keyword) {
       return;
     }
 
     this.preset.keywords.push({
-      keyword: keywordValue.value,
+      keywordName: keywordValue.value,
       replacement: keywordReplace.value,
-      type: keywordType.value
+      keywordType: keywordType.value,
+      showInGenerate: keywordShowInGenerate.checked
     });
 
     keywordValue.value = '';
     keywordReplace.value = '';
-    keywordType.value = '';
+    keywordType.value = 'text';
+    keywordShowInGenerate.checked = false;
   }
 
   removeKeyword(keyword: string) {
-    const idx = this.preset.keywords.findIndex(p => p.keyword === keyword);
+    const idx = this.preset.keywords.findIndex(p => p.keywordName === keyword);
     this.preset.keywords.splice(idx, 1);
   }
 

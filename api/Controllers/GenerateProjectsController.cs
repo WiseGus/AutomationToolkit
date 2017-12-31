@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using System.Collections.Generic;
+using Api.Util;
 
 namespace Api.Controllers
 {
@@ -16,24 +17,31 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Preset value)
         {
+            /* Replace internal keywords */
+            value.Keywords.ForEach(keyword => keyword.Replacement = keyword.Replacement.ReplaceKeywords(value.Keywords));
+
             /* Copy Project structure from template */
             var templateOriginInfo = new DirectoryInfo(value.TemplateOrigin);
             if (!templateOriginInfo.Exists) throw new ArgumentException("Invalid template origin path");
 
-            var outputFolderPathInfo = new DirectoryInfo(Path.Combine(value.OutputFolderPath, ReplaceKeyword(value.ProjectName, value.Keywords)));
+            var outputFolderPathInfo = new DirectoryInfo(value.OutputFolderPath.ReplaceKeywords(value.Keywords));
             outputFolderPathInfo.Create();
 
-            DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true);
+            DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true, value.Keywords);
 
             /* Replace keywords in files matching search pattern */
-            var searchPatterns = string.IsNullOrEmpty(value.FileTypesExtensions) ? new[] { "*.*" } : value.FileTypesExtensions.Split(',');
+            var searchPatterns = string.IsNullOrEmpty(value.FileKeywordTypesExtensions) ? new[] { "*.*" } : value.FileKeywordTypesExtensions.Split(',');
             foreach (string searchPattern in searchPatterns)
             {
                 foreach (var fileInfo in outputFolderPathInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
                 {
                     var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName);
-                    ReplaceKeyword(fileText, value.Keywords);
-                    await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText);
+                    fileText = fileText.ReplaceKeywords(value.Keywords);
+                    try
+                    {
+                        await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText);
+                    }
+                    catch { }
                 }
             }
 
@@ -43,16 +51,7 @@ namespace Api.Controllers
             return new OkResult();
         }
 
-        private string ReplaceKeyword(string text, List<Keyword> keywords)
-        {
-            keywords.ForEach(keyword =>
-            {
-                text = text.Replace(keyword.keyword, keyword.replacement);
-            });
-            return text;
-        }
-
-        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs, List<Keyword> keywords)
         {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -73,8 +72,9 @@ namespace Api.Controllers
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
+                string tempPath = Path.Combine(destDirName, file.Name);
+                tempPath = tempPath.ReplaceKeywords(keywords);
+                file.CopyTo(tempPath, true);
             }
 
             // If copying subdirectories, copy them and their contents to new location.
@@ -82,8 +82,9 @@ namespace Api.Controllers
             {
                 foreach (DirectoryInfo subdir in dirs)
                 {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                    string tempPath = Path.Combine(destDirName, subdir.Name);
+                    tempPath = tempPath.ReplaceKeywords(keywords);
+                    DirectoryCopy(subdir.FullName, tempPath, copySubDirs, keywords);
                 }
             }
         }

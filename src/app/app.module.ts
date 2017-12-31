@@ -16,9 +16,9 @@ import { GenerateProjectComponent } from './generate-project/generate-project.co
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'generateproject/:name', component: GenerateProjectComponent },
+  { path: 'generateproject/:alias', component: GenerateProjectComponent },
   { path: 'generateprojectlist', component: GenerateProjectListComponent },
-  { path: 'createtemplate/:name', component: CreateTemplateComponent },
+  { path: 'createtemplate/:alias', component: CreateTemplateComponent },
   { path: 'createtemplate', component: CreateTemplateComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '**', component: HomeComponent }

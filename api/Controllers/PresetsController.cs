@@ -29,11 +29,11 @@ namespace Api.Controllers
             return new JsonResult(presetsList, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> Get(string name)
+        [HttpGet("{alias}")]
+        public async Task<IActionResult> Get(string alias)
         {
             var presetsList = await ReadPresetsFile();
-            var presetObj = presetsList.Find(p => p.Name == name);
+            var presetObj = presetsList.Find(p => p.Alias == alias);
 
             return new JsonResult(presetObj, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         }
@@ -48,11 +48,11 @@ namespace Api.Controllers
             return new OkResult();
         }
 
-        [HttpPut("{name}")]
-        public async void Put(string name, [FromBody]Preset value)
+        [HttpPut("{alias}")]
+        public async void Put(string alias, [FromBody]Preset value)
         {
             var presetsList = await ReadPresetsFile();
-            var presetIdx = presetsList.FindIndex(p => p.Name == name);
+            var presetIdx = presetsList.FindIndex(p => p.Alias == alias);
             if (presetIdx > -1)
             {
                 presetsList.RemoveAt(presetIdx);
@@ -61,11 +61,11 @@ namespace Api.Controllers
             WritePresetsFile(presetsList);
         }
 
-        [HttpDelete("{name}")]
-        public async void Delete(string name)
+        [HttpDelete("{alias}")]
+        public async void Delete(string alias)
         {
             var presetsList = await ReadPresetsFile();
-            var presetObj = presetsList.Find(p => p.Name == name);
+            var presetObj = presetsList.Find(p => p.Alias == alias);
             if (presetObj != null)
             {
                 presetsList.Remove(presetObj);

@@ -1,9 +1,9 @@
 export interface Preset {
-  name: string;
+  alias: string;
   projectName: string;
   templateOrigin: string;
   outputFolderPath: string;
-  fileTypesExtensions: string;
+  fileKeywordTypesExtensions: string;
   keywords: Keyword[];
   autoUpdates: AutoUpdates;
 }
@@ -23,7 +23,8 @@ export interface AutoUpdates {
 }
 
 export interface Keyword {
-  keyword: string;
+  keywordName: string;
   replacement: string;
-  type: string;
+  keywordType: string;
+  showInGenerate: boolean;
 }

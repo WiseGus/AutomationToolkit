@@ -6,29 +6,30 @@
 
     <div class="card-body" *ngIf="preset">
       <h5 class="card-title">Preset:
-        <strong class="text-success">{{preset.name}}</strong>
+        <strong class="text-success">{{preset.alias}}</strong>
       </h5>
       <br>
-
-      <div class="form-group">
-        <label for="projectName">Project name</label>
-        <input type="text" id="projectName" name="projectName" class="form-control" placeholder="Insert a name for the project" [(ngModel)]="preset.projectName">
-      </div>
 
       <div *ngIf="keywords && keywords.length > 0">
         <h5>Required Keywords:</h5>
         <form>
           <div class="form-group row" *ngFor="let keyword of keywords">
-            <label class="offset-2 col-lg-2 col-form-label">{{keyword.keyword}}</label>
+            <label class="offset-2 col-lg-2 col-form-label">{{keyword.keywordName}}</label>
             <div class="col-lg-4">
-              <input type="text" class="form-control" [name]="keyword.keyword" [(ngModel)]="keyword.replacement">
+              <input type="text" class="form-control" [name]="keyword.keywordName" [(ngModel)]="keyword.replacement">
             </div>
           </div>
         </form>
       </div>
+
       <div *ngIf="showDetails">
         <pre>{{preset | json}}</pre>
       </div>
+
+      <div class="alert alert-success alert-dismissible fade show" *ngIf="postOk">
+        <strong>Generated project success!</strong>
+      </div>
+
     </div>
 
     <div class="card-footer text-muted">

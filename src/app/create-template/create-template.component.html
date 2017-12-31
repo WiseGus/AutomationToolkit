@@ -1,14 +1,20 @@
 <div class="container">
   <div class="card">
     <div class="card-header">
-      <h3>Create template preset</h3>
+      <h3>{{isNew ? 'Create' : 'Edit' }} template preset</h3>
     </div>
 
     <div class="card-body">
       <form>
         <div class="form-group">
-          <label for="presetName">Preset name</label>
-          <input type="text" id="presetName" name="presetName" class="form-control" placeholder="Insert a name for the preset" [(ngModel)]="preset.name">
+          <label for="presetAlias">Preset alias</label>
+          <input type="text" id="presetAlias" name="presetAlias" class="form-control" placeholder="Insert an alias for the preset" [(ngModel)]="preset.alias">
+        </div>
+
+        <div class="form-group">
+          <label for="projectName">Project name</label>
+          <input type="text" id="projectName" name="projectName" class="form-control" placeholder="Insert the name of the generated project"
+            [(ngModel)]="preset.projectName">
         </div>
 
         <div class="form-group">
@@ -37,7 +43,7 @@
           <label for="fileExtensions">File types extensions</label>
           <div class="input-group">
             <input type="text" id="fileExtensions" name="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement (comma separated)"
-              [(ngModel)]="preset.fileTypesExtensions">
+              [(ngModel)]="preset.fileKeywordTypesExtensions">
           </div>
         </div>
 
@@ -51,9 +57,18 @@
             <input #keywordReplace type="text" class="form-control mb-2 mr-sm-2" id="keywordReplacement" placeholder="Replacement">
 
             <label class="sr-only" for="keywordType">Type</label>
-            <input #keywordType type="text" class="form-control mb-2 mr-sm-2" id="keywordType" placeholder="Type">
+            <select #keywordType class="form-control mb-2 mr-sm-2" id="keywordType">
+              <option selected="selected">text</option>
+              <option>function</option>
+            </select>
 
-            <button type="button" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType)">Add</button>
+            <label class="custom-control custom-checkbox">
+              <input #keywordShowInGenerate type="checkbox" class="custom-control-input mb-2 mr-sm-2" name="showInGenerate">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Show in generate</span>
+            </label>
+
+            <button type="button" class="btn btn-primary mb-2" (click)="addKeyword(keywordValue, keywordReplace, keywordType, keywordShowInGenerate)">Add</button>
           </form>
 
           <table *ngIf="preset.keywords.length > 0" class="table table-sm">
@@ -62,16 +77,18 @@
                 <th scope="col">Keyword</th>
                 <th scope="col">Replacement</th>
                 <th scope="col">Type</th>
+                <th scope="col">Show in generate</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let keyword of preset.keywords">
-                <td>{{keyword.keyword}}</td>
+                <td>{{keyword.keywordName}}</td>
                 <td>{{keyword.replacement}}</td>
-                <td>{{keyword.type}}</td>
+                <td>{{keyword.keywordType}}</td>
+                <td>{{keyword.showInGenerate}}</td>
                 <td>
-                  <button type="button" class="btn btn-sm btn-danger" (click)="removeKeyword(keyword.keyword)">Delete</button>
+                  <button type="button" class="btn btn-sm btn-danger" (click)="removeKeyword(keyword.keywordName)">Delete</button>
                 </td>
               </tr>
             </tbody>

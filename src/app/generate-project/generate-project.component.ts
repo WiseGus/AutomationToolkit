@@ -13,16 +13,17 @@ export class GenerateProjectComponent implements OnInit {
   preset: Preset;
   keywords: Keyword[];
   showDetails = false;
+  postOk: boolean;
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
     this._route.params.subscribe(prms => {
-      const presetName = prms['name'];
-      this._dataSvc.getSingle<Preset>('presets', presetName)
+      const presetAlias = prms['alias'];
+      this._dataSvc.getSingle<Preset>('presets', presetAlias)
         .subscribe(p => {
           this.preset = p;
-          this.keywords = this.preset.keywords.filter(x => !x.replacement);
+          this.keywords = this.preset.keywords.filter(x => !x.replacement || x.showInGenerate);
         });
     });
   }
@@ -38,11 +39,7 @@ export class GenerateProjectComponent implements OnInit {
 
     console.log('Generating template: ', this.preset);
     this._dataSvc.post('generateprojects', this.preset)
-      .subscribe(p => { });
-  }
-
-  updateProjectName(value: string) {
-    this.preset.name = value;
+      .subscribe(p => this.postOk = true);
   }
 
 }

@@ -20,8 +20,8 @@ export class GenerateProjectListComponent implements OnInit {
       });
   }
 
-  delete(presetName: string) {
-    this._dataSvc.delete('presets', presetName)
+  delete(presetAlias: string) {
+    this._dataSvc.delete('presets', presetAlias)
       .subscribe(p => {
         this.ngOnInit();
       });
