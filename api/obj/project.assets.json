@@ -12540,12 +12540,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "d:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
+      "projectUniqueName": "D:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "d:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
+      "projectPath": "D:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
       "packagesPath": "C:\\Users\\darth\\.nuget\\packages\\",
-      "outputPath": "d:\\WebProjects\\AutomationToolkit\\api\\obj\\",
+      "outputPath": "D:\\WebProjects\\AutomationToolkit\\api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

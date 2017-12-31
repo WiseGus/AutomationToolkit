@@ -1,0 +1,178 @@
+﻿[
+  {
+    "Alias": "ENT.Master",
+    "ProjectName": "$ProjectName$",
+    "TemplateOrigin": "D:\\darth\\Desktop\\TemplatesNew\\ENT.Master",
+    "OutputFolderPath": "D:\\darth\\Desktop\\Development\\$OutputPath$",
+    "FileKeywordTypesExtensions": "*.*",
+    "Keywords": [
+      {
+        "KeywordName": "$ProjectName$",
+        "Replacement": "$DomainName$.ENT.$ModuleName$.$EntityName$",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$OutputPath$",
+        "Replacement": "Glx\\Baseline\\Sources\\Entities\\$ModuleName$",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$ModuleName$",
+        "Replacement": "IS",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$EntityName$",
+        "Replacement": "Trader",
+        "KeywordType": "text",
+		"ShowInGenerate": "true"
+      },
+      {
+        "KeywordName": "$DomainName$",
+        "Replacement": "Glx",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$DomainPrefix$",
+        "Replacement": "gx",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$DomainNameFull$",
+        "Replacement": "Galaxy",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$SolutionGuid$",
+        "Replacement": "Guid.NewGuid().ToString().ToUpper()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$ProjectGuid$",
+        "Replacement": "Guid.NewGuid().ToString().ToUpper()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$AssemblyGuid$",
+        "Replacement": "Guid.NewGuid()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$Year$",
+        "Replacement": "DateTime.Now.Year",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      }
+    ],
+    "AutoUpdates": {
+      "UpdateEntities": true,
+      "UpdatePresenters": false,
+      "UpdateWinforms": false,
+      "UpdateWpfforms": false,
+      "UpdateCoreBase": true,
+      "UpdateCoreMessages": true,
+      "UpdateActionManager": true,
+      "UpdateFormsCustomization": true,
+      "UpdateObjectsCustomization": true,
+      "UpdateWorkflowsCustomization": true,
+      "IsCrmProject": false
+    }
+  },
+  {
+    "Alias": "ENT.Array",
+    "ProjectName": "$ProjectName$",
+    "TemplateOrigin": "D:\\darth\\Desktop\\TemplatesNew\\ENT.Array",
+    "OutputFolderPath": "D:\\darth\\Desktop\\Development\\$OutputPath$",
+    "FileKeywordTypesExtensions": "*.*",
+    "Keywords": [
+      {
+        "KeywordName": "$ProjectName$",
+        "Replacement": "$DomainName$.ENT.$ModuleName$.$EntityName$",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$OutputPath$",
+        "Replacement": "Glx\\Baseline\\Sources\\Entities\\$ModuleName$",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$ModuleName$",
+        "Replacement": "IS",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$EntityName$",
+        "Replacement": "Company",
+        "KeywordType": "text",
+		"ShowInGenerate": "true"
+      },
+      {
+        "KeywordName": "$DomainName$",
+        "Replacement": "Glx",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$DomainPrefix$",
+        "Replacement": "gx",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$DomainNameFull$",
+        "Replacement": "Galaxy",
+        "KeywordType": "text",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$SolutionGuid$",
+        "Replacement": "Guid.NewGuid().ToString().ToUpper()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+	  {
+        "KeywordName": "$ProjectGuid$",
+        "Replacement": "Guid.NewGuid().ToString().ToUpper()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$AssemblyGuid$",
+        "Replacement": "Guid.NewGuid()",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      },
+      {
+        "KeywordName": "$Year$",
+        "Replacement": "DateTime.Now.Year",
+        "KeywordType": "function",
+		"ShowInGenerate": "false"
+      }
+    ],
+    "AutoUpdates": {
+      "UpdateEntities": true,
+      "UpdatePresenters": false,
+      "UpdateWinforms": false,
+      "UpdateWpfforms": false,
+      "UpdateCoreBase": true,
+      "UpdateCoreMessages": true,
+      "UpdateActionManager": true,
+      "UpdateFormsCustomization": true,
+      "UpdateObjectsCustomization": true,
+      "UpdateWorkflowsCustomization": true,
+      "IsCrmProject": false
+    }
+  }
+]
