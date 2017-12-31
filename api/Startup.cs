@@ -1,3 +1,4 @@
+using Api.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Api
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -27,6 +28,11 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = new JsonExceptionMiddleware(env).Invoke
+            });
 
             app.UseMvc();
         }

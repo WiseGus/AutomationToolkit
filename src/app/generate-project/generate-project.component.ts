@@ -14,6 +14,8 @@ export class GenerateProjectComponent implements OnInit {
   keywords: Keyword[];
   showDetails = false;
   postOk: boolean;
+  postFail: boolean;
+  errorMessage: string;
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
@@ -39,7 +41,12 @@ export class GenerateProjectComponent implements OnInit {
 
     console.log('Generating template: ', this.preset);
     this._dataSvc.post('generateprojects', this.preset)
-      .subscribe(p => this.postOk = true);
+      .subscribe(
+      res => this.postOk = true,
+      error => {
+        this.postFail = true;
+        this.errorMessage = error.error.message;
+      });
   }
 
 }

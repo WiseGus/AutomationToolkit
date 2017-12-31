@@ -29,6 +29,9 @@
       <div class="alert alert-success alert-dismissible fade show" *ngIf="postOk">
         <strong>Generated project success!</strong>
       </div>
+      <div class="alert alert-danger alert-dismissible fade show" *ngIf="postFail">
+        {{errorMessage}}
+      </div>
 
     </div>
 
