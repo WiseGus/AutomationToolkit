@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../svc/data.service';
 import { Preset, Keyword } from '../create-template/preset';
+import { DisableElementDirective } from '../directives/disable-element.directive'
+
+export enum jobStatusEnum { None, Working, DoneOK, DoneError }
 
 @Component({
   selector: 'app-generate-project',
@@ -9,12 +12,12 @@ import { Preset, Keyword } from '../create-template/preset';
   styleUrls: ['./generate-project.component.css']
 })
 export class GenerateProjectComponent implements OnInit {
+  jobStatusEnum = jobStatusEnum;
 
   preset: Preset;
   keywords: Keyword[];
   showDetails = false;
-  postOk: boolean;
-  postFail: boolean;
+  jobStatus: jobStatusEnum = jobStatusEnum.None;
   errorMessage: string;
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
@@ -35,16 +38,18 @@ export class GenerateProjectComponent implements OnInit {
   }
 
   generateProject() {
+    console.log('generateProject', this.jobStatus);
     if (!this.preset.projectName || this.preset.keywords.filter(p => !p.replacement).length > 0) {
       return;
     }
 
+    this.jobStatus = jobStatusEnum.Working;
     console.log('Generating template: ', this.preset);
     this._dataSvc.post('generateprojects', this.preset)
       .subscribe(
-      res => this.postOk = true,
+      res => this.jobStatus = jobStatusEnum.DoneOK,
       error => {
-        this.postFail = true;
+        this.jobStatus = jobStatusEnum.DoneError;
         this.errorMessage = error.error.message;
       });
   }

@@ -12,6 +12,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GenerateProjectListComponent } from './generate-project-list/generate-project-list.component';
 import { GenerateProjectComponent } from './generate-project/generate-project.component';
+import { DisableElementDirective } from './directives/disable-element.directive';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,7 +32,8 @@ const routes: Routes = [
     HomeComponent,
     SettingsComponent,
     GenerateProjectListComponent,
-    GenerateProjectComponent
+    GenerateProjectComponent,
+    DisableElementDirective
   ],
   imports: [
     FormsModule,
