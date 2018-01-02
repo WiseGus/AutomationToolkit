@@ -21,6 +21,10 @@ namespace Api.Controllers
             value.Keywords.ForEach(keyword => keyword.Replacement = keyword.Replacement.ReplaceKeywords(value.Keywords));
 
             /* Copy Project structure from template */
+            if (!Path.IsPathRooted(value.TemplateOrigin)) 
+            {
+                value.TemplateOrigin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, value.TemplateOrigin);
+            }
             var templateOriginInfo = new DirectoryInfo(value.TemplateOrigin);
             if (!templateOriginInfo.Exists) throw new ArgumentException("Invalid template origin path");
 
@@ -39,7 +43,7 @@ namespace Api.Controllers
                     fileText = fileText.ReplaceKeywords(value.Keywords);
                     try
                     {
-                        await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText);
+                        await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.UTF8);
                     }
                     catch { }
                 }

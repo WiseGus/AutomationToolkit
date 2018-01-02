@@ -47,16 +47,18 @@ namespace Api.Middleware
         {
             var error = new ApiError();
 
-            if (env.IsDevelopment())
-            {
-                error.Message = ex.Message;
-                error.Detail = ex.StackTrace;
-            }
-            else
-            {
-                error.Message = DefaultErrorMessage;
-                error.Detail = ex.Message;
-            }
+            // if (env.IsDevelopment())
+            // {
+            //     error.Message = ex.Message;
+            //     error.Detail = ex.StackTrace;
+            // }
+            // else
+            // {
+            //     error.Message = DefaultErrorMessage;
+            //     error.Detail = ex.Message;
+            // }
+            error.Message = ex.Message;
+            error.Detail = ex.StackTrace;
 
             return error;
         }

@@ -9,8 +9,8 @@ let win
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1280,
-    height: 1000,
+    width: 1024,
+    height: 768,
     backgroundColor: '#ffffff',
     icon: `${__dirname}/assets/logo.png`,
     webPreferences: {
