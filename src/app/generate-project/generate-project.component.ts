@@ -28,7 +28,7 @@ export class GenerateProjectComponent implements OnInit {
       this._dataSvc.getSingle<Preset>('presets', presetAlias)
         .subscribe(p => {
           this.preset = p;
-          this.keywords = this.preset.keywords.filter(x => !x.replacement || x.showInGenerate);
+          this.keywords = this.preset.keywords.filter(x => x.showInGenerate);
         });
     });
   }
@@ -38,11 +38,6 @@ export class GenerateProjectComponent implements OnInit {
   }
 
   generateProject() {
-    console.log('generateProject', this.jobStatus);
-    if (!this.preset.projectName || this.preset.keywords.filter(p => !p.replacement).length > 0) {
-      return;
-    }
-
     this.jobStatus = jobStatusEnum.Working;
     console.log('Generating template: ', this.preset);
     this._dataSvc.post('generateprojects', this.preset)

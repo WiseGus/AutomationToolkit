@@ -13,7 +13,7 @@ namespace Api.Util
                 if (keyword.KeywordType == "function")
                 {
                     var compiler = new ExecutronCompiler();
-                    compiler.Compile(keyword.Replacement);
+                    compiler.Compile(keyword.Replacement.Replace(@"\\", @"\"));
                     if (compiler.HasError)
                     {
                         throw new ArgumentException($"Compile error for {keyword.KeywordName}: {compiler.Result}");

@@ -18,6 +18,7 @@ export class CreateTemplateComponent implements OnInit {
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
     this.preset = {
       alias: '',
+      aliasCategory: '',
       projectName: '',
       templateOrigin: '',
       outputFolderPath: '',
@@ -48,6 +49,8 @@ export class CreateTemplateComponent implements OnInit {
         this._dataSvc.getSingle<Preset>('presets', presetAlias)
           .subscribe(p => {
             this.preset = p;
+            console.log('Preset: ', p);
+
           });
       }
     });

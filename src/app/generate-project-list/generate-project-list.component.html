@@ -4,27 +4,36 @@
       <h3>Generate project from template</h3>
     </div>
 
-    <div class="card-body">
+    <div class="card-body" *ngIf="presetsWithCategories.length > 0">
 
       <h2>Presets</h2>
-      <table class="table table-hover" *ngIf="presets.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">Alias</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let preset of presets">
-            <td>{{preset.alias}}</td>
-            <td>
-              <button type="button" class="btn btn-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
-              <button type="button" class="btn btn-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="delete(preset.alias)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div *ngFor="let presetCat of presetsWithCategories">
+        <br>
+        <div class="card">
+          <div class="card-header">{{presetCat.category}} </div>
+          <div class="card-body">
+            <table class="table table-hover table-sm" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Alias</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let preset of presetCat.presets">
+                  <td>{{preset.alias}}</td>
+                  <td align="right">
+                    <button type="button" class="btn btn-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
+                    <button type="button" class="btn btn-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
+                    <button type="button" class="btn btn-danger" (click)="delete(preset.alias)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
     </div>
 

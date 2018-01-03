@@ -29,7 +29,7 @@ namespace Api.Compiler
                 {
                     public string Stringify()
                     {
-                        return Convert.ToString(#sourceCode#);
+                        #sourceCode#
                     }
                 }
             }";

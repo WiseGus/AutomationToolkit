@@ -9,14 +9,21 @@ import { Preset } from '../create-template/preset';
 })
 export class GenerateProjectListComponent implements OnInit {
 
-  presets: Preset[] = [];
+  presetsWithCategories: { category: string, presets: Preset[] }[] = [];
 
   constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
     this._dataSvc.getAll<Preset[]>('presets')
-      .subscribe(p => {
-        this.presets = p;
+      .subscribe(presets => {
+        const categories = new Set(presets.map(x => x.aliasCategory));
+        categories.forEach(category => {
+          const categoryPresets = presets.filter(p => p.aliasCategory === category);
+          this.presetsWithCategories.push({
+            category: category,
+            presets: categoryPresets
+          });
+        });
       });
   }
 
