@@ -17,11 +17,12 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Preset value)
         {
+
             /* Replace internal keywords */
             value.Keywords.ForEach(keyword => keyword.Replacement = keyword.Replacement.ReplaceKeywords(value.Keywords));
 
             /* Copy Project structure from template */
-            if (!Path.IsPathRooted(value.TemplateOrigin)) 
+            if (!Path.IsPathRooted(value.TemplateOrigin))
             {
                 value.TemplateOrigin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, value.TemplateOrigin);
             }
@@ -39,7 +40,7 @@ namespace Api.Controllers
             {
                 foreach (var fileInfo in outputFolderPathInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
                 {
-                    var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName);
+                    var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.UTF8);
                     fileText = fileText.ReplaceKeywords(value.Keywords);
                     try
                     {
@@ -49,8 +50,11 @@ namespace Api.Controllers
                 }
             }
 
-            /* Perform updates in main build solutions, core folders */
-            var appSettings = await new SettingsController().GetAppSettings();
+            if (value.useAutomationUpdates)
+            {
+                var handler = new AutomationUpdatesHandler(value);
+                return new ObjectResult(handler.Execute());
+            }
 
             return new OkResult();
         }

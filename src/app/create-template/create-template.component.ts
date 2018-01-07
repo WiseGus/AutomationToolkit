@@ -24,19 +24,7 @@ export class CreateTemplateComponent implements OnInit {
       outputFolderPath: '',
       fileKeywordTypesExtensions: '',
       keywords: [],
-      autoUpdates: {
-        updateEntities: false,
-        updatePresenters: false,
-        updateWinforms: false,
-        updateWpfforms: false,
-        updateCoreBase: true,
-        updateCoreMessages: true,
-        updateActionManager: true,
-        updateFormsCustomization: true,
-        updateObjectsCustomization: true,
-        updateWorkflowsCustomization: true,
-        isCrmProject: false
-      }
+      useAutomationUpdates: false
     };
   }
 

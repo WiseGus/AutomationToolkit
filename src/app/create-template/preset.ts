@@ -6,21 +6,8 @@ export interface Preset {
   outputFolderPath: string;
   fileKeywordTypesExtensions: string;
   keywords: Keyword[];
-  autoUpdates: AutoUpdates;
-}
-
-export interface AutoUpdates {
-  updateEntities: boolean;
-  updatePresenters: boolean;
-  updateWinforms: boolean;
-  updateWpfforms: boolean;
-  updateCoreBase: boolean;
-  updateCoreMessages: boolean;
-  updateActionManager: boolean;
-  updateFormsCustomization: boolean;
-  updateObjectsCustomization: boolean;
-  updateWorkflowsCustomization: boolean;
-  isCrmProject: boolean;
+  useAutomationUpdates: boolean;
+  automationUpdatesMode?: 'IsEntity | IsPresenter | IsWinForm | IsWpfForm';
 }
 
 export interface Keyword {

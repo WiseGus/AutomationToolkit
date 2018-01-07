@@ -8,12 +8,14 @@
       <form>
         <div class="form-group">
           <label for="presetAlias">Preset alias</label>
-          <input type="text" id="presetAlias" name="presetAlias" class="form-control" placeholder="Insert an alias for the preset" [(ngModel)]="preset.alias">
+          <input type="text" id="presetAlias" name="presetAlias" class="form-control" placeholder="Insert an alias for the preset"
+            [(ngModel)]="preset.alias">
         </div>
 
         <div class="form-group">
           <label for="presetCategory">Preset category</label>
-          <input type="text" id="presetCategory" name="presetCategory" class="form-control" placeholder="Insert a category to group saved aliases" [(ngModel)]="preset.aliasCategory">
+          <input type="text" id="presetCategory" name="presetCategory" class="form-control" placeholder="Insert a category to group saved aliases"
+            [(ngModel)]="preset.aliasCategory">
         </div>
 
         <div class="form-group">
@@ -100,87 +102,47 @@
           </table>
         </div>
 
-        <div class="row">
-          <div class="col-lg-3">
+        <div class="card">
+          <div class="card-header">
+            <h5></h5>
             <div class="custom-controls-stacked">
               <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateEntities" [(ngModel)]="preset.autoUpdates.updateEntities">
+                <input type="checkbox" class="custom-control-input" name="useAutomationUpdates" [(ngModel)]="preset.useAutomationUpdates">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Entities</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updatePresenters" [(ngModel)]="preset.autoUpdates.updatePresenters">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Presenters</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateWinforms" [(ngModel)]="preset.autoUpdates.updateWinforms">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update WinForms</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateWpfForms" [(ngModel)]="preset.autoUpdates.updateWpfforms">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update WpfForms</span>
+                <span class="custom-control-description">Perform
+                  <strong>AutomationToolkitUpdates</strong>
+                </span>
               </label>
             </div>
           </div>
-
-          <div class="col-lg-3">
-            <div class="custom-controls-stacked">
+          <div class="card-body" *ngIf="preset.useAutomationUpdates">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="automationUpdatesMode" value="Is Entity" [(ngModel)]="preset.automationUpdatesMode">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Is Entity</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="automationUpdatesMode" value="Is Presenter" [(ngModel)]="preset.automationUpdatesMode">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Is Presenter</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="automationUpdatesMode" value="Is WinForm" [(ngModel)]="preset.automationUpdatesMode">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Is WinForm</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="automationUpdatesMode" value="Is WpfForm" [(ngModel)]="preset.automationUpdatesMode">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Is WpfForm</span>
+            </label>
+            <!-- <div class="custom-controls-stacked">
               <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateCoreBase" [(ngModel)]="preset.autoUpdates.updateCoreBase">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.Base</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateCoreMessages" [(ngModel)]="preset.autoUpdates.updateCoreMessages">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.Messages</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateActionManager" [(ngModel)]="preset.autoUpdates.updateActionManager">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.Action.Manager</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="custom-controls-stacked">
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateFormsCustomization" [(ngModel)]="preset.autoUpdates.updateFormsCustomization">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.FormsCustomization</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateObjectsCustomization" [(ngModel)]="preset.autoUpdates.updateObjectsCustomization">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.ObjectsCustomization</span>
-              </label>
-
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="updateWorkflowsCustomization" [(ngModel)]="preset.autoUpdates.updateWorkflowsCustomization">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Update Core.WorkflowsCustomization</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="col-lg-2">
-            <div class="custom-controls-stacked">
-              <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="isCrmProject" [(ngModel)]="preset.autoUpdates.isCrmProject">
+                <input type="checkbox" class="custom-control-input" name="isCrmProject">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Is Crm project</span>
               </label>
-            </div>
+            </div> -->
           </div>
         </div>
       </form>

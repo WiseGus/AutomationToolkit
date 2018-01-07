@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
 public class Preset
 {
     public string Alias { get; set; }
@@ -11,11 +10,11 @@ public class Preset
     public string OutputFolderPath { get; set; }
     public string FileKeywordTypesExtensions { get; set; }
     public List<Keyword> Keywords { get; set; }
-    public AutoUpdates AutoUpdates { get; set; }
+    public bool useAutomationUpdates { get; set; }
+    public string automationUpdatesMode { get; set; }
 
     public Preset()
     {
         Keywords = new List<Keyword>();
-        AutoUpdates = new AutoUpdates();
     }
 }
