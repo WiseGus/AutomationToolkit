@@ -17,6 +17,7 @@ export class SettingsComponent implements OnInit {
     this._dataSvc.getAll<any>('settings')
       .subscribe(p => {
         this.appSettings.tfsUrl = p.tfsUrl;
+        this.appSettings.tfPath = p.tfPath;
         this.appSettings.glxSourcesPath = p.glxSourcesPath;
       });
   }
