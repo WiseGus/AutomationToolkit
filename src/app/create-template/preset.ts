@@ -7,7 +7,7 @@ export interface Preset {
   fileKeywordTypesExtensions: string;
   keywords: Keyword[];
   useAutomationUpdates: boolean;
-  automationUpdatesMode?: 'IsEntity | IsPresenter | IsWinForm | IsWpfForm';
+  automationUpdatesMode?: 'IsEntity' | 'IsPresenter' | 'IsWinForm' | 'IsWpfForm';
 }
 
 export interface Keyword {

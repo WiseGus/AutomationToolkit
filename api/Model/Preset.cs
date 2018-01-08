@@ -10,8 +10,8 @@ public class Preset
     public string OutputFolderPath { get; set; }
     public string FileKeywordTypesExtensions { get; set; }
     public List<Keyword> Keywords { get; set; }
-    public bool useAutomationUpdates { get; set; }
-    public string automationUpdatesMode { get; set; }
+    public bool UseAutomationUpdates { get; set; }
+    public string AutomationUpdatesMode { get; set; }
 
     public Preset()
     {
