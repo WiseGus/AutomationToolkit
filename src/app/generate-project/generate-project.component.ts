@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../svc/data.service';
 import { Preset, Keyword } from '../create-template/preset';
-import { DisableElementDirective } from '../directives/disable-element.directive'
+import { DisableElementDirective } from '../directives/disable-element.directive';
 
 export enum jobStatusEnum { None, Working, DoneOK, DoneError }
 

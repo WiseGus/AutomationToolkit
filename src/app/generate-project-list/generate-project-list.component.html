@@ -7,33 +7,34 @@
     <div class="card-body" *ngIf="presetsWithCategories.length > 0">
 
       <h2>Presets</h2>
+      <br>
 
-      <div *ngFor="let presetCat of presetsWithCategories">
-        <br>
-        <div class="card">
-          <div class="card-header">{{presetCat.category}} </div>
-          <div class="card-body">
-            <table class="table table-hover table-sm" style="width:100%">
-              <thead>
-                <tr>
-                  <th>Alias</th>
-                  <th class="text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let preset of presetCat.presets">
-                  <td>{{preset.alias}}</td>
-                  <td align="right">
-                    <button type="button" class="btn btn-outline-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
-                    <button type="button" class="btn btn-outline-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
-                    <button type="button" class="btn btn-outline-danger" (click)="delete(preset.alias)">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <ngb-accordion [closeOthers]="true">
+        <ng-container *ngFor="let presetCat of presetsWithCategories">
+          <ngb-panel [id]="presetCat.category" [title]="presetCat.category">
+            <ng-template ngbPanelContent>
+              <table class="table table-hover table-sm" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Alias</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let preset of presetCat.presets">
+                    <td>{{preset.alias}}</td>
+                    <td align="right">
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
+                      <button type="button" class="btn btn-outline-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="delete(preset.alias)" disabled>Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-template>
+          </ngb-panel>
+        </ng-container>
+      </ngb-accordion>
 
     </div>
 
