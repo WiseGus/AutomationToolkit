@@ -29,10 +29,10 @@
       <div class="alert alert-success alert-dismissible fade show" *ngIf="jobStatus === jobStatusEnum.DoneOK">
         <strong>Generated project success!</strong>
       </div>
-      <div class="alert alert-danger alert-dismissible fade show" *ngIf="jobStatus === jobStatusEnum.DoneError">
-        {{errorMessage}}
+      <div class="alert alert-danger alert-dismissible fade show" *ngIf="jobStatus === jobStatusEnum.DoneError">An error has occured!</div>
+      <div class="alert alert-info alert-dismissible fade show" *ngIf="resultMessage">
+        {{resultMessage}}
       </div>
-
     </div>
 
     <div class="card-footer text-muted">

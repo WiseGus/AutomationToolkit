@@ -18,7 +18,7 @@ export class GenerateProjectComponent implements OnInit {
   keywords: Keyword[];
   showDetails = false;
   jobStatus: jobStatusEnum = jobStatusEnum.None;
-  errorMessage: string;
+  resultMessage: string;
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
@@ -42,10 +42,13 @@ export class GenerateProjectComponent implements OnInit {
     console.log('Generating template: ', this.preset);
     this._dataSvc.post('generateprojects', this.preset)
       .subscribe(
-      res => this.jobStatus = jobStatusEnum.DoneOK,
+      (res: any) => {
+        this.resultMessage = res.resultMessage;
+        this.jobStatus = jobStatusEnum.DoneOK;
+      },
       error => {
         this.jobStatus = jobStatusEnum.DoneError;
-        this.errorMessage = error.error.message;
+        this.resultMessage = error.error.message;
       });
   }
 
