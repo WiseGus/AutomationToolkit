@@ -10,7 +10,7 @@
 /node_modules
 /api/bin/Release
 /api/bin/Debug
-/api/obj
+/api/obj/*
 
 # IDEs and editors
 /.idea
