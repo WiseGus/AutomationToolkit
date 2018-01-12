@@ -18,7 +18,6 @@ export class SettingsComponent implements OnInit {
       .subscribe(p => {
         this.appSettings.tfsUrl = p.tfsUrl;
         this.appSettings.tfsWorkspace = p.tfsWorkspace;
-        this.appSettings.tfsProject = p.tfsProject;
         this.appSettings.tfPath = p.tfPath;
         this.appSettings.debugMode = p.debugMode;
       });

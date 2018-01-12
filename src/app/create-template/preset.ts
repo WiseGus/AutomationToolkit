@@ -6,8 +6,8 @@ export interface Preset {
   outputFolderPath: string;
   fileKeywordTypesExtensions: string;
   keywords: Keyword[];
+  addToSourceControl: boolean;
   useAutomationUpdates: boolean;
-  automationUpdatesMode?: 'IsEntity' | 'IsWinForm' | 'IsWpfForm';
 }
 
 export interface Keyword {

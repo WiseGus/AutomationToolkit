@@ -50,7 +50,13 @@ namespace Api.Controllers
         }
       }
 
-      if (value.UseAutomationUpdates)
+      if (value.AddToSourceControl)
+      {
+        /* Add to Source Control */
+        // TODO
+      }
+
+      if (value.AutomationUpdates.UseAutomationUpdates)
       {
         var appSettsObj = await new SettingsController().GetAppSettings();
         var handler = new AutomationUpdatesHandler(value, appSettsObj);

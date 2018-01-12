@@ -24,6 +24,7 @@ export class CreateTemplateComponent implements OnInit {
       outputFolderPath: '',
       fileKeywordTypesExtensions: '',
       keywords: [],
+      addToSourceControl: true,
       useAutomationUpdates: false
     };
   }
@@ -37,6 +38,7 @@ export class CreateTemplateComponent implements OnInit {
         this._dataSvc.getSingle<Preset>('presets', presetAlias)
           .subscribe(p => {
             this.preset = p;
+            this.preset.useAutomationUpdates = (<any>p).automationUpdates.useAutomationUpdates;
             console.log('Preset: ', p);
 
           });
