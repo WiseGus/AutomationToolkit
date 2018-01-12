@@ -5783,7 +5783,7 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "yJhUn0gmNUuMhbtaRbARNcuAhImKmaR905XpPgwj8rmltbaECbtSu+rDsIxPP70RRj24B/pmPamw8Tia/WHjwA==",
+      "sha512": "HiOM4ui/omMKixIsWyYc4hjJX6UFAsTpkb1dkShkb2tGW1nAKxLnFdvdlJbdRTWsVWYnoiA6QgTKILsDxEiTJA==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "files": [
@@ -9595,7 +9595,7 @@
       ]
     },
     "System.Linq.Queryable/4.0.1": {
-      "sha512": "7IaHV189cVgMWcbRLT72KddUgHIr7yd7rPph/7tMDb0b1hIRZ9S68YFHduB3o5C7RwiuiJmO+1bM7JrPuo/66g==",
+      "sha512": "/gfkhZrC1CB1JNwW8Z7hEt3uEr/+8VM0CFqXlSIik6tbXSt0mjcQlSOMJGiRoRRP379uscx0/0GAfBuCz4JzoA==",
       "type": "package",
       "path": "system.linq.queryable/4.0.1",
       "files": [
@@ -12535,26 +12535,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\darth\\.nuget\\packages\\": {},
+    "C:\\Users\\ksofos\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "D:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
+      "projectUniqueName": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "D:\\WebProjects\\AutomationToolkit\\api\\Api.csproj",
-      "packagesPath": "C:\\Users\\darth\\.nuget\\packages\\",
-      "outputPath": "D:\\WebProjects\\AutomationToolkit\\api\\obj\\",
+      "projectPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
+      "packagesPath": "C:\\Users\\ksofos\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\darth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ksofos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12562,8 +12559,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://www.myget.org/F/aspnetcidev/api/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {

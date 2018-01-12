@@ -20,6 +20,7 @@ export class SettingsComponent implements OnInit {
         this.appSettings.tfsWorkspace = p.tfsWorkspace;
         this.appSettings.tfsProject = p.tfsProject;
         this.appSettings.tfPath = p.tfPath;
+        this.appSettings.debugMode = p.debugMode;
       });
   }
 

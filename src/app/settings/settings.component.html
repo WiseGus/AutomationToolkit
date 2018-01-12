@@ -23,6 +23,11 @@
           <input type="text" id="tfPath" name="tfPath" class="form-control" placeholder="Insert the Team Foundation version control path to be able to call TFS commands"
             [(ngModel)]="appSettings.tfPath">
         </div>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name="debugMode" [(ngModel)]="appSettings.debugMode">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Debug mode</span>
+        </label>
       </form>
 
       <div class="alert alert-success alert-dismissible fade show" *ngIf="postOk">

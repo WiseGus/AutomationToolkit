@@ -5,36 +5,17 @@ using Newtonsoft.Json;
 
 namespace Api.Model
 {
-    public sealed class ApiError
+  public sealed class ApiError
+  {
+    public string Error { get; set; }
+
+    public ApiError()
     {
-        public const string ModelBindingErrorMessage = "Invalid parameters.";
-
-        public ApiError()
-        {
-        }
-
-        public ApiError(string message)
-        {
-            Message = message;
-        }
-
-        public ApiError(ModelStateDictionary modelState)
-        {
-            Message = ModelBindingErrorMessage;
-
-            Detail = modelState
-                .FirstOrDefault(x => x.Value.Errors.Any())
-                .Value?.Errors?.FirstOrDefault()?.ErrorMessage;
-        }
-
-        public string Message { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Detail { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        [DefaultValue("")]
-        public string StackTrace { get; set; }
-
     }
+
+    public ApiError(string message)
+    {
+      Error = Error;
+    }
+  }
 }

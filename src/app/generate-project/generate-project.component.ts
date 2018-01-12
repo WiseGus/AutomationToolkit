@@ -43,12 +43,12 @@ export class GenerateProjectComponent implements OnInit {
     this._dataSvc.post('generateprojects', this.preset)
       .subscribe(
       (res: any) => {
-        this.resultMessage = res.resultMessage;
         this.jobStatus = jobStatusEnum.DoneOK;
+        this.resultMessage = res ? res.resultMessage : '';
       },
       error => {
         this.jobStatus = jobStatusEnum.DoneError;
-        this.resultMessage = error.error.message;
+        this.resultMessage = error.error.error;
       });
   }
 
