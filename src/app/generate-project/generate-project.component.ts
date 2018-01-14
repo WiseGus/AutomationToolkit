@@ -19,6 +19,7 @@ export class GenerateProjectComponent implements OnInit {
   showDetails = false;
   jobStatus: jobStatusEnum = jobStatusEnum.None;
   resultMessage: string;
+  useAutomationUpdates: boolean;
 
   constructor(private _api: ApiService, private _route: ActivatedRoute) { }
 
@@ -29,6 +30,7 @@ export class GenerateProjectComponent implements OnInit {
         .subscribe(p => {
           this.preset = p;
           this.keywords = this.preset.keywords.filter(x => x.showInGenerate);
+          this.useAutomationUpdates = (<any>p).automationUpdates.useAutomationUpdates;
         });
     });
   }
@@ -39,6 +41,7 @@ export class GenerateProjectComponent implements OnInit {
 
   generateProject() {
     this.jobStatus = jobStatusEnum.Working;
+    (<any>this.preset).automationUpdates.useAutomationUpdates = this.useAutomationUpdates;
     console.log('Generating template: ', this.preset);
     this._api.post('generateprojects', this.preset)
       .subscribe(
