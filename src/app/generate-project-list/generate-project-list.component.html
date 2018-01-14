@@ -24,9 +24,9 @@
                   <tr *ngFor="let preset of presetCat.presets">
                     <td>{{preset.alias}}</td>
                     <td align="right">
-                      <button type="button" class="btn btn-outline-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
-                      <button type="button" class="btn btn-outline-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
-                      <button type="button" class="btn btn-outline-dark" (click)="delete(preset.alias)" disabled>Delete</button>
+                      <button type="button" class="btn btn-sm btn-outline-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>
+                      <button type="button" class="btn btn-sm btn-outline-primary" [routerLink]="['/createtemplate', preset.alias]">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark" (click)="delete(preset.alias)" disabled>Delete</button>
                     </td>
                   </tr>
                 </tbody>

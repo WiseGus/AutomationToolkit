@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../svc/data.service';
+import { ApiService } from '../svc/api.service';
 import { Preset, Keyword } from '../create-template/preset';
 import { DisableElementDirective } from '../directives/disable-element.directive';
 
@@ -20,12 +20,12 @@ export class GenerateProjectComponent implements OnInit {
   jobStatus: jobStatusEnum = jobStatusEnum.None;
   resultMessage: string;
 
-  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
+  constructor(private _api: ApiService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
     this._route.params.subscribe(prms => {
       const presetAlias = prms['alias'];
-      this._dataSvc.getSingle<Preset>('presets', presetAlias)
+      this._api.getSingle<Preset>('presets', presetAlias)
         .subscribe(p => {
           this.preset = p;
           this.keywords = this.preset.keywords.filter(x => x.showInGenerate);
@@ -40,7 +40,7 @@ export class GenerateProjectComponent implements OnInit {
   generateProject() {
     this.jobStatus = jobStatusEnum.Working;
     console.log('Generating template: ', this.preset);
-    this._dataSvc.post('generateprojects', this.preset)
+    this._api.post('generateprojects', this.preset)
       .subscribe(
       (res: any) => {
         this.jobStatus = jobStatusEnum.DoneOK;

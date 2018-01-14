@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../svc/data.service';
+import { ApiService } from '../svc/api.service';
 import { Preset } from '../create-template/preset';
 
 @Component({
@@ -11,10 +11,10 @@ export class GenerateProjectListComponent implements OnInit {
 
   presetsWithCategories: { category: string, presets: Preset[] }[] = [];
 
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _api: ApiService) { }
 
   ngOnInit() {
-    this._dataSvc.getAll<Preset[]>('presets')
+    this._api.getAll<Preset[]>('presets')
       .subscribe(presets => {
         const categories = new Set(presets.map(x => x.aliasCategory));
         categories.forEach(category => {
@@ -28,7 +28,7 @@ export class GenerateProjectListComponent implements OnInit {
   }
 
   delete(presetAlias: string) {
-    this._dataSvc.delete('presets', presetAlias)
+    this._api.delete('presets', presetAlias)
       .subscribe(p => {
         this.ngOnInit();
       });

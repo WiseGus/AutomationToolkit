@@ -4,7 +4,7 @@ import { NgxElectronModule } from 'ngx-electron';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { DataService } from './svc/data.service';
+import { ApiService } from './svc/api.service';
 import { CreateTemplateComponent } from './create-template/create-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -45,7 +45,7 @@ const routes: Routes = [
     NgbModule.forRoot()
   ],
   providers: [
-    DataService
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../svc/data.service';
+import { ApiService } from '../svc/api.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,10 +11,10 @@ export class SettingsComponent implements OnInit {
   appSettings: any = {};
   postOk: boolean;
 
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _api: ApiService) { }
 
   ngOnInit() {
-    this._dataSvc.getAll<any>('settings')
+    this._api.getAll<any>('settings')
       .subscribe(p => {
         this.appSettings.tfsUrl = p.tfsUrl;
         this.appSettings.tfsWorkspace = p.tfsWorkspace;
@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit {
   }
 
   save() {
-    this._dataSvc.post<any>('settings', this.appSettings)
+    this._api.post<any>('settings', this.appSettings)
       .subscribe(p => this.postOk = true);
   }
 

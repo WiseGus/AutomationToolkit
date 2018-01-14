@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../svc/data.service';
+import { ApiService } from '../svc/api.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,10 @@ export class HomeComponent implements OnInit {
 
   templatesCount: number;
 
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _api: ApiService) { }
 
   ngOnInit() {
-    this._dataSvc.getAll<any[]>('presets')
+    this._api.getAll<any[]>('presets')
       .subscribe(p => this.templatesCount = p.length);
   }
 

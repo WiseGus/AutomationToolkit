@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Preset, Keyword } from './preset';
 import { element } from 'protractor';
-import { DataService } from '../svc/data.service';
+import { ApiService } from '../svc/api.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class CreateTemplateComponent implements OnInit {
   preset: Preset;
   postOk: boolean;
 
-  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
+  constructor(private _api: ApiService, private _route: ActivatedRoute) {
     this.preset = {
       alias: '',
       aliasCategory: '',
@@ -35,7 +35,7 @@ export class CreateTemplateComponent implements OnInit {
 
       if (presetAlias) {
         this.isNew = false;
-        this._dataSvc.getSingle<Preset>('presets', presetAlias)
+        this._api.getSingle<Preset>('presets', presetAlias)
           .subscribe(p => {
             this.preset = p;
             this.preset.useAutomationUpdates = (<any>p).automationUpdates.useAutomationUpdates;
@@ -53,11 +53,11 @@ export class CreateTemplateComponent implements OnInit {
       }
 
       console.log('Posting preset: ', this.preset);
-      this._dataSvc.post<Preset>('presets', this.preset)
+      this._api.post<Preset>('presets', this.preset)
         .subscribe(p => this.postOk = true);
     } else {
       console.log('Updating preset: ', this.preset);
-      this._dataSvc.update<Preset>('presets', this.preset.alias, this.preset)
+      this._api.update<Preset>('presets', this.preset.alias, this.preset)
         .subscribe(p => this.postOk = true);
     }
   }

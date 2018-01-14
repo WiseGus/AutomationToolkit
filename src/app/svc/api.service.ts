@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ElectronService } from 'ngx-electron';
 
 @Injectable()
-export class DataService {
+export class ApiService {
 
   private actionUrl: string;
   private _isElectronApp: boolean;
