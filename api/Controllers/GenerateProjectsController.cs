@@ -14,12 +14,16 @@ namespace Api.Controllers
   [Route("api/[controller]")]
   public class GenerateProjectsController : Controller
   {
+     KeywordReplace _keyReplace;
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody]Preset value)
     {
-
-      /* Replace internal keywords */
-      value.Keywords.ForEach(keyword => keyword.Replacement = keyword.Replacement.ReplaceKeywords(value.Keywords));
+      var appSettsObj = await new SettingsController().GetAppSettings();
+      _keyReplace = new KeywordReplace();
+      _keyReplace.AddKeywords(value.Keywords);
+      _keyReplace.AddKeywords(appSettsObj.AsKeywords());
+      _keyReplace.ReplaceAll();
 
       /* Copy Project structure from template */
       if (!Path.IsPathRooted(value.TemplateOrigin))
@@ -29,10 +33,10 @@ namespace Api.Controllers
       var templateOriginInfo = new DirectoryInfo(value.TemplateOrigin);
       if (!templateOriginInfo.Exists) throw new ArgumentException("Invalid template origin path");
 
-      var outputFolderPathInfo = new DirectoryInfo(value.OutputFolderPath.ReplaceKeywords(value.Keywords));
+      var outputFolderPathInfo = new DirectoryInfo(_keyReplace.Replace(value.OutputFolderPath));
       outputFolderPathInfo.Create();
 
-      DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true, value.Keywords);
+      DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true);
 
       /* Replace keywords in files matching search pattern */
       var searchPatterns = string.IsNullOrEmpty(value.FileKeywordTypesExtensions) ? new[] { "*.*" } : value.FileKeywordTypesExtensions.Split(',');
@@ -41,7 +45,7 @@ namespace Api.Controllers
         foreach (var fileInfo in outputFolderPathInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
         {
           var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.UTF8);
-          fileText = fileText.ReplaceKeywords(value.Keywords);
+          fileText = _keyReplace.Replace(fileText);
           try
           {
             await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.UTF8);
@@ -58,15 +62,14 @@ namespace Api.Controllers
 
       if (value.AutomationUpdates.UseAutomationUpdates)
       {
-        var appSettsObj = await new SettingsController().GetAppSettings();
-        var handler = new AutomationUpdatesHandler(value, appSettsObj);
+        var handler = new AutomationUpdatesHandler(value, appSettsObj, _keyReplace);
         return new ObjectResult(handler.Execute());
       }
 
       return new OkResult();
     }
 
-    private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs, List<Keyword> keywords)
+    private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
     {
       // Get the subdirectories for the specified directory.
       DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -88,7 +91,7 @@ namespace Api.Controllers
       foreach (FileInfo file in files)
       {
         string tempPath = Path.Combine(destDirName, file.Name);
-        tempPath = tempPath.ReplaceKeywords(keywords);
+        tempPath = _keyReplace.Replace(tempPath);
         file.CopyTo(tempPath, true);
       }
 
@@ -98,8 +101,8 @@ namespace Api.Controllers
         foreach (DirectoryInfo subdir in dirs)
         {
           string tempPath = Path.Combine(destDirName, subdir.Name);
-          tempPath = tempPath.ReplaceKeywords(keywords);
-          DirectoryCopy(subdir.FullName, tempPath, copySubDirs, keywords);
+          tempPath = _keyReplace.Replace(tempPath);
+          DirectoryCopy(subdir.FullName, tempPath, copySubDirs);
         }
       }
     }

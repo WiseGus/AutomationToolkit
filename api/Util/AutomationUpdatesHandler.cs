@@ -11,11 +11,13 @@ namespace Api.Util
     private AppSettings _settingsObj;
     private Process _process;
     private List<string> _messages;
+    private KeywordReplace _keyReplace;
 
-    public AutomationUpdatesHandler(Preset presetObj, AppSettings settingsObj)
+    public AutomationUpdatesHandler(Preset presetObj, AppSettings settingsObj, KeywordReplace keyReplace )
     {
       _presetObj = presetObj;
       _settingsObj = settingsObj;
+      _keyReplace = keyReplace;
     }
 
     internal OperationResult Execute()
@@ -26,7 +28,7 @@ namespace Api.Util
       for (int i = 0; i < _presetObj.AutomationUpdates.AutomationUpdatesArgs.Count; i++)
       {
         var arg = _presetObj.AutomationUpdates.AutomationUpdatesArgs.ElementAt(i);
-        _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] = arg.Value.ReplaceKeywords(_presetObj.Keywords).Replace(' ', '_');
+        _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] =  _keyReplace.Replace(arg.Value).Replace(' ', '_');
       }
 
       /* Run AutomationToolkitUpdates */
