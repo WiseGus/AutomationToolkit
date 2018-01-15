@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Collections.Generic;
 using Api.Util;
+using System.Diagnostics;
 
 namespace Api.Controllers
 {
   [Route("api/[controller]")]
   public class GenerateProjectsController : Controller
   {
-     KeywordReplace _keyReplace;
+    KeywordReplace _keyReplace;
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody]Preset value)
@@ -33,31 +34,20 @@ namespace Api.Controllers
       var templateOriginInfo = new DirectoryInfo(value.TemplateOrigin);
       if (!templateOriginInfo.Exists) throw new ArgumentException("Invalid template origin path");
 
+      var copiedFolders = new List<DirectoryInfo>();
       var outputFolderPathInfo = new DirectoryInfo(_keyReplace.Replace(value.OutputFolderPath));
-      outputFolderPathInfo.Create();
-
-      DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true);
+      DirectoryCopy(templateOriginInfo.FullName, outputFolderPathInfo.FullName, true, outputFolderPathInfo.FullName, copiedFolders);
 
       /* Replace keywords in files matching search pattern */
-      var searchPatterns = string.IsNullOrEmpty(value.FileKeywordTypesExtensions) ? new[] { "*.*" } : value.FileKeywordTypesExtensions.Split(',');
-      foreach (string searchPattern in searchPatterns)
-      {
-        foreach (var fileInfo in outputFolderPathInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
-        {
-          var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.UTF8);
-          fileText = _keyReplace.Replace(fileText);
-          try
-          {
-            await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.UTF8);
-          }
-          catch { }
-        }
-      }
+      await ReplaceKeywordsInFiles(value.FileKeywordTypesExtensions, copiedFolders);
 
       if (value.AddToSourceControl)
       {
-        /* Add to Source Control */
-        // TODO
+        var tf = new TFImpl(appSettsObj.TfPath);
+        foreach (var dirInfo in copiedFolders)
+        {
+          tf.RunTFCommand(dirInfo.FullName, new[] { "add", "*.*", "/recursive" });
+        }
       }
 
       if (value.AutomationUpdates.UseAutomationUpdates)
@@ -69,7 +59,28 @@ namespace Api.Controllers
       return new OkResult();
     }
 
-    private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+    private async Task ReplaceKeywordsInFiles(string fileKeywordTypesExtensions, List<DirectoryInfo> copiedFolders)
+    {
+      var searchPatterns = string.IsNullOrEmpty(fileKeywordTypesExtensions) ? new[] { "*.*" } : fileKeywordTypesExtensions.Split(',');
+      foreach (var dirInfo in copiedFolders)
+      {
+        foreach (string searchPattern in searchPatterns)
+        {
+          foreach (var fileInfo in dirInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
+          {
+            var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.UTF8);
+            fileText = _keyReplace.Replace(fileText);
+            try
+            {
+              await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.UTF8);
+            }
+            catch { }
+          }
+        }
+      }
+    }
+
+    private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs, string rootCopyFolder, List<DirectoryInfo> copiedRootFolders)
     {
       // Get the subdirectories for the specified directory.
       DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -83,7 +94,11 @@ namespace Api.Controllers
       // If the destination directory doesn't exist, create it.
       if (!Directory.Exists(destDirName))
       {
-        Directory.CreateDirectory(destDirName);
+        var dirInfo = Directory.CreateDirectory(destDirName);
+        if (dirInfo.Parent.FullName == rootCopyFolder)
+        {
+          copiedRootFolders.Add(dirInfo);
+        }
       }
 
       // Get the files in the directory and copy them to the new location.
@@ -102,7 +117,7 @@ namespace Api.Controllers
         {
           string tempPath = Path.Combine(destDirName, subdir.Name);
           tempPath = _keyReplace.Replace(tempPath);
-          DirectoryCopy(subdir.FullName, tempPath, copySubDirs);
+          DirectoryCopy(subdir.FullName, tempPath, copySubDirs, rootCopyFolder, copiedRootFolders);
         }
       }
     }
