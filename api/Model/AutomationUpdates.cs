@@ -4,7 +4,6 @@ public class AutomationUpdates
 {
   public bool UseAutomationUpdates { get; set; }
   public string AutomationUpdatesPath { get; set; }
-  public string AutomationUpdatesMode { get; set; }
   public Dictionary<string, string> AutomationUpdatesArgs { get; set; }
 
   public AutomationUpdates()
