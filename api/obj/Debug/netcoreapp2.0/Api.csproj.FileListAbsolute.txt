@@ -1,32 +1,13 @@
-D:\WebProjects\Electron01\api\Api\Api\bin\Debug\netcoreapp2.0\Api.deps.json
-D:\WebProjects\Electron01\api\Api\Api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.json
-D:\WebProjects\Electron01\api\Api\Api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.dev.json
-D:\WebProjects\Electron01\api\Api\Api\bin\Debug\netcoreapp2.0\Api.dll
-D:\WebProjects\Electron01\api\Api\Api\bin\Debug\netcoreapp2.0\Api.pdb
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.csprojResolveAssemblyReference.cache
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoInputs.cache
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.dll
-D:\WebProjects\Electron01\api\Api\Api\obj\Debug\netcoreapp2.0\Api.pdb
-D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.deps.json
-D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.json
-D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.dev.json
-D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.dll
-D:\WebProjects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.pdb
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csprojResolveAssemblyReference.cache
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoInputs.cache
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.dll
-D:\WebProjects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.pdb
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.deps.json
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.json
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.dev.json
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.dll
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.pdb
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoInputs.cache
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.dll
-c:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.pdb
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.deps.json
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.json
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.runtimeconfig.dev.json
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.dll
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\Api.pdb
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csproj.CoreCompileInputs.cache
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfoInputs.cache
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.AssemblyInfo.cs
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.dll
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.pdb
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\SLNTools.dll
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\bin\Debug\netcoreapp2.0\SLNTools.pdb
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\api\obj\Debug\netcoreapp2.0\Api.csprojResolveAssemblyReference.cache
