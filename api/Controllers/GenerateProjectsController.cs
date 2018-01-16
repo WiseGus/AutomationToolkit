@@ -81,11 +81,11 @@ namespace Api.Controllers
         {
           foreach (var fileInfo in dirInfo.EnumerateFiles(searchPattern, SearchOption.AllDirectories))
           {
-            var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.UTF8);
+            var fileText = await System.IO.File.ReadAllTextAsync(fileInfo.FullName, Encoding.ASCII);
             fileText = _keyReplace.Replace(fileText);
             try
             {
-              await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.UTF8);
+              await System.IO.File.WriteAllTextAsync(fileInfo.FullName, fileText, Encoding.ASCII);
             }
             catch { }
           }
