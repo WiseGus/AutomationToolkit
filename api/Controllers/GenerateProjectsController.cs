@@ -19,7 +19,7 @@ namespace Api.Controllers
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody]Preset value)
-    {      
+    {
       var appSettsObj = await new SettingsController().GetAppSettings();
       _keyReplace = new KeywordReplace();
       _keyReplace.AddKeywords(value.Keywords);
@@ -41,14 +41,15 @@ namespace Api.Controllers
       /* Replace keywords in files matching search pattern */
       await ReplaceKeywordsInFiles(value.FileKeywordTypesExtensions, copiedFolders);
 
-      /* Add to Source Control / Update main solution with new project */
       if (value.AddToSourceControl)
       {
         var tf = new TFImpl(appSettsObj.TfPath);
         foreach (var dirInfo in copiedFolders)
         {
+          /* Add to Source Control */
           tf.RunTFCommand(dirInfo.FullName, new[] { "add", "*.*", "/recursive" });
 
+          /* Update main solution with new project (Glx/Crm build convention)*/
           var buildSolutionDirInfo = dirInfo.Parent.GetDirectories($"Build_*");
           if (buildSolutionDirInfo.Length > 0) {
             var buildSolutionPath = buildSolutionDirInfo[0].GetFiles("*.sln");
