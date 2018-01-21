@@ -14,6 +14,7 @@ import { GenerateProjectComponent } from './generate-project/generate-project.co
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ApiService } from './svc/api.service';
+import { FormGenComponent } from './form-gen/form-gen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -34,7 +35,8 @@ const routes: Routes = [
     SettingsComponent,
     GenerateProjectListComponent,
     GenerateProjectComponent,
-    DisableElementDirective
+    DisableElementDirective,
+    FormGenComponent
   ],
   imports: [
     FormsModule,
