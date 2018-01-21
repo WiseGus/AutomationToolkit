@@ -1,3 +1,58 @@
-<p>
-  form-gen works!
-</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Form generator</h3>
+    </div>
+
+    <form #frm="ngForm">
+      <div class="card-body">
+        <!-- standalone component -->
+        <div *ngIf="wizStep===0">
+          <h5 class="card-title">
+            <strong>Step 1:</strong> Select a datasource
+          </h5>
+          <div class="form-group">
+            <label for="assemblyPath">Assembly path</label>
+            <input type="text" id="assemblyPath" name="assemblyPath" class="form-control" placeholder="Insert the path to the Assembly"
+              ngModel required>
+          </div>
+          <div class="form-group">
+            <label for="classFullName">Class full name</label>
+            <input type="text" id="classFullName" name="classFullName" class="form-control" placeholder="Insert the full name of the class"
+              ngModel required>
+          </div>
+        </div>
+        <!--  -->
+
+        <!-- standalone component -->
+        <div *ngIf="wizStep===1 && pocoInfo">
+          <h5 class="card-title">
+            <strong>Step 2:</strong> Datasource details
+          </h5>
+          <div>
+            <strong>Class:</strong> {{pocoInfo.className}}</div>
+          <div>
+            <strong>Properties:</strong>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let dataSourceItem of pocoInfo.dataSourceInfo">
+                <div>
+                  <strong>{{dataSourceItem.name}}</strong>
+                  <footer style="color: blue">{{dataSourceItem.dataType}}</footer>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--  -->
+
+      </div>
+    </form>
+
+    <div class="card-footer text-muted">
+      <button type="button" class="btn btn-warning" (click)="previousStep()">Back</button>
+      <button type="submit" class="btn btn-success" (click)="nextStep(frm)">Next</button>
+      <button type="button" class="btn btn-secondary float-right" routerLink="">Cancel</button>
+    </div>
+
+  </div>
+</div>

@@ -14,14 +14,16 @@ namespace Api.Util.FormGenerator
       _type = type;
     }
 
-    public POCOParser(string assemblyPath, string fullClassName)
+    public POCOParser(string assemblyPath, string classFullName)
     {
       var asm = Assembly.LoadFrom(assemblyPath);
-      _type = asm.GetType(fullClassName);
+      _type = asm.GetType(classFullName);
     }
 
     public IEnumerable<DatasourceInfo> Parse()
     {
+      throw new ArgumentException("Invalid type");
+
       var props = _type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
       foreach (var prop in props)
       {

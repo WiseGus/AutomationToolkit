@@ -19,9 +19,9 @@ namespace Api.Controllers
     }
 
     [HttpGet("pocoinfo")]
-    public IActionResult Get(string assemblyPath, string fullClassName)
+    public IActionResult Get(string assemblyPath, string classFullName)
     {
-      var parser = new POCOParser(assemblyPath, fullClassName);
+      var parser = new POCOParser(assemblyPath, classFullName);
       var res = parser.Parse();
 
       return new JsonResult(res);

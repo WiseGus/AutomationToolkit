@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'generateprojectlist', component: GenerateProjectListComponent },
   { path: 'createtemplate/:alias', component: CreateTemplateComponent },
   { path: 'createtemplate', component: CreateTemplateComponent },
+  { path: 'formgen', component: FormGenComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '**', component: HomeComponent }
 ];
