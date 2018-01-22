@@ -7,19 +7,19 @@
     <div class="card-body">
       <form>
         <div class="form-group">
-          <label for="tfsUrl">TFS url</label>
+          <label for="tfsUrl">TFS url <strong>(@TfsUrl@)</strong></label>
           <input type="text" id="tfsUrl" name="tfsUrl" class="form-control" placeholder="Insert the TFS Url" [(ngModel)]="appSettings.tfsUrl">
         </div>
         <div class="form-group">
-          <label for="tfsWorkspace">TFS workspace</label>
+          <label for="tfsWorkspace">TFS workspace <strong>(@TfsWorkspace@)</strong></label>
           <input type="text" id="tfsWorkspace" name="tfsWorkspace" class="form-control" placeholder="Insert the TFS Workspace" [(ngModel)]="appSettings.tfsWorkspace">
         </div>
         <div class="form-group">
-          <label for="rootSourcesPath">Root sources path</label>
+          <label for="rootSourcesPath">Root sources path <strong>(@RootSourcesPath@)</strong></label>
           <input type="text" id="rootSourcesPath" name="rootSourcesPath" class="form-control" placeholder="Insert the root code sources path" [(ngModel)]="appSettings.rootSourcesPath">
         </div>
         <div class="form-group">
-          <label for="tfPath">Team Foundation version control path</label>
+          <label for="tfPath">Team Foundation version control path <strong>(@TfPath@)</strong></label>
           <input type="text" id="tfPath" name="tfPath" class="form-control" placeholder="Insert the Team Foundation version control path to be able to call TFS commands"
             [(ngModel)]="appSettings.tfPath">
         </div>

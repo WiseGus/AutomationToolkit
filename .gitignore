@@ -11,6 +11,10 @@
 /api/bin/*
 /api/obj/*
 /api/.vs/*
+/SLNTools/bin/*
+/SLNTools/obj/*
+/Api.Tests/bin/*
+/Api.Tests/obj/*
 
 # IDEs and editors
 /.idea
