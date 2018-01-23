@@ -14,12 +14,12 @@
           <div class="form-group">
             <label for="assemblyPath">Assembly path</label>
             <input type="text" id="assemblyPath" name="assemblyPath" class="form-control" placeholder="Insert the path to the Assembly"
-              ngModel required>
+              [(ngModel)]="data.asmPath" required>
           </div>
           <div class="form-group">
             <label for="classFullName">Class full name</label>
             <input type="text" id="classFullName" name="classFullName" class="form-control" placeholder="Insert the full name of the class"
-              ngModel required>
+            [(ngModel)]="data.fullName" required>
           </div>
         </div>
         <!--  -->

@@ -26,6 +26,32 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       }
+    },
+    ".NETStandard,Version=v2.0/win-x64": {
+      "Microsoft.NETCore.Platforms/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/_._": {}
+        }
+      },
+      "NETStandard.Library/2.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "build": {
+          "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -183,11 +209,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
+      "projectUniqueName": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
       "projectName": "SLNTools",
-      "projectPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
+      "projectPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
       "packagesPath": "C:\\Users\\ksofos\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\obj\\",
+      "outputPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -229,6 +255,11 @@
         ],
         "assetTargetFallback": true,
         "warn": true
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
       }
     }
   }

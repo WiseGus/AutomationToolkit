@@ -15,6 +15,14 @@ export class FormGenComponent implements OnInit {
 
   wizStep = 0;
   pocoInfo: any;
+  data = {
+    asmPath: 'C:\\ksofos\\Development\\Glx\\Baseline\\Sources\\Output\\Debug\\Apps\\Classes\\Crm.Schema.dll',
+    fullName: 'Crm.Data.DataObjects.cmContactsDataObject'
+  };
+  // data = {
+  //   asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
+  //   fullName: 'Api.Tests.DummyModel'
+  // }
 
   private _isElectronApp: boolean;
 

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api.csproj", "{7B8BB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLNTools", "..\SLNTools\SLNTools.csproj", "{A8CA72E6-99E7-455A-88B3-37593E6960C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests", "..\FormGenerator.Tests\Api.Tests.csproj", "{36E9D186-2EAA-4BCA-BCD1-D14E93EAC25A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests", "..\Api.Tests\Api.Tests.csproj", "{36E9D186-2EAA-4BCA-BCD1-D14E93EAC25A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

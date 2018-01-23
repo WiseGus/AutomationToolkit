@@ -6,3 +6,4 @@ C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools
 C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.AssemblyInfo.cs
 C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.dll
 C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.pdb
+C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.csprojResolveAssemblyReference.cache
