@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers {
   [Route("api/[controller]")]
-  public class FormgenController : Controller {
-    public FormgenController() {
+  public class FormGenController : Controller {
+    public FormGenController() {
     }
 
     [HttpGet("pocoinfosch")]

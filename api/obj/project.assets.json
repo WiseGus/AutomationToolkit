@@ -12759,12 +12759,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
+      "projectUniqueName": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
+      "projectPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\Api.csproj",
       "packagesPath": "C:\\Users\\ksofos\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\obj\\",
+      "outputPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12783,8 +12786,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj": {
-              "projectPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj"
+            "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj": {
+              "projectPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj"
             }
           }
         }

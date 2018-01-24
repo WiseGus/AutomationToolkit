@@ -14,6 +14,7 @@ export class FormGenComponent implements OnInit {
 
   @ViewChild(NgbTabset) tabSet: NgbTabset;
 
+  formEditors: any;
   wizStep = 0;
   pocoInfo: any;
   data = {
@@ -54,7 +55,7 @@ export class FormGenComponent implements OnInit {
       let params: {
         [param: string]: string | string[];
       };
-      let getCallback;
+      let callback;
 
       if (this.tabSet.activeId === 'schemaTab') {
         const classNameSplit = frm.value.tableXmlPath.split('\\') as string[];
@@ -63,7 +64,7 @@ export class FormGenComponent implements OnInit {
         params = {
           'tableXmlPath': frm.value.tableXmlPath
         };
-        getCallback = (res) => {
+        callback = (res) => {
           this.pocoInfo = {
             className: classNameSplit[classNameSplit.length - 1].replace('.xml', ''),
             dataSourceInfo: res
@@ -77,7 +78,7 @@ export class FormGenComponent implements OnInit {
           'assemblyPath': frm.value.assemblyPath,
           'classFullName': frm.value.classFullName
         };
-        getCallback = (res) => {
+        callback = (res) => {
           this.pocoInfo = {
             className: classFullNameSplit[classFullNameSplit.length - 1],
             dataSourceInfo: res
@@ -86,8 +87,18 @@ export class FormGenComponent implements OnInit {
       }
 
       this._http.get(this.generateUrl(url), { params: params })
-        .subscribe(p => getCallback(p));
+        .subscribe(p => {
+          callback(p);
+          this.fillEditors();
+        });
     }
+  }
+
+  private fillEditors() {
+    this._http.get(this.generateUrl('formeditors'))
+      .subscribe(p => {
+        this.formEditors = p;
+      });
   }
 
   private generateUrl(url: string) {

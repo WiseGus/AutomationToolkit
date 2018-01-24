@@ -182,12 +182,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
+      "projectUniqueName": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
       "projectName": "SLNTools",
-      "projectPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
+      "projectPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\SLNTools.csproj",
       "packagesPath": "C:\\Users\\ksofos\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\obj\\",
+      "outputPath": "C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\SLNTools\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
