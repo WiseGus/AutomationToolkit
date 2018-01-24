@@ -1,26 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
-using System.Collections.Generic;
 using Api.Util.FormGenerator;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers
-{
+namespace Api.Controllers {
   [Route("api/[controller]")]
-  public class FormgenController : Controller
-  {
-    public FormgenController()
-    {
+  public class FormgenController : Controller {
+    public FormgenController() {
     }
 
-    [HttpGet("pocoinfo")]
-    public IActionResult Get(string assemblyPath, string classFullName)
-    {
+    [HttpGet("pocoinfosch")]
+    public IActionResult Get(string tableXmlPath) {
+      var parser = new slSchemaTableParser(tableXmlPath);
+      var res = parser.Parse();
+
+      return new JsonResult(res);
+    }
+
+    [HttpGet("pocoinfoasm")]
+    public IActionResult Get(string assemblyPath, string classFullName) {
       var parser = new POCOParser(assemblyPath, classFullName);
       var res = parser.Parse();
 

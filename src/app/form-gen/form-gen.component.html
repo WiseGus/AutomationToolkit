@@ -6,25 +6,41 @@
 
     <form #frm="ngForm">
       <div class="card-body">
-        <!-- standalone component -->
+        <!-- TODO: standalone component -->
         <div *ngIf="wizStep===0">
           <h5 class="card-title">
             <strong>Step 1:</strong> Select a datasource
           </h5>
-          <div class="form-group">
-            <label for="assemblyPath">Assembly path</label>
-            <input type="text" id="assemblyPath" name="assemblyPath" class="form-control" placeholder="Insert the path to the Assembly"
-              [(ngModel)]="data.asmPath" required>
-          </div>
-          <div class="form-group">
-            <label for="classFullName">Class full name</label>
-            <input type="text" id="classFullName" name="classFullName" class="form-control" placeholder="Insert the full name of the class"
-            [(ngModel)]="data.fullName" required>
-          </div>
+
+          <ngb-tabset #tabSet>
+            <ngb-tab id="schemaTab" title="Schema data object">
+              <ng-template ngbTabContent>
+                <div class="form-group">
+                  <label for="tableXmlPath">Path to schema table xml</label>
+                  <input type="text" id="tableXmlPath" name="tableXmlPath" class="form-control" placeholder="Insert the path to the schema table xml file"
+                    [(ngModel)]="data.tableXmlPath" required>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="pocoTab" title="Poco">
+              <ng-template ngbTabContent>
+                <div class="form-group">
+                  <label for="assemblyPath">Assembly path</label>
+                  <input type="text" id="assemblyPath" name="assemblyPath" class="form-control" placeholder="Insert the path to the Assembly"
+                    [(ngModel)]="data.asmPath" required>
+                </div>
+                <div class="form-group">
+                  <label for="classFullName">Class full name</label>
+                  <input type="text" id="classFullName" name="classFullName" class="form-control" placeholder="Insert the full name of the class"
+                    [(ngModel)]="data.fullName" required>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
         </div>
         <!--  -->
 
-        <!-- standalone component -->
+        <!-- TODO: standalone component -->
         <div *ngIf="wizStep===1 && pocoInfo">
           <h5 class="card-title">
             <strong>Step 2:</strong> Datasource details
@@ -36,7 +52,7 @@
             <ul class="list-group">
               <li class="list-group-item" *ngFor="let dataSourceItem of pocoInfo.dataSourceInfo">
                 <div>
-                  <strong>{{dataSourceItem.name}}</strong>
+                  <strong>{{dataSourceItem.name}}</strong> ({{dataSourceItem.caption}})
                   <footer style="color: blue">{{dataSourceItem.dataType}}</footer>
                 </div>
               </li>

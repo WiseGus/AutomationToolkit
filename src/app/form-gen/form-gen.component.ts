@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-import { ApiService } from '../svc/api.service';
-import { HttpClient } from '@angular/common/http';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap/tabset/tabset';
 import { ElectronService } from 'ngx-electron';
 
 @Component({
@@ -13,16 +12,15 @@ import { ElectronService } from 'ngx-electron';
 })
 export class FormGenComponent implements OnInit {
 
+  @ViewChild(NgbTabset) tabSet: NgbTabset;
+
   wizStep = 0;
   pocoInfo: any;
   data = {
-    asmPath: 'C:\\ksofos\\Development\\Glx\\Baseline\\Sources\\Output\\Debug\\Apps\\Classes\\Crm.Schema.dll',
-    fullName: 'Crm.Data.DataObjects.cmContactsDataObject'
+    asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
+    fullName: 'Api.Tests.DummyModel',
+    tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
   };
-  // data = {
-  //   asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
-  //   fullName: 'Api.Tests.DummyModel'
-  // }
 
   private _isElectronApp: boolean;
 
@@ -51,19 +49,44 @@ export class FormGenComponent implements OnInit {
 
   private performStep(frm: NgForm) {
     if (this.wizStep === 1) {
-      const classFullNameSplit = frm.value.classFullName.split('.');
-      this._http.get(this.generateUrl('formgen/pocoinfo'), {
-        params: {
+
+      let url: string;
+      let params: {
+        [param: string]: string | string[];
+      };
+      let getCallback;
+
+      if (this.tabSet.activeId === 'schemaTab') {
+        const classNameSplit = frm.value.tableXmlPath.split('\\') as string[];
+
+        url = 'formgen/pocoinfosch';
+        params = {
+          'tableXmlPath': frm.value.tableXmlPath
+        };
+        getCallback = (res) => {
+          this.pocoInfo = {
+            className: classNameSplit[classNameSplit.length - 1].replace('.xml', ''),
+            dataSourceInfo: res
+          };
+        };
+      } else {
+        const classFullNameSplit = frm.value.classFullName.split('.');
+
+        url = 'formgen/pocoinfoasm';
+        params = {
           'assemblyPath': frm.value.assemblyPath,
           'classFullName': frm.value.classFullName
-        }
-      })
-        .subscribe(p => {
+        };
+        getCallback = (res) => {
           this.pocoInfo = {
             className: classFullNameSplit[classFullNameSplit.length - 1],
-            dataSourceInfo: p
+            dataSourceInfo: res
           };
-        });
+        };
+      }
+
+      this._http.get(this.generateUrl(url), { params: params })
+        .subscribe(p => getCallback(p));
     }
   }
 

@@ -30,6 +30,7 @@ namespace Api.Util.FormGenerator {
       foreach (var prop in props) {
         _datasourceInfo.Add(new DatasourceInfo {
           Name = prop.Name,
+          Caption = prop.Name,
           DataType = PrettyTypeName(prop.PropertyType)
         });
       }

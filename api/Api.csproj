@@ -36,6 +36,9 @@
     <Reference Include="SLnet.Sand.Base">
       <HintPath>bin\Debug\netcoreapp2.0\SLnet.Sand.Base.dll</HintPath>
     </Reference>
+    <Reference Include="SLnet.Sand.Schema">
+      <HintPath>bin\Debug\netcoreapp2.0\SLnet.Sand.Schema.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
