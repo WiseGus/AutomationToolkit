@@ -5,16 +5,21 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap/tabset/tabset';
 import { ElectronService } from 'ngx-electron';
 
+interface FormEditor {
+  assignType: 'Text' | 'Guid' | 'Memo' | 'Number' | 'Date';
+  isDefaultForAssignType: boolean;
+  editorName: string;
+}
+
 @Component({
   selector: 'app-form-gen',
   templateUrl: './form-gen.component.html',
   styleUrls: ['./form-gen.component.css']
 })
 export class FormGenComponent implements OnInit {
-
   @ViewChild(NgbTabset) tabSet: NgbTabset;
 
-  formEditors: any;
+  formEditors: FormEditor[];
   wizStep = 0;
   pocoInfo: any;
   data = {
@@ -97,7 +102,7 @@ export class FormGenComponent implements OnInit {
   private fillEditors() {
     this._http.get(this.generateUrl('formeditors'))
       .subscribe(p => {
-        this.formEditors = p;
+        this.formEditors = <any>p;
       });
   }
 

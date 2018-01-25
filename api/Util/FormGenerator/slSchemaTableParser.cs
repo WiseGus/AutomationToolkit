@@ -1,8 +1,6 @@
-using Newtonsoft.Json;
 using SLnet.Sand.Schema;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace Api.Util.FormGenerator {
