@@ -1,0 +1,33 @@
+<h5 class="card-title">
+  <strong>Step 1:</strong> Select a datasource
+</h5>
+
+<div *ngIf="args">
+  <form #frm="ngForm">
+    <ngb-tabset #tabSet>
+      <ngb-tab id="schemaTab" title="Schema data object">
+        <ng-template ngbTabContent>
+          <div class="form-group">
+            <label for="tableXmlPath">Path to schema table xml</label>
+            <input type="text" id="tableXmlPath" name="tableXmlPath" class="form-control" placeholder="Insert the path to the schema table xml file"
+              [(ngModel)]="args.tableXmlPath" required>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="pocoTab" title="Poco">
+        <ng-template ngbTabContent>
+          <div class="form-group">
+            <label for="assemblyPath">Assembly path</label>
+            <input type="text" id="assemblyPath" name="assemblyPath" class="form-control" placeholder="Insert the path to the Assembly"
+              [(ngModel)]="args.asmPath" required>
+          </div>
+          <div class="form-group">
+            <label for="classFullName">Class full name</label>
+            <input type="text" id="classFullName" name="classFullName" class="form-control" placeholder="Insert the full name of the class"
+              [(ngModel)]="args.fullName" required>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </form>
+</div>

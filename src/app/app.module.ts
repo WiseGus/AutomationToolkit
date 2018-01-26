@@ -9,12 +9,14 @@ import { NgxElectronModule } from 'ngx-electron';
 import { AppComponent } from './app.component';
 import { CreateTemplateComponent } from './create-template/create-template.component';
 import { DisableElementDirective } from './directives/disable-element.directive';
+import { FormGenComponent } from './form-gen/form-gen.component';
+import { WizStepPreparationComponent } from './form-gen/wiz-step-preparation/wiz-step-preparation.component';
 import { GenerateProjectListComponent } from './generate-project-list/generate-project-list.component';
 import { GenerateProjectComponent } from './generate-project/generate-project.component';
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ApiService } from './svc/api.service';
-import { FormGenComponent } from './form-gen/form-gen.component';
+import { WizStepDetailsComponent } from './form-gen/wiz-step-details/wiz-step-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,7 +39,9 @@ const routes: Routes = [
     GenerateProjectListComponent,
     GenerateProjectComponent,
     DisableElementDirective,
-    FormGenComponent
+    FormGenComponent,
+    WizStepPreparationComponent,
+    WizStepDetailsComponent
   ],
   imports: [
     FormsModule,

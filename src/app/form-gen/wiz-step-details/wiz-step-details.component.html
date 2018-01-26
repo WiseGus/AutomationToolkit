@@ -1,0 +1,35 @@
+<form #frm="ngForm">
+  <h5 class="card-title">
+    <strong>Step 2:</strong> Datasource details
+  </h5>
+  <div *ngIf="args">
+    <div>
+      <strong>Class:</strong> {{args.className}}</div>
+    <div>
+      <strong>Properties:</strong>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let dataSourceItem of args.dataSourceInfo">
+          <div class="row">
+            <div class="col-lg-4">
+              <strong>{{dataSourceItem.name}}</strong> ({{dataSourceItem.caption}})
+              <footer style="color: blue">{{dataSourceItem.dataType}}</footer>
+            </div>
+
+            <label class="custom-control custom-checkbox" style="align-self: center">
+              <input type="checkbox" class="custom-control-input" [name]="dataSourceItem.name" checked [(ngModel)]="dataSourceItem.include">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Include
+              </span>
+            </label>
+
+            <div class="col-lg-2" style="align-self: center;">
+              <select class="form-control">
+                <option *ngFor="let editor of formEditors" [selected]="editor.isDefaultForAssignType">{{editor.editorName}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>

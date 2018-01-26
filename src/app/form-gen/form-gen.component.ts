@@ -1,118 +1,47 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap/tabset/tabset';
-import { ElectronService } from 'ngx-electron';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
-interface FormEditor {
-  assignType: 'Text' | 'Guid' | 'Memo' | 'Number' | 'Date';
-  isDefaultForAssignType: boolean;
-  editorName: string;
-}
+import { WizardStep } from './wizard-step';
 
 @Component({
   selector: 'app-form-gen',
   templateUrl: './form-gen.component.html',
   styleUrls: ['./form-gen.component.css']
 })
-export class FormGenComponent implements OnInit {
-  @ViewChild(NgbTabset) tabSet: NgbTabset;
+export class FormGenComponent implements OnInit, AfterViewInit {
+  @ViewChild(WizardStep) currentWizStep: WizardStep;
 
-  formEditors: FormEditor[];
-  wizStep = 0;
-  pocoInfo: any;
-  data = {
-    asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
-    fullName: 'Api.Tests.DummyModel',
-    tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
-  };
+  currentStep = 0;
+  maxStep = 1;
 
-  private _isElectronApp: boolean;
+  ngOnInit() { }
 
-  constructor(electron: ElectronService, private _http: HttpClient, private _route: ActivatedRoute) {
-    this._isElectronApp = electron.isElectronApp;
-  }
-
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.currentWizStep.init({
+      asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
+      fullName: 'Api.Tests.DummyModel',
+      tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
+    });
   }
 
   previousStep() {
-    if (this.wizStep === 0) {
+    if (this.currentStep === 0) {
       return;
     }
-    this.wizStep--;
+    this.currentStep--;
   }
 
-  nextStep(frm: NgForm) {
-    if (!frm.valid) {
-      alert('Invalid values found');
-      return;
-    }
-    this.wizStep++;
-    this.performStep(frm);
-  }
-
-  private performStep(frm: NgForm) {
-    if (this.wizStep === 1) {
-
-      let url: string;
-      let params: {
-        [param: string]: string | string[];
-      };
-      let callback;
-
-      if (this.tabSet.activeId === 'schemaTab') {
-        const classNameSplit = frm.value.tableXmlPath.split('\\') as string[];
-
-        url = 'formgen/pocoinfosch';
-        params = {
-          'tableXmlPath': frm.value.tableXmlPath
-        };
-        callback = (res) => {
-          this.pocoInfo = {
-            className: classNameSplit[classNameSplit.length - 1].replace('.xml', ''),
-            dataSourceInfo: res
-          };
-        };
-      } else {
-        const classFullNameSplit = frm.value.classFullName.split('.');
-
-        url = 'formgen/pocoinfoasm';
-        params = {
-          'assemblyPath': frm.value.assemblyPath,
-          'classFullName': frm.value.classFullName
-        };
-        callback = (res) => {
-          this.pocoInfo = {
-            className: classFullNameSplit[classFullNameSplit.length - 1],
-            dataSourceInfo: res
-          };
-        };
-      }
-
-      this._http.get(this.generateUrl(url), { params: params })
+  nextStep() {
+    if (this.currentWizStep.isValid()) {
+      this.currentWizStep.nextStep()
         .subscribe(p => {
-          callback(p);
-          this.fillEditors();
+          console.log('Result', p);
+
+          if (this.currentStep === this.maxStep) {
+            return;
+          }
+          this.currentStep++;
+          setTimeout(() => this.currentWizStep.init(p), 0);
         });
     }
   }
-
-  private fillEditors() {
-    this._http.get(this.generateUrl('formeditors'))
-      .subscribe(p => {
-        this.formEditors = <any>p;
-      });
-  }
-
-  private generateUrl(url: string) {
-    let apiUrl = `api/${url}`;
-    if (this._isElectronApp
-    ) {
-      apiUrl = `http://localhost:5000/${apiUrl}`;
-    }
-    return apiUrl;
-  }
-
 }
