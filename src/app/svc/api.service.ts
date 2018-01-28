@@ -35,7 +35,7 @@ export class ApiService {
     return this.http.delete<T>(this.generateUrl(controller) + id);
   }
 
-  private generateUrl(controller: string) {
+  public generateUrl(controller: string) {
     let apiUrl = `api/${controller}/`;
     if (this._isElectronApp) {
       apiUrl = `http://localhost:5000/${apiUrl}`;

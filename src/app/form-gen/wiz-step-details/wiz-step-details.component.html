@@ -1,35 +1,48 @@
-<form #frm="ngForm">
-  <h5 class="card-title">
-    <strong>Step 2:</strong> Datasource details
-  </h5>
-  <div *ngIf="args">
-    <div>
-      <strong>Class:</strong> {{args.className}}</div>
-    <div>
-      <strong>Properties:</strong>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let dataSourceItem of args.dataSourceInfo">
-          <div class="row">
-            <div class="col-lg-4">
-              <strong>{{dataSourceItem.name}}</strong> ({{dataSourceItem.caption}})
-              <footer style="color: blue">{{dataSourceItem.dataType}}</footer>
-            </div>
-
-            <label class="custom-control custom-checkbox" style="align-self: center">
-              <input type="checkbox" class="custom-control-input" [name]="dataSourceItem.name" checked [(ngModel)]="dataSourceItem.include">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Include
-              </span>
-            </label>
-
-            <div class="col-lg-2" style="align-self: center;">
-              <select class="form-control">
-                <option *ngFor="let editor of formEditors" [selected]="editor.isDefaultForAssignType">{{editor.editorName}}</option>
-              </select>
-            </div>
-          </div>
-        </li>
-      </ul>
+<h5 class="card-title">
+  <strong>Step 2:</strong> Datasource details
+  <hr>
+</h5>
+<div *ngIf="detailsInfo">
+  <div class="row">
+    <div class="col-lg-4">
+      <strong>Class:</strong>
+      <div>
+        {{className}}
+      </div>
+    </div>
+    <div class="col-lg-2" style="align-self: center;" style="margin-left: 100px;">
+      <strong>Category:</strong>
+      <select class="form-control" [(ngModel)]="editorCategory" (change)="filterFormEditors($event.target.value)">
+        <option *ngFor="let item of allFormEditors" [value]="item.category">{{item.category}}</option>
+      </select>
     </div>
   </div>
-</form>
+  <div>
+    <strong>Properties:</strong>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let detailInfo of detailsInfo">
+        <div class="row">
+          <div class="col-lg-4">
+            <strong>{{detailInfo.name}}</strong> ({{detailInfo.caption}})
+            <footer style="color: blue">{{detailInfo.dataType}}</footer>
+          </div>
+
+          <label class="custom-control custom-checkbox" style="align-self: center">
+            <input type="checkbox" class="custom-control-input" [name]="detailInfo.name" checked [(ngModel)]="detailInfo.include">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Include
+            </span>
+          </label>
+
+          <div class="col-lg-3" style="align-self: center;">
+            <select class="form-control" [(ngModel)]="detailInfo.formEditor">
+              <optgroup *ngFor="let item of allFormEditors" [label]="item.category">
+                <option *ngFor="let editor of item.data" [selected]="editor.isDefaultForAssignType">{{editor.editorName}}</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

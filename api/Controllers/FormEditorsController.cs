@@ -18,7 +18,7 @@ namespace Api.Controllers {
 
       var formEditors = Assembly.GetExecutingAssembly()
         .GetTypes()
-        .Where(p => p.GetInterfaces().Contains(typeof(IFormEditorInfo)));
+        .Where(p => p.GetInterfaces().Contains(typeof(IFormEditorInfo)) && !p.IsAbstract);
       foreach (var formEditor in formEditors) {
         var instantiatedType = (IFormEditorInfo)Activator.CreateInstance(formEditor);
         res.Add(instantiatedType);

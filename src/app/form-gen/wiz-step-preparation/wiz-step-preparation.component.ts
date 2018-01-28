@@ -19,9 +19,9 @@ const PROMISE = Promise.resolve(null);
 })
 export class WizStepPreparationComponent implements OnInit, WizardStep {
   args: {
-    asmPath: '',
-    fullName: '',
-    tableXmlPath: ''
+    asmPath: string,
+    fullName: string,
+    tableXmlPath: string
   };
   @ViewChild(NgForm) frm: NgForm;
   @ViewChild(NgbTabset) tabSet: NgbTabset;
@@ -30,13 +30,16 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
 
   constructor(electron: ElectronService, private _http: HttpClient, private _route: ActivatedRoute) {
     this._isElectronApp = electron.isElectronApp;
+    this.args = {
+      asmPath: 'D:\\WebProjects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
+      fullName: 'Api.Tests.DummyModel',
+      tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
+    };
   }
 
   ngOnInit() { }
 
-  init(args: any) {
-    PROMISE.then(() => this.args = args);
-  }
+  init(args?: any) { }
 
   isValid(): boolean {
     if (this.tabSet.activeId === 'schemaTab') {
@@ -45,8 +48,6 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
       return (this.frm.value.assemblyPath && this.frm.value.classFullName);
     }
   }
-
-  previousStep() { }
 
   nextStep(): Observable<any> {
     return Observable.create(observer => {

@@ -16,18 +16,7 @@ export class FormGenComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   ngAfterViewInit() {
-    this.currentWizStep.init({
-      asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
-      fullName: 'Api.Tests.DummyModel',
-      tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
-    });
-  }
-
-  previousStep() {
-    if (this.currentStep === 0) {
-      return;
-    }
-    this.currentStep--;
+    this.currentWizStep.init();
   }
 
   nextStep() {

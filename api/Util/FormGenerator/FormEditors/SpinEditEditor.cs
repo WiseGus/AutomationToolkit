@@ -1,9 +1,9 @@
 namespace Api.Util.FormGenerator.FormEditors
 {
 
-  public abstract class TextEditEditor : IFormEditorInfo, IApplyFormEditor
+  public abstract class SpinEditEditor : IFormEditorInfo, IApplyFormEditor
   {
-    public AssignType AssignType => AssignType.String;
+    public AssignType AssignType => AssignType.Int32;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
@@ -17,11 +17,11 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public TextEditEditor()
+    public SpinEditEditor()
     {
     }
 
-    public TextEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
+    public SpinEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
       _name = name;
       _caption = caption;
@@ -32,13 +32,13 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddDeclaration()
     {
-      return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit {ControlName};
+      return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}SpinEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
     public string AddInstantiation()
     {
-      return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit();
+      return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}SpinEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
@@ -50,8 +50,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddISupportInitializeEnd()
     {
-      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
-                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
+      return $"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();";
     }
 
     public string AddPropsSetup()
@@ -62,6 +61,12 @@ namespace Api.Util.FormGenerator.FormEditors
                 this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.Name = ""{ControlName}"";
                 this.{ControlName}.StyleController = this.MainLayout;
+                this.{ControlName}.EditValue = new decimal(new int[] {{
+                      0,0,
+                      0,
+                      0}});
+                this.{ControlName}.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {{
+                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)}});
                 // 
                 // {LayoutName}
                 // 
@@ -74,27 +79,27 @@ namespace Api.Util.FormGenerator.FormEditors
     }
   }
 
-  public class cmTextEditEditor : TextEditEditor
+  public class cmSpinEditEditor : SpinEditEditor
   {
-    public override bool IsDefaultForAssignType => true;
-    public override string EditorName => "cmTextEdit";
+    public override bool IsDefaultForAssignType => false;
+    public override string EditorName => "cmSpinEdit";
     public override string Category => "Crm";
 
-    public cmTextEditEditor() { }
+    public cmSpinEditEditor() { }
 
-    public cmTextEditEditor(string name, string caption, string bindingSourceName)
+    public cmSpinEditEditor(string name, string caption, string bindingSourceName)
       : base(name, caption, bindingSourceName, true) { }
   }
 
-  public class gxTextEditEditor : TextEditEditor
+  public class gxSpinEditEditor : SpinEditEditor
   {
-    public override bool IsDefaultForAssignType => true;
-    public override string EditorName => "gxTextEdit";
+    public override bool IsDefaultForAssignType => false;
+    public override string EditorName => "gxSpinEdit";
     public override string Category => "Glx";
 
-    public gxTextEditEditor() { }
+    public gxSpinEditEditor() { }
 
-    public gxTextEditEditor(string name, string caption, string bindingSourceName)
+    public gxSpinEditEditor(string name, string caption, string bindingSourceName)
       : base(name, caption, bindingSourceName, true) { }
   }
 

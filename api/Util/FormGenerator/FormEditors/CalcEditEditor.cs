@@ -1,9 +1,9 @@
 namespace Api.Util.FormGenerator.FormEditors
 {
 
-  public abstract class TextEditEditor : IFormEditorInfo, IApplyFormEditor
+  public abstract class CalcEditEditor : IFormEditorInfo, IApplyFormEditor
   {
-    public AssignType AssignType => AssignType.String;
+    public AssignType AssignType => AssignType.Int32;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
@@ -17,11 +17,11 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public TextEditEditor()
+    public CalcEditEditor()
     {
     }
 
-    public TextEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
+    public CalcEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
       _name = name;
       _caption = caption;
@@ -32,13 +32,13 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddDeclaration()
     {
-      return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit {ControlName};
+      return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}CalcEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
     public string AddInstantiation()
     {
-      return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit();
+      return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}CalcEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
@@ -50,8 +50,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddISupportInitializeEnd()
     {
-      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
-                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
+      return $"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();";
     }
 
     public string AddPropsSetup()
@@ -62,6 +61,8 @@ namespace Api.Util.FormGenerator.FormEditors
                 this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.Name = ""{ControlName}"";
                 this.{ControlName}.StyleController = this.MainLayout;
+                this.{ControlName}.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {{
+                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)}});
                 // 
                 // {LayoutName}
                 // 
@@ -74,27 +75,27 @@ namespace Api.Util.FormGenerator.FormEditors
     }
   }
 
-  public class cmTextEditEditor : TextEditEditor
+  public class cmCalcEditEditor : CalcEditEditor
   {
     public override bool IsDefaultForAssignType => true;
-    public override string EditorName => "cmTextEdit";
+    public override string EditorName => "cmCalcEdit";
     public override string Category => "Crm";
 
-    public cmTextEditEditor() { }
+    public cmCalcEditEditor() { }
 
-    public cmTextEditEditor(string name, string caption, string bindingSourceName)
+    public cmCalcEditEditor(string name, string caption, string bindingSourceName)
       : base(name, caption, bindingSourceName, true) { }
   }
 
-  public class gxTextEditEditor : TextEditEditor
+  public class gxCalcEditEditor : CalcEditEditor
   {
     public override bool IsDefaultForAssignType => true;
-    public override string EditorName => "gxTextEdit";
+    public override string EditorName => "gxCalcEdit";
     public override string Category => "Glx";
 
-    public gxTextEditEditor() { }
+    public gxCalcEditEditor() { }
 
-    public gxTextEditEditor(string name, string caption, string bindingSourceName)
+    public gxCalcEditEditor(string name, string caption, string bindingSourceName)
       : base(name, caption, bindingSourceName, true) { }
   }
 
