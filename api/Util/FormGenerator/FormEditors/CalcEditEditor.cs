@@ -17,9 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public CalcEditEditor()
-    {
-    }
+    public CalcEditEditor() { }
 
     public CalcEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
@@ -50,7 +48,8 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddISupportInitializeEnd()
     {
-      return $"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();";
+      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
+                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
     public string AddPropsSetup()

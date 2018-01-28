@@ -17,9 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public DateEditEditor()
-    {
-    }
+    public DateEditEditor() { }
 
     public DateEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
@@ -29,7 +27,6 @@ namespace Api.Util.FormGenerator.FormEditors
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
     }
-
 
     public string AddDeclaration()
     {

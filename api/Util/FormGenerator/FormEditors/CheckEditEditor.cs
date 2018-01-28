@@ -17,9 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public CheckEditEditor()
-    {
-    }
+    public CheckEditEditor() { }
 
     public CheckEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
@@ -29,7 +27,6 @@ namespace Api.Util.FormGenerator.FormEditors
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
     }
-
 
     public string AddDeclaration()
     {
@@ -51,7 +48,8 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public string AddISupportInitializeEnd()
     {
-      return $"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();";
+      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
+                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
     public string AddPropsSetup()
@@ -71,7 +69,8 @@ namespace Api.Util.FormGenerator.FormEditors
                 this.{LayoutName}.Name = ""{LayoutName}"";
                 this.{LayoutName}.ReadOnly = false;
                 this.{LayoutName}.Text = ""{_caption}"";
-                this.{LayoutName}.TextSize = new System.Drawing.Size(50, 13);";
+                this.{LayoutName}.TextSize = new System.Drawing.Size(50, 13);
+                this.{LayoutName}.TextVisible = false;";
     }
   }
 

@@ -35,12 +35,10 @@ namespace Api.Util.FormGenerator
     /// </summary>
     private void InitializeComponent()
     {
+        this.components = new System.ComponentModel.Container();
         $Instantiations$
-
         $ISupportInitializeBegin$
-
         $PropsSetup$
-
         $ISupportInitializeEnd$
     }
 

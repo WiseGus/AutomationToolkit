@@ -17,9 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public TextEditEditor()
-    {
-    }
+    public TextEditEditor() { }
 
     public TextEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
     {
