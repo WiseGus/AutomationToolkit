@@ -1,15 +1,13 @@
-namespace Api.Util.FormGenerator.FormEditors
-{
+namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class TextEditEditor : IFormEditorInfo, IApplyFormEditor
-  {
+  public abstract class TextEditEditor : BaseEditor, IFormEditorInfo {
     public AssignType AssignType => AssignType.String;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
-    public string ControlName => "ctrl" + _name;
-    public string LayoutName => "lo" + _name;
+    public override string ControlName => "ctrl" + _name;
+    public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
@@ -17,10 +15,11 @@ namespace Api.Util.FormGenerator.FormEditors
     private string _namespacePrefix;
     private string _controlPrefix;
 
-    public TextEditEditor() { }
+    public TextEditEditor() {
+    }
 
     public TextEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
-    {
+      : this() {
       _name = name;
       _caption = caption;
       _bindingSourceName = bindingSourceName;
@@ -28,32 +27,27 @@ namespace Api.Util.FormGenerator.FormEditors
       _controlPrefix = isCrm ? "cm" : "gx";
     }
 
-    public string AddDeclaration()
-    {
+    protected override string AddDeclaration() {
       return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
-    public string AddInstantiation()
-    {
+    protected override string AddInstantiation() {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}TextEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
-    public string AddISupportInitializeBegin()
-    {
+    protected override string AddISupportInitializeBegin() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).BeginInit();";
     }
 
-    public string AddISupportInitializeEnd()
-    {
+    protected override string AddISupportInitializeEnd() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
-    public string AddPropsSetup()
-    {
+    protected override string AddPropsSetup() {
       return $@"// 
                 // {ControlName}
                 //
@@ -72,8 +66,7 @@ namespace Api.Util.FormGenerator.FormEditors
     }
   }
 
-  public class cmTextEditEditor : TextEditEditor
-  {
+  public class cmTextEditEditor : TextEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "cmTextEdit";
     public override string Category => "Crm";
@@ -84,8 +77,7 @@ namespace Api.Util.FormGenerator.FormEditors
       : base(name, caption, bindingSourceName, true) { }
   }
 
-  public class gxTextEditEditor : TextEditEditor
-  {
+  public class gxTextEditEditor : TextEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "gxTextEdit";
     public override string Category => "Glx";

@@ -1,11 +1,11 @@
+using Api.Util.FormGenerator.Model;
 using System;
 
-namespace Api.Util.FormGenerator
-{
-    public class DesignerReplace
-    {
-        const string DESIGNER_TEMPLATE =
-@"namespace $Namespace$
+namespace Api.Util.FormGenerator {
+  public class CsDesignerTemplate {
+    const string DESIGNER_TEMPLATE =
+@"$TODO$
+namespace $Namespace$
 {
   partial class $ClassName$
   {
@@ -47,18 +47,18 @@ namespace Api.Util.FormGenerator
     $Declarations$
   }
 }";
-        public string GenerateDesigner(DesignerInfo data)
-        {
-            var designerString = DESIGNER_TEMPLATE
-              .Replace("$Namespace$", data.Namespace)
-              .Replace("$ClassName$", data.ClassName)
-              .Replace("$Instantiations$", string.Join(Environment.NewLine, data.Instantiations))
-              .Replace("$ISupportInitializeBegin$", string.Join(Environment.NewLine, data.ISupportInitializeBegin))
-              .Replace("$PropsSetup$", string.Join(Environment.NewLine, data.PropsSetup))
-              .Replace("$ISupportInitializeEnd$", string.Join(Environment.NewLine, data.ISupportInitializeEnd))
-              .Replace("$Declarations$", string.Join(Environment.NewLine, data.Declarations));
-            return designerString;
-        }
-
+    public string GenerateDesigner(DesignerInfo data) {
+      var designerString = DESIGNER_TEMPLATE
+        .Replace("$TODO$", data.Todo)
+        .Replace("$Namespace$", data.Namespace)
+        .Replace("$ClassName$", data.ClassName)
+        .Replace("$Instantiations$", string.Join(Environment.NewLine, data.Instantiations))
+        .Replace("$ISupportInitializeBegin$", string.Join(Environment.NewLine, data.ISupportInitializeBegin))
+        .Replace("$PropsSetup$", string.Join(Environment.NewLine, data.PropsSetup))
+        .Replace("$ISupportInitializeEnd$", string.Join(Environment.NewLine, data.ISupportInitializeEnd))
+        .Replace("$Declarations$", string.Join(Environment.NewLine, data.Declarations));
+      return designerString;
     }
+
+  }
 }

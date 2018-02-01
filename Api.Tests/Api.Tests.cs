@@ -1,11 +1,10 @@
-using Api.Util.FormGenerator;
+using Api.Util.FormGenerator.DatasourceParsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace Api.Tests
-{
+namespace Api.Tests {
   [TestClass]
   public class FormGeneratorTests
   {

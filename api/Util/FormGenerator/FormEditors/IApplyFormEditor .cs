@@ -1,12 +1,15 @@
+using System.Collections.Generic;
+
 namespace Api.Util.FormGenerator.FormEditors {
 
   public interface IApplyFormEditor {
     string ControlName { get; }
     string LayoutName { get; }
-    string AddInstantiation();
-    string AddISupportInitializeBegin();
-    string AddPropsSetup();
-    string AddISupportInitializeEnd();
-    string AddDeclaration();
+    List<string> Instantiations { get; }
+    List<string> ISupportInitializeBegin { get; }
+    List<string> PropsSetup { get; }
+    List<string> ISupportInitializeEnd { get; }
+    List<string> Declarations { get; }
+    void Apply();
   }
 }

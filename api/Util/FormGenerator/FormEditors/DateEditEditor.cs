@@ -1,15 +1,13 @@
-namespace Api.Util.FormGenerator.FormEditors
-{
+namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class DateEditEditor : IFormEditorInfo, IApplyFormEditor
-  {
+  public abstract class DateEditEditor : BaseEditor, IApplyFormEditor {
     public AssignType AssignType => AssignType.DateTime;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
-    public string ControlName => "ctrl" + _name;
-    public string LayoutName => "lo" + _name;
+    public override string ControlName => "ctrl" + _name;
+    public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
@@ -19,8 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public DateEditEditor() { }
 
-    public DateEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
-    {
+    public DateEditEditor(string name, string caption, string bindingSourceName, bool isCrm) {
       _name = name;
       _caption = caption;
       _bindingSourceName = bindingSourceName;
@@ -28,34 +25,29 @@ namespace Api.Util.FormGenerator.FormEditors
       _controlPrefix = isCrm ? "cm" : "gx";
     }
 
-    public string AddDeclaration()
-    {
+    protected override string AddDeclaration() {
       return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}DateEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
-    public string AddInstantiation()
-    {
+    protected override string AddInstantiation() {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}DateEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
-    public string AddISupportInitializeBegin()
-    {
+    protected override string AddISupportInitializeBegin() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties.CalendarTimeProperties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).BeginInit();";
     }
 
-    public string AddISupportInitializeEnd()
-    {
+    protected override string AddISupportInitializeEnd() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties.CalendarTimeProperties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName}.Properties)).EndInit();";
     }
 
-    public string AddPropsSetup()
-    {
+    protected override string AddPropsSetup() {
       return $@"// 
                 // {ControlName}
                 //
@@ -74,8 +66,7 @@ namespace Api.Util.FormGenerator.FormEditors
     }
   }
 
-  public class cmDateEditEditor : DateEditEditor
-  {
+  public class cmDateEditEditor : DateEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "cmDateEdit";
     public override string Category => "Crm";
@@ -86,8 +77,7 @@ namespace Api.Util.FormGenerator.FormEditors
       : base(name, caption, bindingSourceName, true) { }
   }
 
-  public class gxDateEditEditor : DateEditEditor
-  {
+  public class gxDateEditEditor : DateEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "gxDateEdit";
     public override string Category => "Glx";

@@ -31,7 +31,7 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
   constructor(electron: ElectronService, private _http: HttpClient, private _route: ActivatedRoute) {
     this._isElectronApp = electron.isElectronApp;
     this.args = {
-      asmPath: 'D:\\WebProjects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
+      asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
       fullName: 'Api.Tests.DummyModel',
       tableXmlPath: 'C:\\ksofos\\Development\\CrmNet\\Baseline\\Sources\\Schema\\slsSchemaTable.Files\\cmContacts.xml'
     };
@@ -53,7 +53,7 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
     return Observable.create(observer => {
       console.log('NextStep', this.frm);
 
-      let url: string;
+      const url = 'formgen';
       let params: {
         [param: string]: string | string[];
       };
@@ -62,8 +62,8 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
       if (this.tabSet.activeId === 'schemaTab') {
         const classNameSplit = this.frm.value.tableXmlPath.split('\\') as string[];
 
-        url = 'formgen/pocoinfosch';
         params = {
+          'isGlxSchema': 'true',
           'tableXmlPath': this.frm.value.tableXmlPath
         };
         callback = (res) => {
@@ -75,8 +75,8 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
       } else {
         const classFullNameSplit = this.frm.value.classFullName.split('.');
 
-        url = 'formgen/pocoinfoasm';
         params = {
+          'isGlxSchema': 'false',
           'assemblyPath': this.frm.value.assemblyPath,
           'classFullName': this.frm.value.classFullName
         };

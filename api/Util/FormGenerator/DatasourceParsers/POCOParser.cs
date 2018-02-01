@@ -1,12 +1,11 @@
+using Api.Util.FormGenerator.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
 
-namespace Api.Util.FormGenerator {
+namespace Api.Util.FormGenerator.DatasourceParsers {
   public class POCOParser : IDatasourceParser {
     private Type _type;
     private List<DatasourceInfo> _datasourceInfo = new List<DatasourceInfo>();

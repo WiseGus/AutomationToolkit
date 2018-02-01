@@ -1,15 +1,13 @@
-namespace Api.Util.FormGenerator.FormEditors
-{
+namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class CheckEditEditor : IFormEditorInfo, IApplyFormEditor
-  {
+  public abstract class CheckEditEditor : BaseEditor, IApplyFormEditor {
     public AssignType AssignType => AssignType.Int16 | AssignType.Boolean;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
-    public string ControlName => "ctrl" + _name;
-    public string LayoutName => "lo" + _name;
+    public override string ControlName => "ctrl" + _name;
+    public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
@@ -19,8 +17,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public CheckEditEditor() { }
 
-    public CheckEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
-    {
+    public CheckEditEditor(string name, string caption, string bindingSourceName, bool isCrm) {
       _name = name;
       _caption = caption;
       _bindingSourceName = bindingSourceName;
@@ -28,32 +25,27 @@ namespace Api.Util.FormGenerator.FormEditors
       _controlPrefix = isCrm ? "cm" : "gx";
     }
 
-    public string AddDeclaration()
-    {
+    protected override string AddDeclaration() {
       return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}CheckEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
-    public string AddInstantiation()
-    {
+    protected override string AddInstantiation() {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}CheckEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
-    public string AddISupportInitializeBegin()
-    {
+    protected override string AddISupportInitializeBegin() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).BeginInit();";
     }
 
-    public string AddISupportInitializeEnd()
-    {
+    protected override string AddISupportInitializeEnd() {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
-    public string AddPropsSetup()
-    {
+    protected override string AddPropsSetup() {
       return $@"// 
                 // {ControlName}
                 //
@@ -74,8 +66,7 @@ namespace Api.Util.FormGenerator.FormEditors
     }
   }
 
-  public class cmCheckEditEditor : CheckEditEditor
-  {
+  public class cmCheckEditEditor : CheckEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "cmCheckEdit";
     public override string Category => "Crm";
@@ -86,8 +77,7 @@ namespace Api.Util.FormGenerator.FormEditors
       : base(name, caption, bindingSourceName, true) { }
   }
 
-  public class gxCheckEditEditor : CheckEditEditor
-  {
+  public class gxCheckEditEditor : CheckEditEditor {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "gxCheckEdit";
     public override string Category => "Glx";
