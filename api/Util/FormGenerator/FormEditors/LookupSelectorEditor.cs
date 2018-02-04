@@ -6,22 +6,21 @@ namespace Api.Util.FormGenerator.FormEditors {
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
+    public override string Name => _name;
     public override string ControlName => "ctrl" + _name;
     public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
-    private string _bindingSourceName;
     private string _namespacePrefix;
     private string _controlPrefix;
     private string _definition;
 
     public LookupSelectorEditor() { }
 
-    public LookupSelectorEditor(string name, string caption, string bindingSourceName, bool isCrm, string definition) {
+    public LookupSelectorEditor(string name, string caption, bool isCrm, string definition) {
       _name = name;
       _caption = caption;
-      _bindingSourceName = bindingSourceName;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
       _definition = definition;
@@ -53,7 +52,6 @@ namespace Api.Util.FormGenerator.FormEditors {
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.AutoFetchData = true;
                 this.{ControlName}.EditValue = ""{ControlName}"";            
                 this.{ControlName}.LookupDefinition = {_definition};
@@ -85,8 +83,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public cmLookupSelectorEditor() { }
 
-    public cmLookupSelectorEditor(string name, string caption, string bindingSourceName, string definition)
-      : base(name, caption, bindingSourceName, true, definition) { }
+    public cmLookupSelectorEditor(string name, string caption, string definition)
+      : base(name, caption, true, definition) { }
   }
 
   public class gxLookupSelectorEditor : LookupSelectorEditor {
@@ -96,8 +94,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public gxLookupSelectorEditor() { }
 
-    public gxLookupSelectorEditor(string name, string caption, string bindingSourceName, string definition)
-      : base(name, caption, bindingSourceName, true, definition) { }
+    public gxLookupSelectorEditor(string name, string caption, string definition)
+      : base(name, caption, true, definition) { }
   }
 
 }

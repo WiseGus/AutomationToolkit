@@ -6,23 +6,22 @@ namespace Api.Util.FormGenerator.FormEditors {
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
+    public override string Name => _name;
     public override string ControlName => "ctrl" + _name;
     public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
-    private string _bindingSourceName;
     private string _namespacePrefix;
     private string _controlPrefix;
 
     public TextEditEditor() {
     }
 
-    public TextEditEditor(string name, string caption, string bindingSourceName, bool isCrm)
+    public TextEditEditor(string name, string caption, bool isCrm)
       : this() {
       _name = name;
       _caption = caption;
-      _bindingSourceName = bindingSourceName;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
     }
@@ -51,7 +50,6 @@ namespace Api.Util.FormGenerator.FormEditors {
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.Name = ""{ControlName}"";
                 this.{ControlName}.StyleController = this.MainLayout;
                 // 
@@ -73,8 +71,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public cmTextEditEditor() { }
 
-    public cmTextEditEditor(string name, string caption, string bindingSourceName)
-      : base(name, caption, bindingSourceName, true) { }
+    public cmTextEditEditor(string name, string caption)
+      : base(name, caption, true) { }
   }
 
   public class gxTextEditEditor : TextEditEditor {
@@ -84,8 +82,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public gxTextEditEditor() { }
 
-    public gxTextEditEditor(string name, string caption, string bindingSourceName)
-      : base(name, caption, bindingSourceName, true) { }
+    public gxTextEditEditor(string name, string caption)
+      : base(name, caption, true) { }
   }
 
 }

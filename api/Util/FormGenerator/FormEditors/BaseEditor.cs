@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 
-namespace Api.Util.FormGenerator.FormEditors {
-  public abstract class BaseEditor : IApplyFormEditor {
+namespace Api.Util.FormGenerator.FormEditors
+{
+  public abstract class BaseEditor : IApplyFormEditor, IEditorVisitable
+  {
     public List<string> Instantiations => _instantiations;
 
     public List<string> ISupportInitializeBegin => _iSupportInitializeBegin;
@@ -12,10 +14,11 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public List<string> Declarations => _declarations;
 
+    public abstract string Name { get; }
 
     public abstract string ControlName { get; }
 
-    public abstract string LayoutName { get; }
+    public virtual string LayoutName { get; }
 
     private List<string> _iSupportInitializeBegin;
     private List<string> _propsSetup;
@@ -23,7 +26,8 @@ namespace Api.Util.FormGenerator.FormEditors {
     private List<string> _instantiations;
     private List<string> _declarations;
 
-    public BaseEditor() {
+    public BaseEditor()
+    {
       _iSupportInitializeBegin = new List<string>();
       _propsSetup = new List<string>();
       _iSupportInitializeEnd = new List<string>();
@@ -31,7 +35,8 @@ namespace Api.Util.FormGenerator.FormEditors {
       _declarations = new List<string>();
     }
 
-    public void Apply() {
+    public void Apply()
+    {
       Declarations.Add(AddDeclaration());
       ISupportInitializeBegin.Add(AddISupportInitializeBegin());
       PropsSetup.Add(AddPropsSetup());
@@ -44,5 +49,10 @@ namespace Api.Util.FormGenerator.FormEditors {
     protected abstract string AddPropsSetup();
     protected abstract string AddISupportInitializeBegin();
     protected abstract string AddDeclaration();
+
+    public void Accept(IEditorVisitor visitor)
+    {
+      visitor.Visit(this);
+    }
   }
 }

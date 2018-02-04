@@ -20,7 +20,7 @@ namespace $Namespace$
     /// <param name=""disposing"">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-        if (disposing(components != null))
+        if (disposing && (components != null))
         {
             components.Dispose();
         }
@@ -37,9 +37,11 @@ namespace $Namespace$
     {
         this.components = new System.ComponentModel.Container();
         $Instantiations$
+        this.SuspendLayout();
         $ISupportInitializeBegin$
         $PropsSetup$
         $ISupportInitializeEnd$
+        this.ResumeLayout(false);
     }
 
     #endregion

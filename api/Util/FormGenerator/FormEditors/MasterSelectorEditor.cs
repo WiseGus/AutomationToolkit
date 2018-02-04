@@ -6,22 +6,21 @@ namespace Api.Util.FormGenerator.FormEditors {
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
+    public override string Name => _name;
     public override string ControlName => "ctrl" + _name;
     public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
-    private string _bindingSourceName;
     private string _namespacePrefix;
     private string _controlPrefix;
     private string _definition;
 
     public MasterSelectorEditor() { }
 
-    public MasterSelectorEditor(string name, string caption, string bindingSourceName, bool isCrm, string definition) {
+    public MasterSelectorEditor(string name, string caption, bool isCrm, string definition) {
       _name = name;
       _caption = caption;
-      _bindingSourceName = bindingSourceName;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
       _definition = definition;
@@ -53,7 +52,6 @@ namespace Api.Util.FormGenerator.FormEditors {
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.AllowMultiSelect = false;
                 this.{ControlName}.DisplayTextField1 = null;
                 this.{ControlName}.DisplayTextField2 = null;
@@ -97,8 +95,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public cmMasterSelectorEditor() { }
 
-    public cmMasterSelectorEditor(string name, string caption, string bindingSourceName, string definition)
-      : base(name, caption, bindingSourceName, true, definition) { }
+    public cmMasterSelectorEditor(string name, string caption, string definition)
+      : base(name, caption, true, definition) { }
   }
 
   public class gxMasterSelectorEditor : MasterSelectorEditor {
@@ -108,8 +106,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public gxMasterSelectorEditor() { }
 
-    public gxMasterSelectorEditor(string name, string caption, string bindingSourceName, string definition)
-      : base(name, caption, bindingSourceName, true, definition) { }
+    public gxMasterSelectorEditor(string name, string caption, string definition)
+      : base(name, caption, true, definition) { }
   }
 
 }
