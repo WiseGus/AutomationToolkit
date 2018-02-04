@@ -13,7 +13,8 @@ namespace Api.Util.FormGenerator.FormEditors
     DateTime = 256,
     Float = 512,
     Double = 1024,
-    Decimal = 2048
+    Decimal = 2048,
+    Special = 4096
   }
 
   public interface IFormEditorInfo

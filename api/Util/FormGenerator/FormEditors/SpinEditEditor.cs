@@ -1,26 +1,26 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class SpinEditEditor : BaseEditor, IFormEditorInfo {
+  public abstract class SpinEditEditor : BaseEditor, IFormEditorInfo
+  {
     public AssignType AssignType => AssignType.Int32;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
     public abstract string Category { get; }
 
+    public override string Name => _name;
     public override string ControlName => "ctrl" + _name;
     public override string LayoutName => "lo" + _name;
 
     private string _name;
     private string _caption;
-    private string _bindingSourceName;
     private string _namespacePrefix;
     private string _controlPrefix;
 
     public SpinEditEditor() { }
 
-    public SpinEditEditor(string name, string caption, string bindingSourceName, bool isCrm) {
+    public SpinEditEditor(string name, string caption, bool isCrm) {
       _name = name;
       _caption = caption;
-      _bindingSourceName = bindingSourceName;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
     }
@@ -49,7 +49,6 @@ namespace Api.Util.FormGenerator.FormEditors {
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{_bindingSourceName}, ""{ControlName}"", true));
                 this.{ControlName}.Name = ""{ControlName}"";
                 this.{ControlName}.StyleController = this.MainLayout;
                 this.{ControlName}.EditValue = new decimal(new int[] {{
@@ -77,8 +76,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public cmSpinEditEditor() { }
 
-    public cmSpinEditEditor(string name, string caption, string bindingSourceName)
-      : base(name, caption, bindingSourceName, true) { }
+    public cmSpinEditEditor(string name, string caption)
+      : base(name, caption, true) { }
   }
 
   public class gxSpinEditEditor : SpinEditEditor {
@@ -88,8 +87,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public gxSpinEditEditor() { }
 
-    public gxSpinEditEditor(string name, string caption, string bindingSourceName)
-      : base(name, caption, bindingSourceName, true) { }
+    public gxSpinEditEditor(string name, string caption)
+      : base(name, caption, true) { }
   }
 
 }
