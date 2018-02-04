@@ -1,6 +1,7 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class LookupEnumerationEditor : BaseEditor, IApplyFormEditor {
+  public abstract class LookupEnumerationEditor : BaseEditor, IFormEditorInfo
+  {
     public AssignType AssignType => AssignType.Int16;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }

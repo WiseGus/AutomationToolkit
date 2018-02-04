@@ -1,6 +1,7 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class CalcEditEditor : BaseEditor, IFormEditorInfo {
+  public abstract class CalcEditEditor : BaseEditor, IFormEditorInfo
+  {
     public AssignType AssignType => AssignType.Float | AssignType.Double | AssignType.Decimal;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
@@ -12,7 +13,6 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     private string _name;
     private string _caption;
-    private string _bindingSourceName;
     private string _namespacePrefix;
     private string _controlPrefix;
 

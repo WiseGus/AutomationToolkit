@@ -1,6 +1,7 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class MasterSelectorEditor : BaseEditor, IApplyFormEditor {
+  public abstract class MasterSelectorEditor : BaseEditor, IFormEditorInfo
+  {
     public AssignType AssignType => AssignType.Guid;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }

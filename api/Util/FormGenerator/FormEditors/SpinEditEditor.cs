@@ -1,6 +1,7 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class SpinEditEditor : BaseEditor, IApplyFormEditor {
+  public abstract class SpinEditEditor : BaseEditor, IFormEditorInfo
+  {
     public AssignType AssignType => AssignType.Int32;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }
