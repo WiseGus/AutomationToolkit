@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, forwardRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { ElectronService } from 'ngx-electron';
 import { Observable } from 'rxjs/Observable';
 
-import { WizardStep } from '../wizard-step';
+import { FormGenInfo, WizardStep } from '../wiz-model';
 
 const PROMISE = Promise.resolve(null);
 
@@ -17,7 +16,7 @@ const PROMISE = Promise.resolve(null);
   styleUrls: ['./wiz-step-preparation.component.css'],
   providers: [{ provide: WizardStep, useExisting: forwardRef(() => WizStepPreparationComponent) }]
 })
-export class WizStepPreparationComponent implements OnInit, WizardStep {
+export class WizStepPreparationComponent implements WizardStep {
   args: {
     asmPath: string,
     fullName: string,
@@ -27,8 +26,9 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
   @ViewChild(NgbTabset) tabSet: NgbTabset;
 
   private _isElectronApp: boolean;
+  private _formGenInfo: FormGenInfo;
 
-  constructor(electron: ElectronService, private _http: HttpClient, private _route: ActivatedRoute) {
+  constructor(electron: ElectronService, private _http: HttpClient) {
     this._isElectronApp = electron.isElectronApp;
     this.args = {
       asmPath: 'C:\\Users\\ksofos\\Documents\\Visual Studio 2017\\Projects\\AutomationToolkit\\Api.Tests\\bin\\Debug\\netcoreapp2.0\\Api.Tests.dll',
@@ -37,9 +37,9 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
     };
   }
 
-  ngOnInit() { }
-
-  init(args?: any) { }
+  init(args: { formGenInfo: FormGenInfo; data?: any; }) {
+    this._formGenInfo = args.formGenInfo;
+  }
 
   isValid(): boolean {
     if (this.tabSet.activeId === 'schemaTab') {
@@ -66,6 +66,9 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
           'isGlxSchema': 'true',
           'tableXmlPath': this.frm.value.tableXmlPath
         };
+        this._formGenInfo.isGlxSchema = true;
+        this._formGenInfo.tableXmlPath = this.frm.value.tableXmlPath;
+
         callback = (res) => {
           observer.next({
             className: classNameSplit[classNameSplit.length - 1].replace('.xml', ''),
@@ -80,6 +83,10 @@ export class WizStepPreparationComponent implements OnInit, WizardStep {
           'assemblyPath': this.frm.value.assemblyPath,
           'classFullName': this.frm.value.classFullName
         };
+        this._formGenInfo.isGlxSchema = false;
+        this._formGenInfo.assemblyPath = this.frm.value.assemblyPath;
+        this._formGenInfo.classFullName = this.frm.value.classFullName;
+
         callback = (res) => {
           observer.next({
             className: classFullNameSplit[classFullNameSplit.length - 1],

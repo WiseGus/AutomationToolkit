@@ -1,22 +1,27 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
-import { WizardStep } from './wizard-step';
+import { WizardStep, FormGenInfo } from './wiz-model';
 
 @Component({
   selector: 'app-form-gen',
   templateUrl: './form-gen.component.html',
   styleUrls: ['./form-gen.component.css']
 })
-export class FormGenComponent implements OnInit, AfterViewInit {
+export class FormGenComponent implements AfterViewInit {
   @ViewChild(WizardStep) currentWizStep: WizardStep;
 
   currentStep = 0;
   maxStep = 1;
 
-  ngOnInit() { }
+  private _formGenInfo: FormGenInfo = {};
+
+  constructor() { }
 
   ngAfterViewInit() {
-    this.currentWizStep.init();
+    this.currentWizStep.init({
+      formGenInfo: this._formGenInfo,
+      data: null
+    });
   }
 
   nextStep() {
@@ -29,7 +34,13 @@ export class FormGenComponent implements OnInit, AfterViewInit {
             return;
           }
           this.currentStep++;
-          setTimeout(() => this.currentWizStep.init(p), 0);
+          setTimeout(() => {
+            const x = this._formGenInfo;
+            this.currentWizStep.init({
+              formGenInfo: this._formGenInfo,
+              data: p
+            });
+          }, 0);
         });
     }
   }

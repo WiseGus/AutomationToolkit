@@ -2,7 +2,7 @@ using CWDev.SLNTools.Core;
 using System;
 using System.Collections.Generic;
 
-namespace Api.Controllers {
+namespace Api.Util {
 
   public class SolutionParser {
 

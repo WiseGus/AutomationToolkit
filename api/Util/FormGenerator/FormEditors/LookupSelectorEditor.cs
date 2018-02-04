@@ -1,6 +1,6 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class LookupSelectorEditor : BaseEditor, IApplyFormEditor {
+  public abstract class LookupSelectorEditor : BaseEditor, IFormEditorInfo {
     public AssignType AssignType => AssignType.Guid;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }

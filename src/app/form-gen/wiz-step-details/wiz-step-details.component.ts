@@ -1,21 +1,13 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from '../../svc/api.service';
-import { WizardStep } from '../wizard-step';
+import { DetailInfo, FormGenInfo, WizardStep } from '../wiz-model';
 
 interface FormEditor {
   assignType: string;
   isDefaultForAssignType: boolean;
   editorName: string;
-}
-
-interface DetailInfo {
-  name: string;
-  caption: string;
-  dataType: string;
-  include: boolean;
-  formEditor: string;
 }
 
 @Component({
@@ -25,23 +17,24 @@ interface DetailInfo {
   styleUrls: ['./wiz-step-details.component.css'],
   providers: [{ provide: WizardStep, useExisting: forwardRef(() => WizStepDetailsComponent) }]
 })
-export class WizStepDetailsComponent implements OnInit, WizardStep {
+export class WizStepDetailsComponent implements WizardStep {
   editorCategory = 'Glx';
   className: string;
   detailsInfo: DetailInfo[];
   allFormEditors: { category: string, data: FormEditor[] }[];
   filteredFormEditors: FormEditor[];
 
+  private _formGenInfo: FormGenInfo;
+
   constructor(private _api: ApiService) { }
 
-  ngOnInit() { }
-
-  init(args: any) {
+  init(args: { formGenInfo: FormGenInfo; data?: any; }) {
+    this._formGenInfo = args.formGenInfo;
     this._api.getAll<any[]>('formeditors')
       .subscribe(p => {
         this.setupFormEditors(p);
-        this.className = args.className;
-        this.detailsInfo = args.dataSourceInfo;
+        this.className = args.data.className;
+        this.detailsInfo = args.data.dataSourceInfo;
         this.detailsInfo.forEach(x => {
           x.include = true;
           x.formEditor = this.getDefaultFormEditor(x);
@@ -54,9 +47,9 @@ export class WizStepDetailsComponent implements OnInit, WizardStep {
   }
 
   nextStep(): Observable<any> {
-    return Observable.create(observer => {
-      console.log('NextStep', this.detailsInfo);
-    });
+    this._formGenInfo.propertiesInfo = this.detailsInfo
+      .filter(p => p.include && p.formEditor);
+    return this._api.post<any>('formgen', this._formGenInfo);
   }
 
   private setupFormEditors(formEditors: any[]) {

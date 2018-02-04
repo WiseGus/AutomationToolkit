@@ -1,6 +1,6 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class CheckEditEditor : BaseEditor, IApplyFormEditor {
+  public abstract class CheckEditEditor : BaseEditor, IFormEditorInfo {
     public AssignType AssignType => AssignType.Int16 | AssignType.Boolean;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }

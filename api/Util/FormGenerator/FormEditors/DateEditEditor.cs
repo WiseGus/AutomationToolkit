@@ -1,6 +1,6 @@
 namespace Api.Util.FormGenerator.FormEditors {
 
-  public abstract class DateEditEditor : BaseEditor, IApplyFormEditor {
+  public abstract class DateEditEditor : BaseEditor, IFormEditorInfo {
     public AssignType AssignType => AssignType.DateTime;
     public abstract bool IsDefaultForAssignType { get; }
     public abstract string EditorName { get; }

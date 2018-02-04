@@ -10,6 +10,13 @@ namespace Api.Util.FormGenerator.Model {
     public List<string> PropsSetup { get; set; }
     public List<string> ISupportInitializeEnd { get; set; }
     public List<string> Declarations { get; set; }
-  }
 
+    public DesignerInfo() {
+      Instantiations = new List<string>();
+      ISupportInitializeBegin = new List<string>();
+      PropsSetup = new List<string>();
+      ISupportInitializeEnd = new List<string>();
+      Declarations = new List<string>();
+    }
+  }
 }
