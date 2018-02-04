@@ -1,7 +1,7 @@
 namespace Api.Util.FormGenerator.FormEditors
 {
 
-  public abstract class ObjectCollectionSourceEditor : BaseEditor
+  public abstract class ObjectCollectionSourceEditor : BaseEditor, IEditorVisitor
   {
     public override string Name => _name;
     public override string ControlName => "oc" + _name;
@@ -42,7 +42,21 @@ namespace Api.Util.FormGenerator.FormEditors
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.CollectionType = typeof({_namespacePrefix}.Data.DataObjects.{_controlPrefix}{ControlName}Collection;";
+                this.{ControlName}.CollectionType = typeof({_namespacePrefix}.Data.DataObjects.{_controlPrefix}{_name}Collection;";
+    }
+
+    public void Visit(IApplyFormEditor editor)
+    {
+      if (editor is ObjectCollectionSourceEditor)
+      {
+        return;
+      }
+
+      if (editor is BindingSourceEditor)
+      {
+        var data = $@"this.{editor.ControlName}.DataSource = this.{ControlName};";
+        editor.PropsSetup.Insert(0, data);
+      }
     }
   }
 

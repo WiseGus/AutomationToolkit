@@ -42,9 +42,8 @@ namespace Api.Util.FormGenerator.FormEditors
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.ContainerControl = this;
-                this.{ControlName}.DataSource = this.{ControlName};";
-    }
+                this.{ControlName}.ContainerControl = this;";
+    }    
   }
 
   public class cmErrorProviderEditor : ErrorProviderEditor

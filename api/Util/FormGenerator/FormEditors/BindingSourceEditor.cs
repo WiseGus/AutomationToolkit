@@ -41,14 +41,28 @@ namespace Api.Util.FormGenerator.FormEditors
     {
       return $@"// 
                 // {ControlName}
-                //
-                this.{ControlName}.DataSource = this.{ControlName};";
+                //";
     }
 
     public void Visit(IApplyFormEditor editor)
     {
-      var data = $@"this.{editor.ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{ControlName}, ""{editor.Name}"", true));";
-      editor.PropsSetup.Insert(0, data);
+      if (editor is BindingSourceEditor || editor is ObjectCollectionSourceEditor)
+      {
+        return;
+      }
+
+      if (editor is ErrorProviderEditor)
+      {
+        var data = $@"this.{editor.ControlName}.DataSource = this.{ControlName};";
+        editor.PropsSetup.Insert(0, data);
+        return;
+      }
+
+      if (editor is BaseEditor)
+      {
+        var data = $@"this.{editor.ControlName}.DataBindings.Add(new System.Windows.Forms.Binding(""EditValue"", this.{ControlName}, ""{editor.Name}"", true));";
+        editor.PropsSetup.Insert(0, data);
+      }
     }
   }
 

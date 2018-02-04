@@ -1,4 +1,5 @@
-namespace Api.Util.FormGenerator.FormEditors {
+namespace Api.Util.FormGenerator.FormEditors
+{
 
   public abstract class LookupEnumerationEditor : BaseEditor, IFormEditorInfo
   {
@@ -19,7 +20,8 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public LookupEnumerationEditor() { }
 
-    public LookupEnumerationEditor(string name, string caption, bool isCrm, string definition) {
+    public LookupEnumerationEditor(string name, string caption, bool isCrm, string definition)
+    {
       _name = name;
       _caption = caption;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
@@ -27,27 +29,32 @@ namespace Api.Util.FormGenerator.FormEditors {
       _definition = definition;
     }
 
-    protected override string AddDeclaration() {
+    protected override string AddDeclaration()
+    {
       return $@"private {_namespacePrefix}.Core.WinControls.AdvControls.{_controlPrefix}LookupEnumeration {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
-    protected override string AddInstantiation() {
+    protected override string AddInstantiation()
+    {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.AdvControls.{_controlPrefix}LookupEnumeration();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
-    protected override string AddISupportInitializeBegin() {
+    protected override string AddISupportInitializeBegin()
+    {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).BeginInit();";
     }
 
-    protected override string AddISupportInitializeEnd() {
+    protected override string AddISupportInitializeEnd()
+    {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
-    protected override string AddPropsSetup() {
+    protected override string AddPropsSetup()
+    {
       return $@"// 
                 // {ControlName}
                 //
@@ -73,7 +80,8 @@ namespace Api.Util.FormGenerator.FormEditors {
     }
   }
 
-  public class cmLookupEnumerationEditor : LookupEnumerationEditor {
+  public class cmLookupEnumerationEditor : LookupEnumerationEditor
+  {
     public override bool IsDefaultForAssignType => false;
     public override string EditorName => "cmLookupEnumeration";
     public override string Category => "Crm";
@@ -84,7 +92,8 @@ namespace Api.Util.FormGenerator.FormEditors {
       : base(name, caption, true, definition) { }
   }
 
-  public class gxLookupEnumerationEditor : LookupEnumerationEditor {
+  public class gxLookupEnumerationEditor : LookupEnumerationEditor
+  {
     public override bool IsDefaultForAssignType => false;
     public override string EditorName => "gxLookupEnumeration";
     public override string Category => "Glx";

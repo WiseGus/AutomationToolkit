@@ -1,4 +1,5 @@
-namespace Api.Util.FormGenerator.FormEditors {
+namespace Api.Util.FormGenerator.FormEditors
+{
 
   public abstract class SpinEditEditor : BaseEditor, IFormEditorInfo
   {
@@ -18,34 +19,40 @@ namespace Api.Util.FormGenerator.FormEditors {
 
     public SpinEditEditor() { }
 
-    public SpinEditEditor(string name, string caption, bool isCrm) {
+    public SpinEditEditor(string name, string caption, bool isCrm)
+    {
       _name = name;
       _caption = caption;
       _namespacePrefix = isCrm ? "Crm" : "Glx";
       _controlPrefix = isCrm ? "cm" : "gx";
     }
 
-    protected override string AddDeclaration() {
+    protected override string AddDeclaration()
+    {
       return $@"private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}SpinEdit {ControlName};
                 private {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem {LayoutName};";
     }
 
-    protected override string AddInstantiation() {
+    protected override string AddInstantiation()
+    {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}SpinEdit();
                 this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
-    protected override string AddISupportInitializeBegin() {
+    protected override string AddISupportInitializeBegin()
+    {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).BeginInit();";
     }
 
-    protected override string AddISupportInitializeEnd() {
+    protected override string AddISupportInitializeEnd()
+    {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
-    protected override string AddPropsSetup() {
+    protected override string AddPropsSetup()
+    {
       return $@"// 
                 // {ControlName}
                 //
@@ -69,7 +76,8 @@ namespace Api.Util.FormGenerator.FormEditors {
     }
   }
 
-  public class cmSpinEditEditor : SpinEditEditor {
+  public class cmSpinEditEditor : SpinEditEditor
+  {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "cmSpinEdit";
     public override string Category => "Crm";
@@ -80,7 +88,8 @@ namespace Api.Util.FormGenerator.FormEditors {
       : base(name, caption, true) { }
   }
 
-  public class gxSpinEditEditor : SpinEditEditor {
+  public class gxSpinEditEditor : SpinEditEditor
+  {
     public override bool IsDefaultForAssignType => true;
     public override string EditorName => "gxSpinEdit";
     public override string Category => "Glx";

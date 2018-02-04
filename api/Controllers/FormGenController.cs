@@ -56,9 +56,10 @@ namespace Api.Controllers
         desInfo.ClassName = schemaTable.Name;
 
         var gxControls = data.PropertiesInfo[0].FormEditor.StartsWith("gx");
-        data.PropertiesInfo.Add(new FormEditorInfo { Name = schemaTable.Name, FormEditor = gxControls ? "gxObjectCollectionSourceEditor" : "cmObjectCollectionSourceEditor" });
-        data.PropertiesInfo.Add(new FormEditorInfo { Name = schemaTable.Name, FormEditor = gxControls ? "gxBindingSourceEditor" : "cmBindingSourceEditor" });
-        data.PropertiesInfo.Add(new FormEditorInfo { Name = schemaTable.Name, FormEditor = gxControls ? "gxErrorProviderEditor" : "cmErrorProviderEditor" });
+        var safeCollectionName = schemaTable.Name.Remove(0, 2);
+        data.PropertiesInfo.Insert(0, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxObjectCollectionSource" : "cmObjectCollectionSource" });
+        data.PropertiesInfo.Insert(1, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxBindingSource" : "cmBindingSource" });
+        data.PropertiesInfo.Insert(2, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxErrorProvider" : "cmErrorProvider" });
       }
       else
       {
@@ -67,13 +68,21 @@ namespace Api.Controllers
         desInfo.ClassName = classFullNameSplit[classFullNameSplit.Length - 1];
       }
 
+      var editors = new List<IApplyFormEditor>();
       foreach (var info in data.PropertiesInfo)
       {
         IApplyFormEditor editor = formEditorFactory.Create(info);
+        editors.Add(editor);
+        if (editor is IEditorVisitor)
+        {
+          editorVisitors.Add(editor as IEditorVisitor);
+        }
+      }
+
+      foreach (var editor in editors)
+      {
         editor.Apply();
-
         VisitFormEditor(editorVisitors, editor);
-
         FillDesignerInfo(desInfo, editor);
       }
 
