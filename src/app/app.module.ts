@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ApiService } from './svc/api.service';
 import { WizStepDetailsComponent } from './form-gen/wiz-step-details/wiz-step-details.component';
+import { WizStepResultsComponent } from './form-gen/wiz-step-results/wiz-step-results.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -41,7 +42,8 @@ const routes: Routes = [
     DisableElementDirective,
     FormGenComponent,
     WizStepPreparationComponent,
-    WizStepDetailsComponent
+    WizStepDetailsComponent,
+    WizStepResultsComponent
   ],
   imports: [
     FormsModule,

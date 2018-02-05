@@ -11,7 +11,7 @@ export class FormGenComponent implements AfterViewInit {
   @ViewChild(WizardStep) currentWizStep: WizardStep;
 
   currentStep = 0;
-  maxStep = 1;
+  maxStep = 2;
 
   private _formGenInfo: FormGenInfo = {};
 

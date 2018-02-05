@@ -7,6 +7,7 @@
     <div class="card-body">
       <wiz-step-preparation *ngIf="currentStep===0"></wiz-step-preparation>
       <wiz-step-details *ngIf="currentStep===1"></wiz-step-details>
+      <app-wiz-step-results *ngIf="currentStep===2"></app-wiz-step-results>
     </div>
 
     <div class="card-footer text-muted">
