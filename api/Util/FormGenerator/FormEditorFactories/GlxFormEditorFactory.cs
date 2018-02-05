@@ -108,7 +108,7 @@ namespace Api.Util.FormGenerator.FormEditorFactories
           editor = new cmErrorProviderEditor(info.Name);
           break;
         default:
-          editor = new cmTextEditEditor(info.Name, _schemaTable.Description ?? _schemaTable.Name);
+          editor = new cmTextEditEditor(info.Name, GetFieldDescription(info.Name));
           break;
       }
 

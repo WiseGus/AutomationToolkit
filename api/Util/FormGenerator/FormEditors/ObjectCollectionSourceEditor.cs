@@ -42,7 +42,7 @@ namespace Api.Util.FormGenerator.FormEditors
       return $@"// 
                 // {ControlName}
                 //
-                this.{ControlName}.CollectionType = typeof({_namespacePrefix}.Data.DataObjects.{_controlPrefix}{_name}Collection;";
+                this.{ControlName}.CollectionType = typeof({_namespacePrefix}.Data.DataObjects.{_controlPrefix}{_name}Collection);";
     }
 
     public void Visit(IApplyFormEditor editor)

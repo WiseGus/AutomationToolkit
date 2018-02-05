@@ -50,7 +50,7 @@ namespace Api.Util.FormGenerator.FormEditors
     {
       return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties.CalendarTimeProperties)).EndInit();
                 ((System.ComponentModel.ISupportInitialize)(this.{ControlName}.Properties)).EndInit();
-                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName}.Properties)).EndInit();";
+                ((System.ComponentModel.ISupportInitialize)(this.{LayoutName})).EndInit();";
     }
 
     protected override string AddPropsSetup()
