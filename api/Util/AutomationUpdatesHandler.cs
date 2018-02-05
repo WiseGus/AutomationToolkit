@@ -13,7 +13,7 @@ namespace Api.Util
     private List<string> _messages;
     private KeywordReplace _keyReplace;
 
-    public AutomationUpdatesHandler(Preset presetObj, AppSettings settingsObj, KeywordReplace keyReplace )
+    public AutomationUpdatesHandler(Preset presetObj, AppSettings settingsObj, KeywordReplace keyReplace)
     {
       _presetObj = presetObj;
       _settingsObj = settingsObj;
@@ -28,14 +28,17 @@ namespace Api.Util
       for (int i = 0; i < _presetObj.AutomationUpdates.AutomationUpdatesArgs.Count; i++)
       {
         var arg = _presetObj.AutomationUpdates.AutomationUpdatesArgs.ElementAt(i);
-        _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] =  _keyReplace.Replace(arg.Value).Replace(' ', '_');
+        _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] = _keyReplace.Replace(arg.Value).Replace(' ', '_');
       }
+
+      _messages.Add("AutomationToolkit path: " + _presetObj.AutomationUpdates.AutomationUpdatesPath);
+      _messages.Add("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
 
       /* Run AutomationToolkitUpdates */
       _process = new Process();
       _process.EnableRaisingEvents = true;
-      _process.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_OutputDataReceived);
-      _process.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_ErrorDataReceived);
+      _process.OutputDataReceived += process_OutputDataReceived;
+      _process.ErrorDataReceived += process_ErrorDataReceived;
       _process.Exited += new System.EventHandler(process_Exited);
 
       _process.StartInfo.FileName = _presetObj.AutomationUpdates.AutomationUpdatesPath;

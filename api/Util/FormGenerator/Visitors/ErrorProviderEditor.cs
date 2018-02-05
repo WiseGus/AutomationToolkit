@@ -1,7 +1,9 @@
+using Api.Util.FormGenerator.FormEditors;
+
 namespace Api.Util.FormGenerator.FormEditors
 {
 
-  public abstract class ErrorProviderEditor : BaseEditor
+  public abstract class ErrorProviderEditor : BaseEditor, IEditorVisitor
   {
     public override string Name => _name;
     public override string ControlName => "ep" + _name;
@@ -43,7 +45,11 @@ namespace Api.Util.FormGenerator.FormEditors
                 // {ControlName}
                 //
                 this.{ControlName}.ContainerControl = this;";
-    }    
+    }
+
+    public void Visit(IApplyFormEditor editor)
+    {
+    }
   }
 
   public class cmErrorProviderEditor : ErrorProviderEditor

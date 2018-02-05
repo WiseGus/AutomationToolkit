@@ -38,7 +38,7 @@ namespace Api.Util.FormGenerator.FormEditors
     protected override string AddInstantiation()
     {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.AdvControls.{_controlPrefix}MasterSelector();
-                this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
+                this.{LayoutName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
     protected override string AddISupportInitializeBegin()
@@ -80,7 +80,6 @@ namespace Api.Util.FormGenerator.FormEditors
                 this.{ControlName}.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
                 this.{ControlName}.ShowActionsButton = false;
                 this.{ControlName}.ShowEditFormButton = false;
-                this.{ControlName}.StyleController = this.MainLayout;
                 this.{ControlName}.ToolTip = null;
                 this.{ControlName}.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Application;
                 this.{ ControlName}.ToolTipTitle = null;

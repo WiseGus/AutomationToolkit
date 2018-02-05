@@ -36,6 +36,7 @@ namespace $Namespace$
     private void InitializeComponent()
     {
         this.components = new System.ComponentModel.Container();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof($ClassName$));
         $Instantiations$
         this.SuspendLayout();
         $ISupportInitializeBegin$

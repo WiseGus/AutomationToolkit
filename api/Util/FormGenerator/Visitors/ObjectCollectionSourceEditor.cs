@@ -1,4 +1,6 @@
-namespace Api.Util.FormGenerator.FormEditors
+using Api.Util.FormGenerator.FormEditors;
+
+namespace Api.Util.FormGenerator.Visitors
 {
 
   public abstract class ObjectCollectionSourceEditor : BaseEditor, IEditorVisitor
@@ -47,11 +49,6 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public void Visit(IApplyFormEditor editor)
     {
-      if (editor is ObjectCollectionSourceEditor)
-      {
-        return;
-      }
-
       if (editor is BindingSourceEditor)
       {
         var data = $@"this.{editor.ControlName}.DataSource = this.{ControlName};";

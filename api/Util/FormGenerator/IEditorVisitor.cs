@@ -1,4 +1,4 @@
-namespace Api.Util.FormGenerator.FormEditors
+namespace Api.Util.FormGenerator
 {
   public interface IEditorVisitor
   {

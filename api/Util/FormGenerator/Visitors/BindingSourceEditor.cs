@@ -1,4 +1,6 @@
-namespace Api.Util.FormGenerator.FormEditors
+using Api.Util.FormGenerator.FormEditors;
+
+namespace Api.Util.FormGenerator.Visitors
 {
 
   public abstract class BindingSourceEditor : BaseEditor, IEditorVisitor
@@ -46,7 +48,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public void Visit(IApplyFormEditor editor)
     {
-      if (editor is BindingSourceEditor || editor is ObjectCollectionSourceEditor)
+      if (editor is IEditorVisitor)
       {
         return;
       }

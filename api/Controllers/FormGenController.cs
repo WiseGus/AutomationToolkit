@@ -3,6 +3,7 @@ using Api.Util.FormGenerator.DatasourceParsers;
 using Api.Util.FormGenerator.FormEditorFactories;
 using Api.Util.FormGenerator.FormEditors;
 using Api.Util.FormGenerator.Model;
+using Api.Util.FormGenerator.Visitors;
 using Microsoft.AspNetCore.Mvc;
 using SLnet.Sand.Schema;
 using System;
@@ -53,19 +54,21 @@ namespace Api.Controllers
       {
         slsSchemaTable schemaTable = new slsSchemaTableParser(data.TableXmlPath).GetSchemaTable();
         formEditorFactory = new GlxFormEditorFactory(schemaTable);
-        desInfo.ClassName = schemaTable.Name;
+        desInfo.ClassName = schemaTable.Name + "F";
 
         var gxControls = data.PropertiesInfo[0].FormEditor.StartsWith("gx");
         var safeCollectionName = schemaTable.Name.Remove(0, 2);
         data.PropertiesInfo.Insert(0, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxObjectCollectionSource" : "cmObjectCollectionSource" });
         data.PropertiesInfo.Insert(1, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxBindingSource" : "cmBindingSource" });
         data.PropertiesInfo.Insert(2, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxErrorProvider" : "cmErrorProvider" });
+
+        data.PropertiesInfo.Add(new FormEditorInfo { Name = safeCollectionName + "F", FormEditor = "MainLayout" });
       }
       else
       {
         formEditorFactory = new PocoFormEditorFactory();
         var classFullNameSplit = data.ClassFullName.Split('.');
-        desInfo.ClassName = classFullNameSplit[classFullNameSplit.Length - 1];
+        desInfo.ClassName = classFullNameSplit[classFullNameSplit.Length - 1] + "F";
       }
 
       var editors = new List<IApplyFormEditor>();

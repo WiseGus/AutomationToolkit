@@ -60,7 +60,6 @@ namespace Api.Util.FormGenerator.FormEditors
                 // {ControlName}
                 //
                 this.{ControlName}.Name = ""{ControlName}"";
-                this.{ControlName}.StyleController = this.MainLayout;
                 // 
                 // {LayoutName}
                 // 

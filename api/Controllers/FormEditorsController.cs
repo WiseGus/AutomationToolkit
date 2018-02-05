@@ -1,11 +1,12 @@
-using Api.Util.FormGenerator.FormEditors;
+using Api.Util.FormGenerator;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Api.Controllers {
+namespace Api.Controllers
+{
   [Route("api/[controller]")]
   public class FormEditorsController : Controller {
 

@@ -36,7 +36,7 @@ namespace Api.Util.FormGenerator.FormEditors
     protected override string AddInstantiation()
     {
       return $@"this.{ControlName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}DateEdit();
-                this.{LayoutName}= new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
+                this.{LayoutName} = new {_namespacePrefix}.Core.WinControls.DevExp.{_controlPrefix}LayoutControlItem();";
     }
 
     protected override string AddISupportInitializeBegin()
@@ -59,7 +59,6 @@ namespace Api.Util.FormGenerator.FormEditors
                 // {ControlName}
                 //
                 this.{ControlName}.Name = ""{ControlName}"";
-                this.{ControlName}.StyleController = this.MainLayout;
                 // 
                 // {LayoutName}
                 // 

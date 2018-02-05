@@ -1,6 +1,6 @@
 using System;
 
-namespace Api.Util.FormGenerator.FormEditors
+namespace Api.Util.FormGenerator
 {
   [Flags]
   public enum AssignType {

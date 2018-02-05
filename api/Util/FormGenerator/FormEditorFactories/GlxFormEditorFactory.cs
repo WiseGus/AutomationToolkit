@@ -1,6 +1,7 @@
 using System;
 using Api.Util.FormGenerator.FormEditors;
 using Api.Util.FormGenerator.Model;
+using Api.Util.FormGenerator.Visitors;
 using SLnet.Sand.Schema;
 
 namespace Api.Util.FormGenerator.FormEditorFactories
@@ -63,6 +64,9 @@ namespace Api.Util.FormGenerator.FormEditorFactories
         case "gxErrorProvider":
           editor = new gxErrorProviderEditor(info.Name);
           break;
+        case "MainLayout":
+          editor = new MainLayoutEditor();
+          break;
         default:
           editor = new gxTextEditEditor(info.Name, GetFieldDescription(info.Name));
           break;
@@ -106,6 +110,9 @@ namespace Api.Util.FormGenerator.FormEditorFactories
           break;
         case "cmErrorProvider":
           editor = new cmErrorProviderEditor(info.Name);
+          break;
+        case "MainLayout":
+          editor = new MainLayoutEditor();
           break;
         default:
           editor = new cmTextEditEditor(info.Name, GetFieldDescription(info.Name));

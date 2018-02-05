@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Api.Util.FormGenerator.FormEditors {
+namespace Api.Util.FormGenerator {
 
   public interface IApplyFormEditor {
     string Name { get; }
