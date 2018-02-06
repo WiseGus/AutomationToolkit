@@ -35,25 +35,33 @@ namespace Api.Util
       _messages.Add("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
 
       /* Run AutomationToolkitUpdates */
-      _process = new Process();
-      _process.EnableRaisingEvents = true;
-      _process.OutputDataReceived += process_OutputDataReceived;
-      _process.ErrorDataReceived += process_ErrorDataReceived;
-      _process.Exited += new System.EventHandler(process_Exited);
+      try
+      {
+        _process = new Process();
+        _process.EnableRaisingEvents = true;
+        _process.OutputDataReceived += process_OutputDataReceived;
+        _process.ErrorDataReceived += process_ErrorDataReceived;
+        _process.Exited += new System.EventHandler(process_Exited);
 
-      _process.StartInfo.FileName = _presetObj.AutomationUpdates.AutomationUpdatesPath;
-      _process.StartInfo.Arguments = string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray());
-      _process.StartInfo.UseShellExecute = false;
-      _process.StartInfo.RedirectStandardError = true;
-      _process.StartInfo.RedirectStandardOutput = true;
+        _process.StartInfo.FileName = _presetObj.AutomationUpdates.AutomationUpdatesPath;
+        _process.StartInfo.Arguments = string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray());
+        _process.StartInfo.UseShellExecute = false;
+        _process.StartInfo.RedirectStandardError = true;
+        _process.StartInfo.RedirectStandardOutput = true;
 
-      _messages.Add("[AutomationToolkitUpdates process]=> ");
+        _messages.Add("[AutomationToolkitUpdates process]=> ");
 
-      _process.Start();
-      _process.BeginErrorReadLine();
-      _process.BeginOutputReadLine();
+        _process.Start();
+        _process.BeginErrorReadLine();
+        _process.BeginOutputReadLine();
 
-      _process.WaitForExit();
+        _process.WaitForExit();
+      }
+      catch (Exception ex)
+      {
+        _messages.Add("AutomationToolkit error:");
+        _messages.Add(ex.ToString());
+      }
 
       return new OperationResult
       {

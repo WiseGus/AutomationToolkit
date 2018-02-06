@@ -39,14 +39,7 @@ namespace Api.Controllers
     [HttpPost]
     public IActionResult Post([FromBody] FormGenInfo data)
     {
-      var desInfo = new DesignerInfo
-      {
-        Todo = @"The following actions must be done manually...
-                1. Enable 'Localizable' from the property editor.
-                2. Add the designer.cs namespace",
-        Namespace = "// TODO: Add namespace"
-      };
-
+      var desInfo = new DesignerInfo();
       var editorVisitors = new List<IEditorVisitor>();
 
       IFormEditorFactory formEditorFactory;

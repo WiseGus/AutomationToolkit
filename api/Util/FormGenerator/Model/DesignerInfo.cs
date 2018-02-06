@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 namespace Api.Util.FormGenerator.Model {
   public class DesignerInfo {
-    public string Todo { get; set; }
-    public string Namespace { get; set; }
     public string ClassName { get; set; }
     public List<string> Instantiations { get; set; }
     public List<string> ISupportInitializeBegin { get; set; }

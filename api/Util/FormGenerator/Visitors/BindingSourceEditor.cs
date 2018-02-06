@@ -49,15 +49,16 @@ namespace Api.Util.FormGenerator.Visitors
 
     public void Visit(IApplyFormEditor editor)
     {
-      if (editor is IIgnoreVisit)
-      {
-        return;
-      }
 
       if (editor is ErrorProviderEditor)
       {
         var data = $@"this.{editor.ControlName}.DataSource = this.{ControlName};";
         editor.PropsSetup.Insert(0, data);
+        return;
+      }
+      
+      if (editor is IIgnoreVisit)
+      {
         return;
       }
 

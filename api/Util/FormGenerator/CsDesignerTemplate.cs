@@ -4,8 +4,8 @@ using System;
 namespace Api.Util.FormGenerator {
   public class CsDesignerTemplate {
     const string DESIGNER_TEMPLATE =
-@"$TODO$
-namespace $Namespace$
+@"
+namespace /* CHANGE ME! */
 {
   partial class $ClassName$
   {
@@ -60,8 +60,6 @@ namespace $Namespace$
 }";
     public string GenerateDesigner(DesignerInfo data) {
       var designerString = DESIGNER_TEMPLATE
-        .Replace("$TODO$", data.Todo)
-        .Replace("$Namespace$", data.Namespace)
         .Replace("$ClassName$", data.ClassName)
         .Replace("$Instantiations$", string.Join(Environment.NewLine, data.Instantiations))
         .Replace("$ISupportInitializeBegin$", string.Join(Environment.NewLine, data.ISupportInitializeBegin))

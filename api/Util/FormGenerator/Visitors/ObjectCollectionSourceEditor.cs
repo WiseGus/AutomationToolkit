@@ -50,15 +50,15 @@ namespace Api.Util.FormGenerator.Visitors
 
     public void Visit(IApplyFormEditor editor)
     {
-      if (editor is IIgnoreVisit)
-      {
-        return;
-      }
-
       if (editor is BindingSourceEditor)
       {
         var data = $@"this.{editor.ControlName}.DataSource = this.{ControlName};";
         editor.PropsSetup.Insert(0, data);
+      }
+
+      if (editor is IIgnoreVisit)
+      {
+        return;
       }
     }
   }
