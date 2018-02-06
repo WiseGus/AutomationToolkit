@@ -10,6 +10,7 @@ import { Preset } from '../create-template/preset';
 export class GenerateProjectListComponent implements OnInit {
 
   presetsWithCategories: { category: string, presets: Preset[] }[] = [];
+  tooltip: { title: string, body: string };
 
   constructor(private _api: ApiService) { }
 

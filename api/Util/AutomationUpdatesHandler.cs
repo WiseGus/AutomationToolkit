@@ -25,6 +25,7 @@ namespace Api.Util
       _messages = new List<string>();
 
       /* Replace keywords */
+      _presetObj.AutomationUpdates.AutomationUpdatesPath = _keyReplace.Replace(_presetObj.AutomationUpdates.AutomationUpdatesPath);
       for (int i = 0; i < _presetObj.AutomationUpdates.AutomationUpdatesArgs.Count; i++)
       {
         var arg = _presetObj.AutomationUpdates.AutomationUpdatesArgs.ElementAt(i);
@@ -41,7 +42,7 @@ namespace Api.Util
         _process.EnableRaisingEvents = true;
         _process.OutputDataReceived += process_OutputDataReceived;
         _process.ErrorDataReceived += process_ErrorDataReceived;
-        _process.Exited += new System.EventHandler(process_Exited);
+        _process.Exited += process_Exited;
 
         _process.StartInfo.FileName = _presetObj.AutomationUpdates.AutomationUpdatesPath;
         _process.StartInfo.Arguments = string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray());

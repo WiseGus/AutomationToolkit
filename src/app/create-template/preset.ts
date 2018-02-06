@@ -1,6 +1,7 @@
 export interface Preset {
   alias: string;
   aliasCategory: string;
+  tooltip: string;
   projectName: string;
   templateOrigin: string;
   outputFolderPath: string;

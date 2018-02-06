@@ -21,7 +21,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let preset of presetCat.presets">
+                  <tr *ngFor="let preset of presetCat.presets" placement="left" [ngbTooltip]="preset.tooltip">
                     <td>{{preset.alias}}</td>
                     <td align="right">
                       <button type="button" class="btn btn-sm btn-outline-success" [routerLink]="['/generateproject', preset.alias]">Generate!</button>

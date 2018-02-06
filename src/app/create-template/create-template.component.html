@@ -19,6 +19,12 @@
         </div>
 
         <div class="form-group">
+          <label for="tooltip">Tooltip</label>
+          <input type="text" id="tooltip" name="tooltip" class="form-control" placeholder="Insert a tooltip to show on generate"
+            [(ngModel)]="preset.tooltip">
+        </div>
+
+        <div class="form-group">
           <label for="projectName">Project name</label>
           <input type="text" id="projectName" name="projectName" class="form-control" placeholder="Insert the name of the generated project"
             [(ngModel)]="preset.projectName">

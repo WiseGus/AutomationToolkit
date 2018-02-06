@@ -5,6 +5,7 @@ public class Preset
 {
   public string Alias { get; set; }
   public string AliasCategory { get; set; }
+  public string Tooltip { get; set; }
   public string ProjectName { get; set; }
   public string TemplateOrigin { get; set; }
   public string OutputFolderPath { get; set; }

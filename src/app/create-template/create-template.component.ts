@@ -19,6 +19,7 @@ export class CreateTemplateComponent implements OnInit {
     this.preset = {
       alias: '',
       aliasCategory: '',
+      tooltip: '',
       projectName: '',
       templateOrigin: '',
       outputFolderPath: '',
