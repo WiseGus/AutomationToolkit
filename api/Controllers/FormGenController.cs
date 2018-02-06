@@ -62,7 +62,9 @@ namespace Api.Controllers
         data.PropertiesInfo.Insert(1, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxBindingSource" : "cmBindingSource" });
         data.PropertiesInfo.Insert(2, new FormEditorInfo { Name = safeCollectionName, FormEditor = gxControls ? "gxErrorProvider" : "cmErrorProvider" });
 
-        data.PropertiesInfo.Add(new FormEditorInfo { Name = safeCollectionName + "F", FormEditor = "MainLayout" });
+        data.PropertiesInfo.Add(new FormEditorInfo { FormEditor = "MainLayout" });
+        data.PropertiesInfo.Add(new FormEditorInfo { FormEditor = "MainLayoutGroup" });
+        data.PropertiesInfo.Add(new FormEditorInfo { FormEditor = "MainPanel" });
       }
       else
       {

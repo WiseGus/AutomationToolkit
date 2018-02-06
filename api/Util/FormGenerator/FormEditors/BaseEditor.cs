@@ -19,7 +19,7 @@ namespace Api.Util.FormGenerator.FormEditors
 
     public abstract string ControlName { get; }
 
-    public virtual string LayoutName { get; }
+    public abstract string LayoutName { get; }
 
     private List<string> _iSupportInitializeBegin;
     private List<string> _propsSetup;

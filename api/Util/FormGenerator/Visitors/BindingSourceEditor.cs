@@ -3,10 +3,11 @@ using Api.Util.FormGenerator.FormEditors;
 namespace Api.Util.FormGenerator.Visitors
 {
 
-  public abstract class BindingSourceEditor : BaseEditor, IEditorVisitor
+  public abstract class BindingSourceEditor : BaseEditor, IEditorVisitor, IIgnoreVisit
   {
     public override string Name => _name;
     public override string ControlName => "bs" + _name;
+    public override string LayoutName => "bs" + _name;
 
     private string _name;
     private string _namespacePrefix;
@@ -48,7 +49,7 @@ namespace Api.Util.FormGenerator.Visitors
 
     public void Visit(IApplyFormEditor editor)
     {
-      if (editor is IEditorVisitor)
+      if (editor is IIgnoreVisit)
       {
         return;
       }

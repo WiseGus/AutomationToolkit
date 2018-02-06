@@ -42,6 +42,14 @@ namespace $Namespace$
         $ISupportInitializeBegin$
         $PropsSetup$
         $ISupportInitializeEnd$
+        // 
+        // $ClassName$
+        // 
+        this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.ClientSize = new System.Drawing.Size(890, 568);
+        this.Name = ""$ClassName$"";
+        this.Text = ""$ClassName$"";
         this.ResumeLayout(false);
     }
 

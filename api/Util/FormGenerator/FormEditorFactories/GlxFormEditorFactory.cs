@@ -67,6 +67,12 @@ namespace Api.Util.FormGenerator.FormEditorFactories
         case "MainLayout":
           editor = new MainLayoutEditor();
           break;
+        case "MainLayoutGroup":
+          editor = new MainLayoutGroupEditor();
+          break;
+        case "MainPanel":
+          editor = new MainPanelEditor();
+          break;
         default:
           editor = new gxTextEditEditor(info.Name, GetFieldDescription(info.Name));
           break;
@@ -113,6 +119,12 @@ namespace Api.Util.FormGenerator.FormEditorFactories
           break;
         case "MainLayout":
           editor = new MainLayoutEditor();
+          break;
+        case "MainLayoutGroup":
+          editor = new MainLayoutGroupEditor();
+          break;
+        case "MainPanel":
+          editor = new MainPanelEditor();
           break;
         default:
           editor = new cmTextEditEditor(info.Name, GetFieldDescription(info.Name));

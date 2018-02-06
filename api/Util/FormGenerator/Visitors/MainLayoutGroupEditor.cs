@@ -5,13 +5,13 @@ using System.Collections.Generic;
 namespace Api.Util.FormGenerator.Visitors
 {
 
-  public class MainLayoutEditor : BaseEditor, IEditorVisitor, IIgnoreVisit
+  public class MainLayoutGroupEditor : BaseEditor, IEditorVisitor, IIgnoreVisit
   {
     private List<string> _editors = new List<string>();
 
-    public override string Name => "MainLayout";
-    public override string ControlName => "MainLayout";
-    public override string LayoutName => "MainLayout";
+    public override string Name => "MainLayoutGroup";
+    public override string ControlName => "MainLayoutGroup";
+    public override string LayoutName => "MainLayoutGroup";
 
     protected override string AddDeclaration()
     {
@@ -25,14 +25,12 @@ namespace Api.Util.FormGenerator.Visitors
 
     protected override string AddISupportInitializeBegin()
     {
-      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).BeginInit();
-                this.MainLayout.SuspendLayout();";
+      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).BeginInit();";
     }
 
     protected override string AddISupportInitializeEnd()
     {
-      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).EndInit();
-                this.{ControlName}.ResumeLayout(false);";
+      return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).EndInit();";
     }
 
     protected override string AddPropsSetup()
@@ -41,10 +39,12 @@ namespace Api.Util.FormGenerator.Visitors
       res.Add("//");
       res.Add("// {ControlName}");
       res.Add("//");
+      res.Add($"this.{ControlName}.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {{");
       _editors.ForEach(editor =>
       {
-        res.Add($"this.{ControlName}.Controls.Add(this.{editor});");
+        res.Add($"this.{editor},");
       });
+      res.Add("});");
       return string.Join(Environment.NewLine, res);
     }
 
@@ -57,10 +57,7 @@ namespace Api.Util.FormGenerator.Visitors
 
       if (editor is BaseEditor)
       {
-        var data = $@"this.{editor.ControlName}.StyleController = this.{ControlName};";
-        editor.PropsSetup.Add(data);
-
-        _editors.Add(editor.ControlName);
+        _editors.Add(editor.LayoutName);
       }
     }
   }
