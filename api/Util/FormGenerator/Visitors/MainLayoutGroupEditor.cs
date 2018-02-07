@@ -37,7 +37,7 @@ namespace Api.Util.FormGenerator.Visitors
     {
       var res = new List<string>();
       res.Add("//");
-      res.Add("// {ControlName}");
+      res.Add($"// {ControlName}");
       res.Add("//");
       res.Add($"this.{ControlName}.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {{");
       _editors.ForEach(editor =>

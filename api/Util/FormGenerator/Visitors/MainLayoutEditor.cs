@@ -39,7 +39,7 @@ namespace Api.Util.FormGenerator.Visitors
     {
       var res = new List<string>();
       res.Add("//");
-      res.Add("// {ControlName}");
+      res.Add($"// {ControlName}");
       res.Add("//");
       _editors.ForEach(editor =>
       {

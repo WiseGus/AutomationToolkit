@@ -32,9 +32,6 @@ namespace Api.Util
         _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] = _keyReplace.Replace(arg.Value).Replace(' ', '_');
       }
 
-      _messages.Add("AutomationToolkit path: " + _presetObj.AutomationUpdates.AutomationUpdatesPath);
-      _messages.Add("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
-
       /* Run AutomationToolkitUpdates */
       try
       {
@@ -60,6 +57,8 @@ namespace Api.Util
       }
       catch (Exception ex)
       {
+        _messages.Add("AutomationToolkit path: " + _presetObj.AutomationUpdates.AutomationUpdatesPath);
+        _messages.Add("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
         _messages.Add("AutomationToolkit error:");
         _messages.Add(ex.ToString());
       }
