@@ -9,6 +9,7 @@ using System.Text;
 using System.Collections.Generic;
 using Api.Util;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace Api.Controllers
 {
@@ -16,15 +17,24 @@ namespace Api.Controllers
   public class GenerateProjectsController : Controller
   {
     KeywordReplace _keyReplace;
+    private readonly ILogger<GenerateProjectsController> _logger;
+
+    public GenerateProjectsController(ILogger<GenerateProjectsController> logger)
+    {
+      this._logger = logger;
+    }
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody]Preset value)
     {
+      _logger.LogDebug("Post GenerateProjects");
+
       var appSettsObj = await new SettingsController().GetAppSettings();
       _keyReplace = new KeywordReplace();
       _keyReplace.AddKeywords(value.Keywords);
       _keyReplace.AddKeywords(appSettsObj.AsKeywords());
       _keyReplace.ReplaceAll();
+      _logger.LogDebug("Replaced keywords");
 
       /* Copy Project structure from template */
       if (!Path.IsPathRooted(value.TemplateOrigin))
@@ -40,6 +50,7 @@ namespace Api.Controllers
 
       /* Replace keywords in files matching search pattern */
       await ReplaceKeywordsInFiles(value.FileKeywordTypesExtensions, copiedFolders);
+      _logger.LogDebug("Replaced keywords in files");
 
       if (value.AddToSourceControl)
       {
@@ -47,14 +58,17 @@ namespace Api.Controllers
         foreach (var dirInfo in copiedFolders)
         {
           /* Add to Source Control */
+          _logger.LogDebug("Adding project to Source Control");
           tf.RunTFCommand(dirInfo.FullName, new[] { "add", "*.*", "/recursive" });
 
           /* Update main solution with new project (Glx/Crm build convention)*/
           var buildSolutionDirInfo = dirInfo.Parent.GetDirectories($"Build_*");
-          if (buildSolutionDirInfo.Length > 0) {
+          if (buildSolutionDirInfo.Length > 0)
+          {
             var buildSolutionPath = buildSolutionDirInfo[0].GetFiles("*.sln");
-            if (buildSolutionPath.Length > 0) {
-
+            if (buildSolutionPath.Length > 0)
+            {
+              _logger.LogDebug("Update main build solution");
               tf.RunTFCommand(dirInfo.FullName, new[] { "checkout", buildSolutionPath[0].FullName });
 
               var slnObj = new SolutionParser(buildSolutionPath[0].FullName);
@@ -66,7 +80,8 @@ namespace Api.Controllers
 
       if (value.AutomationUpdates.UseAutomationUpdates)
       {
-        var handler = new AutomationUpdatesHandler(value, appSettsObj, _keyReplace);
+        _logger.LogDebug("Executing automation toolkit updates");
+        var handler = new AutomationUpdatesHandler(_logger, value, appSettsObj, _keyReplace);
         return new ObjectResult(handler.Execute());
       }
 

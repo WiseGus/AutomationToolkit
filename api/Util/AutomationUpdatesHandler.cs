@@ -1,3 +1,5 @@
+using Api.Controllers;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,14 +9,16 @@ namespace Api.Util
 {
   internal class AutomationUpdatesHandler : IDisposable
   {
+    private readonly ILogger<GenerateProjectsController> _logger;
     private Preset _presetObj;
     private AppSettings _settingsObj;
     private Process _process;
     private List<string> _messages;
     private KeywordReplace _keyReplace;
 
-    public AutomationUpdatesHandler(Preset presetObj, AppSettings settingsObj, KeywordReplace keyReplace)
+    public AutomationUpdatesHandler(ILogger<GenerateProjectsController> logger, Preset presetObj, AppSettings settingsObj, KeywordReplace keyReplace)
     {
+      this._logger = logger;
       _presetObj = presetObj;
       _settingsObj = settingsObj;
       _keyReplace = keyReplace;
@@ -32,7 +36,9 @@ namespace Api.Util
         _presetObj.AutomationUpdates.AutomationUpdatesArgs[arg.Key] = _keyReplace.Replace(arg.Value).Replace(' ', '_');
       }
 
+      _logger.LogDebug("AutomationToolkit path: " + _presetObj.AutomationUpdates.AutomationUpdatesPath);
       _messages.Add("AutomationToolkit path: " + _presetObj.AutomationUpdates.AutomationUpdatesPath);
+      _logger.LogDebug("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
       _messages.Add("AutomationToolkit args: " + string.Join(' ', _presetObj.AutomationUpdates.AutomationUpdatesArgs.Select(p => p.Value).ToArray()));
 
       /* Run AutomationToolkitUpdates */
@@ -50,6 +56,7 @@ namespace Api.Util
         _process.StartInfo.RedirectStandardError = true;
         _process.StartInfo.RedirectStandardOutput = true;
 
+        _logger.LogDebug("[AutomationToolkitUpdates process]=> ");
         _messages.Add("[AutomationToolkitUpdates process]=> ");
 
         _process.Start();
@@ -62,6 +69,7 @@ namespace Api.Util
       {
         _messages.Add("AutomationToolkit error:");
         _messages.Add(ex.ToString());
+        _logger.LogDebug(ex.ToString());
       }
 
       return new OperationResult
@@ -75,6 +83,7 @@ namespace Api.Util
       var res = string.Format("process exited with code {0}\n", _process.ExitCode.ToString());
       Console.WriteLine(res);
       _messages.Add(res);
+      _logger.LogDebug(res);
     }
 
     private void process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
@@ -82,6 +91,7 @@ namespace Api.Util
       var res = e.Data + "\n";
       Console.WriteLine(res);
       _messages.Add(res);
+      _logger.LogDebug(res);
     }
 
     private void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -89,6 +99,7 @@ namespace Api.Util
       var res = e.Data + "\n";
       Console.WriteLine(res);
       _messages.Add(res);
+      _logger.LogDebug(res);
     }
 
     #region IDisposable Support
