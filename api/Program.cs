@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.IO;
 using System.Linq;
@@ -12,8 +14,30 @@ namespace Api {
       //dotnet publish -c release -r win-x64 --output bin/dist/win
       // AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve1;
       //AssemblyLoadContext.Default.Resolving += Default_Resolving;
-      BuildWebHost(args).Run();
+      Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .CreateLogger();
+
+      try {
+        Log.Information("Starting web host");
+        BuildWebHost(args).Run();
+      }
+      catch (Exception ex) {
+        Log.Fatal(ex, "Host terminated unexpectedly");
+      }
+      finally {
+        Log.CloseAndFlush();
+      }
     }
+
+    public static IWebHost BuildWebHost(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .UseSerilog() // <-- Add this line
+        .Build();
 
     // private static Assembly Default_Resolving(AssemblyLoadContext arg1, AssemblyName arg2) {
     //   return null;
@@ -62,10 +86,5 @@ namespace Api {
       }
       return null;
     }
-
-    public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
   }
 }

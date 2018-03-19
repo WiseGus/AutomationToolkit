@@ -6,8 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
 
-namespace Api
-{
+namespace Api {
   public class Startup
   {
     public Startup(IConfiguration configuration)
@@ -34,10 +33,7 @@ namespace Api
       {
         app.UseDeveloperExceptionPage();
       }
-
-      var logConf = Configuration.GetSection("Logging");
-      loggerFactory.AddFile("Logs/{Date}.txt", LogLevel.Information);
-
+            
       app.UseExceptionHandler(new ExceptionHandlerOptions
       {
         ExceptionHandler = new JsonExceptionMiddleware(env).Invoke
