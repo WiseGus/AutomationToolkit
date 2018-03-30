@@ -30,6 +30,10 @@ namespace Api.Util
 
       /* Replace keywords */
       _presetObj.AutomationUpdates.AutomationUpdatesPath = _keyReplace.Replace(_presetObj.AutomationUpdates.AutomationUpdatesPath);
+      if (string.IsNullOrEmpty(_presetObj.AutomationUpdates.AutomationUpdatesPath)) {
+        return new OperationResult();
+      }
+
       for (int i = 0; i < _presetObj.AutomationUpdates.AutomationUpdatesArgs.Count; i++)
       {
         var arg = _presetObj.AutomationUpdates.AutomationUpdatesArgs.ElementAt(i);

@@ -29,6 +29,9 @@ namespace Api.Util
 
         internal string Replace(string value)
         {
+            if (string.IsNullOrEmpty(value)) {
+                return value;
+            }
             return ReplaceKeywords(value);
         }
 
