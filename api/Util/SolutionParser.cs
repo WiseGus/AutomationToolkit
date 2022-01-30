@@ -15,7 +15,7 @@ namespace Api.Util {
     public void AddProject(string newProjectName) {
       var baseSln = SolutionFile.FromFile(_solutionPath);
 
-      var templateProject = baseSln.Projects[0];
+      var templateProject = GetTemplateProject(baseSln.Projects);
 
       baseSln.Projects.Add(new Project(
           container: baseSln,
@@ -29,6 +29,21 @@ namespace Api.Util {
           projectConfigurationPlatformsLines: templateProject.ProjectConfigurationPlatformsLines));
 
       baseSln.Save();
+    }
+
+    private Project GetTemplateProject(ProjectHashList projects) {
+      int i = 0;
+
+      Project templateProject;
+      while (true)
+      {
+        templateProject = projects[i++];
+
+        var relativeLevels = templateProject.RelativePath.Split("..", 2, StringSplitOptions.RemoveEmptyEntries);
+        if (relativeLevels.Length == 1) break;
+      }
+
+      return templateProject;
     }
 
     private static IEnumerable<PropertyLine> SetVersionControlLines(Project templateProject, string templateProjectName, string newProjectName) {
