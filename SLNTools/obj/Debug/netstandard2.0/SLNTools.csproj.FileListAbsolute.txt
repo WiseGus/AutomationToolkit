@@ -1,9 +1,0 @@
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\bin\Debug\netstandard2.0\SLNTools.deps.json
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\bin\Debug\netstandard2.0\SLNTools.dll
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\bin\Debug\netstandard2.0\SLNTools.pdb
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.csprojResolveAssemblyReference.cache
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.csproj.CoreCompileInputs.cache
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.AssemblyInfoInputs.cache
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.AssemblyInfo.cs
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.dll
-C:\Users\ksofos\Documents\Visual Studio 2017\Projects\AutomationToolkit\SLNTools\obj\Debug\netstandard2.0\SLNTools.pdb

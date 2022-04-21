@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationToolkit.Api", "AutomationToolkit.Api\AutomationToolkit.Api.csproj", "{63DDBD74-95DB-4EA9-B7D9-40507A253096}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D173D10-6197-4344-92B1-C90A53286898} = {7D173D10-6197-4344-92B1-C90A53286898}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationToolkit.Api.Tests", "AutomationToolkit.Api.Tests\AutomationToolkit.Api.Tests.csproj", "{DDC18CD6-EEE4-4FC5-A49D-E7D73EEC22A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63DDBD74-95DB-4EA9-B7D9-40507A253096} = {63DDBD74-95DB-4EA9-B7D9-40507A253096}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationToolkit.Core", "AutomationToolkit.Core\AutomationToolkit.Core.csproj", "{7D173D10-6197-4344-92B1-C90A53286898}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD} = {6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationToolkit.SLNTools", "AutomationToolkit.SLNTools\AutomationToolkit.SLNTools.csproj", "{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63DDBD74-95DB-4EA9-B7D9-40507A253096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DDBD74-95DB-4EA9-B7D9-40507A253096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DDBD74-95DB-4EA9-B7D9-40507A253096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DDBD74-95DB-4EA9-B7D9-40507A253096}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC18CD6-EEE4-4FC5-A49D-E7D73EEC22A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC18CD6-EEE4-4FC5-A49D-E7D73EEC22A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC18CD6-EEE4-4FC5-A49D-E7D73EEC22A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC18CD6-EEE4-4FC5-A49D-E7D73EEC22A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D173D10-6197-4344-92B1-C90A53286898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D173D10-6197-4344-92B1-C90A53286898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D173D10-6197-4344-92B1-C90A53286898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D173D10-6197-4344-92B1-C90A53286898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9D3DB2-EAA8-46EC-9947-4212A96C28FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09DBFA49-6E3F-4003-8AC3-5531F2165F0D}
+	EndGlobalSection
+EndGlobal

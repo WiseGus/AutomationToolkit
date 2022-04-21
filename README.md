@@ -1,4 +1,4 @@
-# Automation Toolkit 2.0
+# Automation Toolkit 2.1
 
 This project comes to replace the Automation toolkit app (internal company code generator tool).
 
