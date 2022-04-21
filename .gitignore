@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/client/dist
 /tmp
 /out-tsc
 /Automation Toolkit 2-win32-x64
