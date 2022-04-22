@@ -10,52 +10,52 @@ namespace AutomationToolkit.Infrastructure.FormGenerator.DatasourceParsers;
 
 public class POCOParser : IDatasourceParser
 {
-private Type _type;
-private List<DatasourceInfo> _datasourceInfo = new List<DatasourceInfo>();
+    private Type _type;
+    private List<DatasourceInfo> _datasourceInfo = new List<DatasourceInfo>();
 
-public POCOParser(Type type)
-{
-  _type = type;
-}
-
-public POCOParser(string assemblyPath, string classFullName)
-{
-  var asmName = AssemblyLoadContext.GetAssemblyName(assemblyPath);
-  var asm = Assembly.LoadFrom(assemblyPath);
-  _type = asm.GetType(classFullName);
-}
-
-public IEnumerable<DatasourceInfo> Parse()
-{
-  if (_type == null)
-  {
-    throw new ArgumentException("Invalid type");
-  }
-
-  var props = _type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-  foreach (var prop in props)
-  {
-    _datasourceInfo.Add(new DatasourceInfo
+    public POCOParser(Type type)
     {
-      Name = prop.Name,
-      Caption = prop.Name,
-      DataType = PrettyTypeName(prop.PropertyType)
-    });
-  }
+        _type = type;
+    }
 
-  return _datasourceInfo;
-}
+    public POCOParser(string assemblyPath, string classFullName)
+    {
+        var asmName = AssemblyLoadContext.GetAssemblyName(assemblyPath);
+        var asm = Assembly.LoadFrom(assemblyPath);
+        _type = asm.GetType(classFullName);
+    }
 
-private string PrettyTypeName(Type t)
-{
-  if (t.IsGenericType)
-  {
-    return string.Format(
-        "{0}<{1}>",
-        t.Name.Substring(0, t.Name.LastIndexOf("`", StringComparison.InvariantCulture)),
-        string.Join(", ", t.GetGenericArguments().Select(PrettyTypeName)));
-  }
+    public IEnumerable<DatasourceInfo> Parse()
+    {
+        if (_type == null)
+        {
+            throw new ArgumentException("Invalid type");
+        }
 
-  return t.Name;
-}
+        var props = _type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+        foreach (var prop in props)
+        {
+            _datasourceInfo.Add(new DatasourceInfo
+            {
+                Name = prop.Name,
+                Caption = prop.Name,
+                DataType = PrettyTypeName(prop.PropertyType)
+            });
+        }
+
+        return _datasourceInfo;
+    }
+
+    private string PrettyTypeName(Type t)
+    {
+        if (t.IsGenericType)
+        {
+            return string.Format(
+                "{0}<{1}>",
+                t.Name.Substring(0, t.Name.LastIndexOf("`", StringComparison.InvariantCulture)),
+                string.Join(", ", t.GetGenericArguments().Select(PrettyTypeName)));
+        }
+
+        return t.Name;
+    }
 }

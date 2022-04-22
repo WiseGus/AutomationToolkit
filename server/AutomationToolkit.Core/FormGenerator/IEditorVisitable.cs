@@ -1,6 +1,6 @@
-namespace AutomationToolkit.Core.FormGenerator;
+﻿namespace AutomationToolkit.Core.FormGenerator;
 
 public interface IEditorVisitable
 {
-void Accept(IEditorVisitor visitor);
+    void Accept(IEditorVisitor visitor);
 }

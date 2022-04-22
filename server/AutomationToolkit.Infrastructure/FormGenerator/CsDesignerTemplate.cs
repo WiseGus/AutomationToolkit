@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using AutomationToolkit.Core.FormGenerator.Model;
 
 namespace AutomationToolkit.Infrastructure.FormGenerator;
 
 public class CsDesignerTemplate
 {
-const string DESIGNER_TEMPLATE =
-@"
+    const string DESIGNER_TEMPLATE =
+    @"
 namespace /* CHANGE ME! */
 {
   partial class $ClassName$
@@ -60,16 +60,16 @@ namespace /* CHANGE ME! */
     $Declarations$
   }
 }";
-public string GenerateDesigner(DesignerInfo data)
-{
-  var designerString = DESIGNER_TEMPLATE
-    .Replace("$ClassName$", data.ClassName)
-    .Replace("$Instantiations$", string.Join(Environment.NewLine, data.Instantiations))
-    .Replace("$ISupportInitializeBegin$", string.Join(Environment.NewLine, data.ISupportInitializeBegin))
-    .Replace("$PropsSetup$", string.Join(Environment.NewLine, data.PropsSetup))
-    .Replace("$ISupportInitializeEnd$", string.Join(Environment.NewLine, data.ISupportInitializeEnd))
-    .Replace("$Declarations$", string.Join(Environment.NewLine, data.Declarations));
-  return designerString;
-}
+    public string GenerateDesigner(DesignerInfo data)
+    {
+        var designerString = DESIGNER_TEMPLATE
+          .Replace("$ClassName$", data.ClassName)
+          .Replace("$Instantiations$", string.Join(Environment.NewLine, data.Instantiations))
+          .Replace("$ISupportInitializeBegin$", string.Join(Environment.NewLine, data.ISupportInitializeBegin))
+          .Replace("$PropsSetup$", string.Join(Environment.NewLine, data.PropsSetup))
+          .Replace("$ISupportInitializeEnd$", string.Join(Environment.NewLine, data.ISupportInitializeEnd))
+          .Replace("$Declarations$", string.Join(Environment.NewLine, data.Declarations));
+        return designerString;
+    }
 
 }

@@ -1,6 +1,6 @@
-namespace AutomationToolkit.Core.FormGenerator;
+﻿namespace AutomationToolkit.Core.FormGenerator;
 
 public interface IEditorVisitor
 {
-void Visit(IApplyFormEditor editor);
+    void Visit(IApplyFormEditor editor);
 }

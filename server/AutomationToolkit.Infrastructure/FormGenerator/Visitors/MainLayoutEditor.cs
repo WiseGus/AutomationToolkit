@@ -7,60 +7,60 @@ namespace AutomationToolkit.Infrastructure.FormGenerator.Visitors;
 
 public class MainLayoutEditor : BaseEditor, IEditorVisitor, IIgnoreVisit
 {
-private List<string> _editors = new List<string>();
+    private List<string> _editors = new List<string>();
 
-public override string Name => "MainLayout";
-public override string ControlName => "MainLayout";
-public override string LayoutName => "MainLayout";
+    public override string Name => "MainLayout";
+    public override string ControlName => "MainLayout";
+    public override string LayoutName => "MainLayout";
 
-protected override string AddDeclaration()
-{
-  return string.Empty;
-}
+    protected override string AddDeclaration()
+    {
+        return string.Empty;
+    }
 
-protected override string AddInstantiation()
-{
-  return string.Empty;
-}
+    protected override string AddInstantiation()
+    {
+        return string.Empty;
+    }
 
-protected override string AddISupportInitializeBegin()
-{
-  return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).BeginInit();
+    protected override string AddISupportInitializeBegin()
+    {
+        return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).BeginInit();
                 this.MainLayout.SuspendLayout();";
-}
+    }
 
-protected override string AddISupportInitializeEnd()
-{
-  return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).EndInit();
+    protected override string AddISupportInitializeEnd()
+    {
+        return $@"((System.ComponentModel.ISupportInitialize)(this.{ControlName})).EndInit();
                 this.{ControlName}.ResumeLayout(false);";
-}
+    }
 
-protected override string AddPropsSetup()
-{
-  var res = new List<string>();
-  res.Add("//");
-  res.Add($"// {ControlName}");
-  res.Add("//");
-  _editors.ForEach(editor =>
-  {
-    res.Add($"this.{ControlName}.Controls.Add(this.{editor});");
-  });
-  return string.Join(Environment.NewLine, res);
-}
+    protected override string AddPropsSetup()
+    {
+        var res = new List<string>();
+        res.Add("//");
+        res.Add($"// {ControlName}");
+        res.Add("//");
+        _editors.ForEach(editor =>
+        {
+            res.Add($"this.{ControlName}.Controls.Add(this.{editor});");
+        });
+        return string.Join(Environment.NewLine, res);
+    }
 
-public void Visit(IApplyFormEditor editor)
-{
-  if (editor is IIgnoreVisit)
-  {
-    return;
-  }
+    public void Visit(IApplyFormEditor editor)
+    {
+        if (editor is IIgnoreVisit)
+        {
+            return;
+        }
 
-  if (editor is BaseEditor)
-  {
-    var data = $@"this.{editor.ControlName}.StyleController = this.{ControlName};";
-    editor.PropsSetup.Add(data);
+        if (editor is BaseEditor)
+        {
+            var data = $@"this.{editor.ControlName}.StyleController = this.{ControlName};";
+            editor.PropsSetup.Add(data);
 
-    _editors.Add(editor.ControlName);
-  }
-}
+            _editors.Add(editor.ControlName);
+        }
+    }
 }
