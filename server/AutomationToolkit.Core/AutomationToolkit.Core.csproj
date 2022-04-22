@@ -1,29 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AutomationToolkit.SLNTools\AutomationToolkit.SLNTools.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="SLnet.Base">
-      <HintPath>bin\Debug\netcoreapp3.1\SLnet.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="SLnet.Sand.Base">
-      <HintPath>bin\Debug\netcoreapp3.1\SLnet.Sand.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="SLnet.Sand.Schema">
-      <HintPath>bin\Debug\netcoreapp3.1\SLnet.Sand.Schema.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
   </ItemGroup>
 
 </Project>

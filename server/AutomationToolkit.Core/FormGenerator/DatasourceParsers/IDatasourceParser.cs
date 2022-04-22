@@ -1,11 +1,10 @@
-using Core.FormGenerator.Model;
 using System.Collections.Generic;
+using AutomationToolkit.Core.FormGenerator.Model;
 
-namespace Core.FormGenerator.DatasourceParsers
+namespace AutomationToolkit.Core.FormGenerator.DatasourceParsers;
+
+public interface IDatasourceParser
 {
-  public interface IDatasourceParser
-  {
-    IEnumerable<DatasourceInfo> Parse();
-  }
-
+IEnumerable<DatasourceInfo> Parse();
 }
+

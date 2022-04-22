@@ -1,9 +1,8 @@
-using Core.FormGenerator.Model;
+using AutomationToolkit.Core.FormGenerator.Model;
 
-namespace Core.FormGenerator.FormEditorFactories
+namespace AutomationToolkit.Core.FormGenerator.FormEditorFactories;
+
+public interface IFormEditorFactory
 {
-  public interface IFormEditorFactory
-  {
-    IApplyFormEditor Create(FormEditorInfo propInfo);
-  }
+IApplyFormEditor Create(FormEditorInfo propInfo);
 }

@@ -1,4 +1,3 @@
-namespace Core.FormGenerator {
-  public interface IIgnoreVisit {
-  }
+namespace AutomationToolkit.Core.FormGenerator; 
+public interface IIgnoreVisit {
 }

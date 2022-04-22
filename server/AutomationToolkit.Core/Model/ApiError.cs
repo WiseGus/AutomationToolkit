@@ -1,16 +1,15 @@
-namespace Core.Model
+namespace AutomationToolkit.Core.Model;
+
+public sealed class ApiError
 {
-  public sealed class ApiError
-  {
-    public string Error { get; set; }
+public string Error { get; set; }
 
-    public ApiError()
-    {
-    }
+public ApiError()
+{
+}
 
-    public ApiError(string message)
-    {
-      Error = Error;
-    }
-  }
+public ApiError(string message)
+{
+  Error = Error;
+}
 }

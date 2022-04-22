@@ -1,39 +1,39 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
-using System;
 
-namespace Api
+namespace AutomationToolkit.Api;
+
+public class Program
 {
-  public class Program
-  {
     public static void Main(string[] args)
     {
 
-      //dotnet publish -c release -r win-x64 --output bin/dist/win
-      // AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve1;
-      //AssemblyLoadContext.Default.Resolving += Default_Resolving;
-      Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
+        //dotnet publish -c release -r win-x64 --output bin/dist/win
+        // AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve1;
+        //AssemblyLoadContext.Default.Resolving += Default_Resolving;
+        Log.Logger = new LoggerConfiguration()
+              .MinimumLevel.Debug()
+              .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+              .Enrich.FromLogContext()
+              .WriteTo.Console()
+              .CreateLogger();
 
-      try
-      {
-        Log.Information("Starting web host");
-        CreateHostBuilder(args).Build().Run();
-      }
-      catch (Exception ex)
-      {
-        Log.Fatal(ex, "Host terminated unexpectedly");
-      }
-      finally
-      {
-        Log.CloseAndFlush();
-      }
+        try
+        {
+            Log.Information("Starting web host");
+            CreateHostBuilder(args).Build().Run();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Host terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -41,9 +41,9 @@ namespace Api
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-              webBuilder.UseStartup<Startup>();
-              webBuilder.UseSerilog();
-            });
+                webBuilder.UseStartup<Startup>();
+            })
+            .UseSerilog();
 
     // private static Assembly Default_Resolving(AssemblyLoadContext arg1, AssemblyName arg2) {
     //   return null;
@@ -101,5 +101,4 @@ namespace Api
     //  }
     //  return null;
     //}
-  }
 }
