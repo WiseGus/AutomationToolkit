@@ -1,0 +1,162 @@
+﻿@page "/generateproject/{Alias}"
+
+@using AutomationToolkit.Core.Model
+@using Blazor.Services
+@using System.Text.Json.Serialization
+@using System.Text.Json
+
+@inject ApiService ApiSvc
+@inject NavigationManager NavigationManager
+
+@{
+    RenderFragment<IEnumerable<Keyword>> keywordTpl = (keywords) => @:@{
+            @foreach (var keyword in keywords)
+                {
+                @if (keyword.ShowInGenerate)
+        {
+                    <div class="form-group row mb-3">
+                        <label class="offset-1 col-lg-3 col-form-label">@keyword.KeywordName</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" name="@keyword.KeywordName" @bind-value="keyword.Replacement">
+                        </div>
+                    </div>
+        }
+                }
+        }
+    ;
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Generate project</h3>
+        </div>
+
+        @if (_preset is not null)
+        {
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Preset:
+                    <strong class="text-success">@_preset.Alias</strong>
+                </h5>
+                <br>
+
+                @if (_preset.Keywords.Any(x => x.ShowInGenerate) == true)
+                {
+                    <div>
+                        <h5>Required Keywords:</h5>
+                        <form>
+                            @keywordTpl(_preset.Keywords)
+                        </form>
+                    </div>
+                }
+
+                @if (_globalKeywords?.Any(p => p.ShowInGenerate) == true)
+                {
+                    <div>
+                        <h5>Global Keywords:</h5>
+                        <form>
+                            @keywordTpl(_globalKeywords)
+                        </form>
+                    </div>
+                }
+
+                <div class="form-group mb-3">
+                    <label class="custom-control custom-checkbox">Add to Source Control</label>
+                    <input type="checkbox" class="form-check-input" name="addToSourceControl" checked='@(_preset.AddToSourceControl ? "checked" : null)' @bind-value="_preset.AddToSourceControl">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="custom-control custom-checkbox">Run AutomationToolkitUpdates</label>
+                    <input type="checkbox" class="form-check-input" name="useAutomationUpdates" checked='@(_preset.AutomationUpdates.UseAutomationUpdates ? "checked" : null)' @bind-value="_preset.AutomationUpdates.UseAutomationUpdates">
+                </div>
+
+                @if (_jobStatus == JobStatusEnum.DoneOK)
+                {
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <strong>Generated project success!</strong>
+                    </div>
+                }
+
+                @if (_jobStatus == JobStatusEnum.DoneError)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        An error has occured!
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="card-footer text-muted">
+            <button type="button" class="btn btn-success" @onclick="Generate">Generate!</button>
+            <button type="button" class="btn btn-secondary" @onclick="GoBack">Back</button>
+            <button type="button" class="btn btn-primary" @onclick="(() => _showDetails = !_showDetails)">Details</button>
+        </div>
+
+    </div>
+
+    @if (_showDetails)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h3>Parameters Details</h3>
+            </div>
+
+            <div class="card-body">
+                <pre>@ToJson(_preset)</pre>
+            </div>
+        </div>
+    }
+</div>
+
+
+@code {
+    public enum JobStatusEnum { None, Working, DoneOK, DoneError }
+
+    [Parameter] public string Alias { get; set; }
+
+    private Preset _preset;
+    private IEnumerable<Keyword> _globalKeywords;
+    private JobStatusEnum _jobStatus = JobStatusEnum.None;
+    private bool _showDetails = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var presetTask = ApiSvc.GetSingle<Preset>("presets", Alias);
+        var globalKeywordsTask = ApiSvc.GetAll<Keyword>("settings");
+
+        await Task.WhenAll(presetTask, globalKeywordsTask);
+
+        _preset = presetTask.Result;
+        _globalKeywords = globalKeywordsTask.Result;
+    }
+
+    private string ToJson(Preset preset)
+    {
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        options.WriteIndented = true;
+        return JsonSerializer.Serialize(preset, options);
+    }
+
+    private async Task Generate()
+    {
+        _jobStatus = JobStatusEnum.Working;
+
+        var presetString = JsonSerializer.Serialize(_preset);
+        var finalPreset = JsonSerializer.Deserialize<Preset>(presetString);
+
+        finalPreset.Keywords.AddRange(this._globalKeywords);
+
+        var res = await ApiSvc.Post("generateprojects", finalPreset);
+
+        _jobStatus = JobStatusEnum.DoneOK;
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/generateprojectlist");
+    }
+}

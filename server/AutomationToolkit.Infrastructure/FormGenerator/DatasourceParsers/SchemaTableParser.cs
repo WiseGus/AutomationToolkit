@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿#if SLNET
+
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using AutomationToolkit.Core.FormGenerator.DatasourceParsers;
 using AutomationToolkit.Core.FormGenerator.Model;
 using SLnet.Sand.Schema;
+
 
 namespace AutomationToolkit.Infrastructure.FormGenerator.DatasourceParsers;
 
@@ -42,3 +45,5 @@ public class slsSchemaTableParser : IDatasourceParser
         }
     }
 }
+
+#endif

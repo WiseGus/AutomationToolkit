@@ -1,0 +1,215 @@
+﻿@page "/createtemplate/{Alias?}"
+
+@using AutomationToolkit.Core.Model
+@using Blazor.Services
+
+@inject ApiService ApiSvc
+@inject NavigationManager NavigationManager
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>@(_isNew ? "Create" : "Edit") template preset</h3>
+        </div>
+
+        <div class="card-body">
+            @if (_preset is not null)
+            {
+                <form>
+                    <div class="form-group mb-3">
+                        <label>Preset alias</label>
+                        <input type="text" name="presetAlias" class="form-control" placeholder="Insert an alias for the preset" @bind-value="_preset.Alias">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Preset category</label>
+                        <input type="text" name="presetCategory" class="form-control" placeholder="Insert a category to group saved aliases" @bind-value="_preset.AliasCategory">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Tooltip</label>
+                        <input type="text" name="tooltip" class="form-control" placeholder="Insert a tooltip to show on generate" @bind-value="_preset.Tooltip">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Project name</label>
+                        <input type="text" name="projectName" class="form-control" placeholder="Insert the name of the generated project" @bind-value="_preset.ProjectName">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Template origin folder</label>
+                        <div class="input-group">
+                            <input type="text" name="originFolder" class="form-control" placeholder="Select the template origin folder" @bind-value="_preset.TemplateOrigin">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Output folder path</label>
+                        <div class="input-group">
+                            <input type="text" name="outputFolderPath" class="form-control" placeholder="Select the generated output path" @bind-value="_preset.OutputFolderPath">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary">Browse</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>File types extensions</label>
+                        <div class="input-group">
+                            <input type="text" name="fileExtensions" class="form-control" placeholder="Insert the file type(s) extensions for the keywords replacement (comma separated)" @bind-value="_preset.FileKeywordTypesExtensions">
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Replacement keywords</label>
+
+                        <div class="row g-1 align-items-center">
+                            <div class="col-3">
+                                <input type="text" class="form-control" placeholder="Keyword" @bind-value="_newKeyword.KeywordName">
+                            </div>
+
+                            <div class="col-3">
+                                <input type="text" class="form-control" placeholder="Replacement" @bind-value="_newKeyword.Replacement">
+                            </div>
+
+                            <div class="col">
+                                <select class="form-control" @bind="_newKeyword.KeywordType">
+                                    <option selected value="text">text</option>
+                                    <option value="function">function</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <label class="custom-control custom-checkbox">Show in generate</label>
+                                <input type="checkbox" class="form-check-input" name="ShowInGenerate" checked='@(_newKeyword.ShowInGenerate? "checked" : null)' @bind-value="_newKeyword.ShowInGenerate">
+                            </div>
+
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-primary" @onclick="AddKeyword">Add</button>
+                            </div>
+                        </div>
+
+                        @if (_preset.Keywords.Count > 0)
+                        {
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Keyword</th>
+                                        <th scope="col">Replacement</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Show in generate</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var keyword in _preset.Keywords)
+                                    {
+                                        <tr>
+                                            <td>@keyword.KeywordName</td>
+                                            <td>@keyword.Replacement</td>
+                                            <td>@keyword.KeywordType</td>
+                                            <td>@keyword.ShowInGenerate</td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-danger" @onclick="() => RemoveKeyword(keyword.KeywordName)">Delete</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
+                    <div class="form-group mb-3">
+
+                        <label class="custom-control custom-checkbox">Add to Source Control</label>
+                        <input type="checkbox" class="form-check-input" name="addToSourceControl" checked='@(_preset.AddToSourceControl ? "checked" : null)' @bind-value="_preset.AddToSourceControl">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="custom-control custom-checkbox">Run AutomationToolkitUpdates (Must config manually)</label>
+                        <input type="checkbox" class="form-check-input" name="useAutomationUpdates" checked='@(_preset.AutomationUpdates.UseAutomationUpdates ? "checked" : null)' @bind-value="_preset.AutomationUpdates.UseAutomationUpdates">
+                    </div>
+
+                </form>
+            }
+            @if (_postOk)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+                    <strong>Save success!</strong>
+                </div>
+            }
+        </div>
+
+        <div class="card-footer text-muted">
+            <button type="button" class="btn btn-success" @onclick="Save">Save</button>
+            <button type="button" class="btn btn-secondary" @onclick="Cancel">@(_postOk ? "Back" : "Cancel")</button>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public string Alias { get; set; }
+
+    private bool _isNew;
+    private Preset _preset;
+    private bool _postOk;
+    private Keyword _newKeyword = new() { KeywordType = "text" };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        _isNew = string.IsNullOrEmpty(Alias);
+        _preset = _isNew ? new() : await ApiSvc.GetSingle<Preset>("presets", Alias);
+    }
+
+    private async Task Save()
+    {
+        if (_isNew)
+        {
+            if (string.IsNullOrEmpty(_preset.Alias)) return;
+
+            await ApiSvc.Post<Preset>("presets", _preset);
+            _postOk = true;
+        }
+        else
+        {
+            await ApiSvc.Update<Preset>("presets", _preset.Alias, _preset);
+            _postOk = true;
+        }
+    }
+
+    private void AddKeyword()
+    {
+        if (string.IsNullOrEmpty(_newKeyword.KeywordName) || _preset.Keywords.Any(p => p.KeywordName == _newKeyword.KeywordName)) return;
+
+        _preset.Keywords.Add(new()
+            {
+                KeywordName = _newKeyword.KeywordName,
+                Replacement = _newKeyword.Replacement,
+                KeywordType = _newKeyword.KeywordType,
+                ShowInGenerate = _newKeyword.ShowInGenerate
+            });
+
+        _newKeyword.KeywordName = string.Empty;
+        _newKeyword.Replacement = string.Empty;
+        _newKeyword.KeywordType = "text";
+        _newKeyword.ShowInGenerate = false;
+    }
+
+    private void RemoveKeyword(string keyword)
+    {
+        var idx = _preset.Keywords.FindIndex(p => p.KeywordName == keyword);
+        _preset.Keywords.RemoveAt(idx);
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

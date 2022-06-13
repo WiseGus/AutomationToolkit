@@ -1,0 +1,105 @@
+﻿@page "/settings"
+
+@using AutomationToolkit.Core.Model
+@using Blazor.Services
+
+@inject ApiService ApiSvc
+@inject NavigationManager NavigationManager
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Settings / Global Keywords</h3>
+        </div>
+
+        <div class="card-body">
+            @foreach (var item in AppSettings)
+            {
+                <div class="form-group mb-3">
+                    <label for="@item.KeywordName">
+                        @Beautify(item.KeywordName)
+                        <strong> (@item.KeywordName) </strong>
+                    </label>
+                    <input type="text"
+                       class="form-control"
+                       id="@item.KeywordName"
+                       name="@item.KeywordName"
+                       placeholder="@item.Notes"
+                       @bind-value="item.Replacement" />
+                </div>
+            }
+
+            @if (_postOk)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+                    <strong>Save success!</strong>
+                </div>
+            }
+        </div>
+
+        <div class="card-footer text-muted">
+            <button type="button" class="btn btn-success" @onclick="Save"> Save </button>
+            <button type="button" class="btn btn-secondary" @onclick="GoBack"> @_goBackButtonLabel </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    public IEnumerable<Keyword> AppSettings { get; set; } = new List<Keyword>();
+
+    private bool _postOk = false;
+    private string _goBackButtonLabel { get => _postOk ? "Back" : "Cancel"; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        AppSettings = await ApiSvc.GetAll<Keyword>("settings");
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            await ApiSvc.Post<IEnumerable<Keyword>>("settings", AppSettings);
+            _postOk = true;
+        }
+        catch (Exception ex)
+        {
+            _postOk = false;
+        }
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private string Beautify(string keyword)
+    {
+        var beautifiedValue = string.Empty;
+
+        if (string.IsNullOrEmpty(keyword)) return beautifiedValue;
+
+        var isFirstOrLastChar = (int i, string value) => i == 0 || i == value.Length - 1;
+
+        for (var i = 0; i < keyword.Length; i++)
+        {
+            var @char = keyword[i];
+
+            if (isFirstOrLastChar(i, keyword) && @char == '@') continue;
+
+            var charUpper = Char.ToUpper(keyword[i]);
+            if (@char == charUpper)
+            {
+                beautifiedValue += $" {Char.ToLower(keyword[i])}";
+            }
+            else
+            {
+                beautifiedValue += keyword[i];
+            }
+        }
+
+        return beautifiedValue;
+    }
+}
