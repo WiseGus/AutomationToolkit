@@ -1,4 +1,6 @@
-﻿using AutomationToolkit.Core.FormGenerator;
+﻿#if SLNET
+
+using AutomationToolkit.Core.FormGenerator;
 using AutomationToolkit.Core.FormGenerator.FormEditorFactories;
 using AutomationToolkit.Core.FormGenerator.Model;
 using AutomationToolkit.Core.FormGenerator.Visitors;
@@ -10,7 +12,6 @@ namespace AutomationToolkit.Infrastructure.FormGenerator.FormEditorFactories;
 
 public class GlxFormEditorFactory : IFormEditorFactory
 {
-
     private slsSchemaTable _schemaTable;
 
     public GlxFormEditorFactory(slsSchemaTable schemaTable)
@@ -142,3 +143,4 @@ public class GlxFormEditorFactory : IFormEditorFactory
         return fieldObj.Description ?? fieldObj.Alias;
     }
 }
+#endif

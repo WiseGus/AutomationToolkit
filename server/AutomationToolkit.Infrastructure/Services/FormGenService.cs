@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if SLNET
+
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutomationToolkit.Core.FormGenerator;
 using AutomationToolkit.Core.FormGenerator.DatasourceParsers;
@@ -103,3 +105,5 @@ public class FormGenService : IFormGenService
         desInfo.Instantiations.AddRange(editor.Instantiations);
     }
 }
+
+#endif

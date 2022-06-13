@@ -1,7 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Debug;Release;SLNET</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='SLNET'">
+    <DefineConstants>$(DefineConstants);TRACE;SLNET</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-  <ProjectReference Include="..\AutomationToolkit.Core\AutomationToolkit.Core.csproj" />
+    <ProjectReference Include="..\AutomationToolkit.Core\AutomationToolkit.Core.csproj" />
     <ProjectReference Include="..\AutomationToolkit.SLNTools\AutomationToolkit.SLNTools.csproj" />
   </ItemGroup>
 

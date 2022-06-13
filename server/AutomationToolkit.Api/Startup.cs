@@ -5,7 +5,6 @@ using AutomationToolkit.Core.Services;
 using AutomationToolkit.Infrastructure;
 using AutomationToolkit.Infrastructure.Compiler;
 using AutomationToolkit.Infrastructure.Repositories;
-using AutomationToolkit.Infrastructure.Services;
 using Newtonsoft.Json.Converters;
 
 namespace AutomationToolkit.Api;
@@ -19,18 +18,19 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
-    [System.Obsolete]
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
         services.AddScoped<IPresetsRepository, PresetsRepository>();
         services.AddScoped<IAppSettingsService, AppSettingsService>();
+        services.AddScoped<IPresetsService, PresetsService>();
+        services.AddScoped<IGenerateProjectsService, GenerateProjectsService>();
+
         services.AddTransient<IKeywordReplace, KeywordReplace>();
         services.AddTransient<ICompiler, ExecutronCompiler>();
-        services.AddTransient<IFormGenService, FormGenService>();
-        services.AddTransient<IPresetsService, PresetsService>();
-        services.AddTransient<IGenerateProjectsService, GenerateProjectsService>();
-
+#if SLNET
+        services.AddTransient<IFormGenService, AutomationToolkit.Infrastructure.Services.FormGenService>();
+#endif
         services.AddControllers()
           .AddNewtonsoftJson(x =>
           {
